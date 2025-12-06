@@ -1,19 +1,20 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X } from 'lucide-react'
+
+interface OverlayMenuProps {
+  isOpen: boolean
+  onClose: () => void
+}
 
 const menuItems = [
-  { label: 'Home', image: 'https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2700&auto=format&fit=crop' },
-  { label: 'Projects', image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2700&auto=format&fit=crop' },
-  { label: 'Process', image: 'https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=2700&auto=format&fit=crop' },
-  { label: 'Studio', image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2700&auto=format&fit=crop' },
-  { label: 'Contact', image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2700&auto=format&fit=crop' },
+  'Home',
+  'Projects',
+  'Process',
+  'Latest News',
+  'Contact'
 ]
 
-export function OverlayMenu() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [activeImage, setActiveImage] = useState(menuItems[0].image)
-
+export function OverlayMenu({ isOpen, onClose }: OverlayMenuProps) {
   // Lock body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
@@ -24,72 +25,96 @@ export function OverlayMenu() {
   }, [isOpen])
 
   return (
-    <>
-      {/* Floating Menu Button */}
-      <button
-        onClick={() => setIsOpen(true)}
-        className="fixed top-8 right-8 z-50 px-6 py-3 bg-black text-white rounded-full font-medium text-sm uppercase tracking-widest hover:scale-105 transition-transform mix-blend-difference"
-      >
-        Menu
-      </button>
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ y: '-100%' }}
+          animate={{ y: 0 }}
+          exit={{ y: '-100%' }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="fixed inset-0 z-[100] bg-black text-white flex flex-col"
+        >
+          {/* --- HEADER --- */}
+          <div className="w-full flex justify-between items-center px-6 py-6 md:px-10">
+            {/* Logo */}
+            <div className="w-12 h-12 flex items-center justify-center">
+               <img 
+                src="/blacklotus.svg" 
+                alt="Black Lotus" 
+                className="h-10 w-10 object-contain"
+              />
+            </div>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ y: '-100%' }}
-            animate={{ y: 0 }}
-            exit={{ y: '-100%' }}
-            transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-[60] bg-black text-white flex"
-          >
             {/* Close Button */}
             <button
-              onClick={() => setIsOpen(false)}
-              className="absolute top-8 right-8 p-2 hover:rotate-90 transition-transform duration-300"
+              onClick={onClose}
+              className="rounded-full border border-white/20 px-8 py-3 text-sm font-medium text-white hover:bg-white hover:text-black transition-colors"
             >
-              <X className="w-8 h-8" />
+              Close
             </button>
+          </div>
 
-            <div className="w-full h-full flex flex-col md:flex-row">
-              {/* Links Section */}
-              <div className="w-full md:w-1/2 h-full flex flex-col justify-center px-12 md:px-24">
-                <nav className="flex flex-col gap-4">
-                  {menuItems.map((item, i) => (
-                    <motion.a
-                      key={item.label}
-                      href="#"
-                      initial={{ opacity: 0, x: -50 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.3 + i * 0.1 }}
-                      onMouseEnter={() => setActiveImage(item.image)}
-                      className="text-5xl md:text-7xl font-display uppercase tracking-tighter hover:text-zinc-400 transition-colors cursor-pointer"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {item.label}
-                    </motion.a>
-                  ))}
-                </nav>
-              </div>
+          {/* --- MAIN CONTENT (LINKS) --- */}
+          <div className="flex-1 flex flex-col items-center justify-center">
+            <nav className="flex flex-col items-center gap-2 md:gap-4">
+              {menuItems.map((item, i) => (
+                <motion.a
+                  key={item}
+                  href="#"
+                  initial={{ y: 50, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: 20, opacity: 0 }}
+                  transition={{ delay: 0.1 + i * 0.05, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  className="text-5xl md:text-7xl lg:text-8xl font-sans font-normal tracking-tight hover:text-zinc-400 transition-colors cursor-pointer text-center"
+                  onClick={onClose}
+                >
+                  {item}
+                </motion.a>
+              ))}
+            </nav>
+          </div>
 
-              {/* Image Preview Section */}
-              <div className="hidden md:block w-1/2 h-full relative overflow-hidden bg-zinc-900">
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={activeImage}
-                    src={activeImage}
-                    alt="Menu Preview"
-                    initial={{ opacity: 0, scale: 1.1 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.4 }}
-                    className="absolute inset-0 w-full h-full object-cover opacity-60"
-                  />
-                </AnimatePresence>
+          {/* --- FOOTER --- */}
+          <div className="w-full grid grid-cols-1 md:grid-cols-3 items-end gap-8 px-6 py-8 md:px-10 pb-10">
+            
+            {/* Left: Copyright */}
+            <div className="flex flex-col gap-1 text-xs md:text-sm text-zinc-400 font-sans">
+              <p>©2025</p>
+              <p className="hover:text-white cursor-pointer transition-colors">Privacy Policy | Cookies</p>
+            </div>
+
+            {/* Center: Address */}
+            <div className="flex flex-col gap-1 text-xs md:text-sm text-zinc-400 font-sans md:text-center">
+              <p>AFRICA, NIGERIA</p>
+              <a href="mailto:blacklotusenquiry@gmail.com" className="hover:text-white transition-colors">
+                blacklotusenquiry@gmail.com
+              </a>
+            </div>
+
+            {/* Right: Video Thumbnail */}
+            <div className="flex justify-start md:justify-end">
+              <div className="relative w-48 h-28 bg-zinc-900 rounded overflow-hidden group cursor-pointer">
+                <video 
+                  muted 
+                  loop 
+                  playsInline
+                  className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                >
+                   <source src="/bg-video/1.mp4" type="video/mp4" />
+                </video>
+                {/* Play Icon Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <div className="w-0 h-0 border-t-[6px] border-t-transparent border-l-[10px] border-l-white border-b-[6px] border-b-transparent ml-1" />
+                  </div>
+                </div>
+                <span className="absolute bottom-2 left-2 text-[10px] font-mono text-white">0:00</span>
               </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   )
 }

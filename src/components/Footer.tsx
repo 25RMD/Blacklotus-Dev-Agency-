@@ -1,4 +1,57 @@
+import { useRef } from 'react'
+import gsap from 'gsap'
 import { ArrowUpRight, Instagram, Linkedin } from 'lucide-react'
+
+const FooterNavItem = ({ label, index, total, color }: { label: string, index: number, total: number, color: string }) => {
+  const bgRef = useRef<HTMLDivElement>(null)
+  const textRef = useRef<HTMLSpanElement>(null)
+  const iconRef = useRef<SVGSVGElement>(null)
+
+  const handleMouseEnter = () => {
+    gsap.to(bgRef.current, { y: '0%', duration: 0.6, ease: 'power4.out' })
+    gsap.to(textRef.current, { color: 'black', duration: 0.3 })
+    gsap.to(iconRef.current, { color: 'black', x: 4, y: -4, duration: 0.3 })
+  }
+
+  const handleMouseLeave = () => {
+    gsap.to(bgRef.current, { y: '100%', duration: 0.6, ease: 'power4.in' })
+    gsap.to(textRef.current, { color: 'white', duration: 0.3 })
+    gsap.to(iconRef.current, { color: '#71717a', x: 0, y: 0, duration: 0.3 })
+  }
+
+  const borderOpacity = 0.5 * (1 - index / (total - 1))
+
+  return (
+    <a
+      href="#"
+      className="relative flex items-center justify-between px-6 md:px-10 py-6 overflow-hidden block"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {/* Color Sweep Background */}
+      <div
+        ref={bgRef}
+        className="absolute inset-0 w-full h-full z-0"
+        style={{ backgroundColor: color, transform: 'translateY(100%)' }}
+      />
+
+      {/* Fading border effect */}
+      {borderOpacity > 0 && (
+        <div
+          className="absolute bottom-0 left-0 right-0 h-px z-10"
+          style={{
+            background: `linear-gradient(to right, rgba(255, 255, 255, ${borderOpacity}) 0%, rgba(255, 255, 255, ${borderOpacity}) 20%, rgba(255, 255, 255, 0) 100%)`
+          }}
+        />
+      )}
+
+      <span ref={textRef} className="text-sm md:text-base font-medium tracking-wide relative z-10 text-white">
+        {label}
+      </span>
+      <ArrowUpRight ref={iconRef} className="w-4 h-4 text-zinc-500 relative z-10" />
+    </a>
+  )
+}
 
 export function Footer() {
   return (
@@ -11,25 +64,27 @@ export function Footer() {
         <div className="flex flex-col justify-between p-6 md:p-10 lg:border-r border-white/20">
           <div className="space-y-6">
             <div className="flex items-start gap-4">
-              <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-black font-bold text-lg flex-shrink-0">
-                B
-              </div>
+              <img 
+                src="/blacklotus.svg" 
+                alt="Black Lotus" 
+                className="w-8 h-8 rounded-full object-contain"
+              />
               <div className="text-xs font-bold uppercase leading-tight tracking-wide mt-1">
-                UNIQUE PUBLIC INTERVENTIONS <br />
-                <span className="text-zinc-500">// IMMERSIVE ACTIVATIONS</span>
+                WEB & SOFTWARE SOLUTIONS <br />
+                <span className="text-zinc-500">DIGITAL TRANSFORMATION</span>
               </div>
             </div>
 
             <p className="text-zinc-400 text-xs leading-relaxed max-w-xs pt-2">
-              Founded by Simon Vaughan and Ben Kearns, we unite decades of combined expertise as visionary creatives and practical masterminds.
+              We are a premium web and software development agency dedicated to engineering ideas into digital reality. We build high-performance, scalable solutions for modern businesses.
             </p>
           </div>
 
           <div className="mt-12 space-y-4">
             <div className="text-zinc-400 text-xs space-y-1">
-              <p>88 London Rd, Brighton BN1 4JF</p>
-              <a href="mailto:hello@blacklotus.agency" className="text-white hover:underline transition-all">
-                hello@blacklotus.agency
+              <p>AFRICA, NIGERIA</p>
+              <a href="mailto:blacklotusenquiry@gmail.com" className="text-white hover:underline transition-all">
+                blacklotusenquiry@gmail.com
               </a>
             </div>
             <div className="flex gap-4">
@@ -41,38 +96,15 @@ export function Footer() {
 
         {/* COLUMN 2: Navigation */}
         <div className="flex flex-col lg:border-r border-white/20">
-          {['HOME', 'PROJECTS', 'WHAT WE DO', 'LATEST NEWS', 'GET IN TOUCH'].map((item, i, arr) => {
-            // Calculate opacity: starts at 0.2 for HOME, decreases to 0 for GET IN TOUCH
-            const borderOpacity = 0.2 * (1 - i / (arr.length - 1))
-            const colors = ['#FF3366', '#33FF99', '#3366FF', '#FF9933', '#9933FF']
-
-            return (
-              <a
-                key={i}
-                href="#"
-                className="group relative flex items-center justify-between px-6 md:px-10 py-6 transition-colors overflow-hidden"
-              >
-                {/* Color Sweep Background */}
-                <div
-                  className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0"
-                  style={{ backgroundColor: colors[i] }}
-                />
-
-                {/* Fading border effect - progressively fades from HOME to GET IN TOUCH */}
-                {borderOpacity > 0 && (
-                  <div
-                    className="absolute bottom-0 left-0 right-0 h-px z-10"
-                    style={{
-                      background: `linear-gradient(to right, rgba(255, 255, 255, ${borderOpacity}) 0%, rgba(255, 255, 255, ${borderOpacity}) 20%, rgba(255, 255, 255, 0) 100%)`
-                    }}
-                  />
-                )}
-
-                <span className="text-sm md:text-base font-medium tracking-wide relative z-10 group-hover:text-black transition-colors">{item}</span>
-                <ArrowUpRight className="w-4 h-4 text-zinc-500 relative z-10 group-hover:text-black group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
-              </a>
-            )
-          })}
+          {['HOME', 'PROJECTS', 'WHAT WE DO', 'LATEST NEWS', 'GET IN TOUCH'].map((item, i, arr) => (
+            <FooterNavItem 
+              key={i}
+              label={item}
+              index={i}
+              total={arr.length}
+              color={['#FF00FF', '#00FF00', '#00FFFF', '#FFAA00', '#FFFF00'][i]}
+            />
+          ))}
         </div>
 
         {/* COLUMN 3: CTA & Copyright */}
@@ -87,8 +119,8 @@ export function Footer() {
           </div>
 
           <div className="flex justify-between items-end mt-12 text-[10px] font-mono uppercase tracking-widest text-zinc-500">
-            <span>BLACK LOTUS AGENCY LTD 2025 ©</span>
-            <span>WEBSITE BY PHUNK</span>
+            <span>BLACK LOTUS DEVELOPMENT AGENCY LTD 2025 ©</span>
+            <span>WEBSITE BY US</span>
           </div>
         </div>
 

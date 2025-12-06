@@ -1,5 +1,6 @@
 import { Server, Zap, Database, Globe } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
 
 const services = [
   {
@@ -25,11 +26,22 @@ const services = [
 ]
 
 export function ServicesGrid() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  })
+
+  const yTitle = useTransform(scrollYProgress, [0, 1], [0, -50])
+  const yCardsOdd = useTransform(scrollYProgress, [0, 1], [0, -30])
+  const yCardsEven = useTransform(scrollYProgress, [0, 1], [0, -60])
+
   return (
-    <section className="w-full px-6 py-24 md:py-32 bg-black/80 backdrop-blur-sm">
+    <section ref={containerRef} className="w-full px-6 py-24 md:py-32 bg-black/80 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
         <motion.div
+          style={{ y: yTitle }}
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
@@ -51,6 +63,7 @@ export function ServicesGrid() {
         {services.map((service, i) => (
           <motion.div 
             key={i} 
+            style={{ y: i % 2 === 0 ? yCardsOdd : yCardsEven }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

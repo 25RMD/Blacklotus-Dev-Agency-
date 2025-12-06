@@ -44,46 +44,76 @@ export function GetInTouch() {
                         <form className="flex flex-col gap-16">
                             {/* Row 1 */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-                                <div className="group relative">
+                                <motion.div 
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.3 }}
+                                    className="group relative"
+                                >
                                     <label className="block text-xs text-zinc-400 mb-2">First name</label>
                                     <input
                                         type="text"
                                         placeholder="Emma"
                                         className="w-full text-4xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black"
                                     />
-                                </div>
-                                <div className="group relative">
+                                </motion.div>
+                                <motion.div 
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.4 }}
+                                    className="group relative"
+                                >
                                     <label className="block text-xs text-zinc-400 mb-2">Last name</label>
                                     <input
                                         type="text"
                                         placeholder="Lewis"
                                         className="w-full text-4xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black"
                                     />
-                                </div>
+                                </motion.div>
                             </div>
 
                             {/* Row 2 */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-                                <div className="group relative">
+                                <motion.div 
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.5 }}
+                                    className="group relative"
+                                >
                                     <label className="block text-xs text-zinc-400 mb-2">Email Address</label>
                                     <input
                                         type="email"
                                         placeholder="emma@email.com"
                                         className="w-full text-4xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black"
                                     />
-                                </div>
-                                <div className="group relative">
+                                </motion.div>
+                                <motion.div 
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.6 }}
+                                    className="group relative"
+                                >
                                     <label className="block text-xs text-zinc-400 mb-2">Phone number</label>
                                     <input
                                         type="tel"
                                         placeholder="+44"
                                         className="w-full text-4xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black"
                                     />
-                                </div>
+                                </motion.div>
                             </div>
 
                             {/* Row 3 */}
-                            <div className="group relative">
+                            <motion.div 
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.7 }}
+                                className="group relative"
+                            >
                                 <label className="block text-xs text-zinc-400 mb-2">Project details</label>
                                 <textarea
                                     placeholder="Tell us about your project..."
@@ -94,10 +124,16 @@ export function GetInTouch() {
                                         e.currentTarget.style.height = e.currentTarget.scrollHeight + 'px';
                                     }}
                                 />
-                            </div>
+                            </motion.div>
 
                             {/* Submit Button */}
-                            <div className="pt-4">
+                            <motion.div 
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.8 }}
+                                className="pt-4"
+                            >
                                 <button
                                     type="submit"
                                     className="bg-black text-white pl-8 pr-2 py-2 rounded-full flex items-center gap-6 text-xs font-bold tracking-widest hover:bg-zinc-800 transition-colors group h-14"

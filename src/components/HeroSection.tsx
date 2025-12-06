@@ -1,12 +1,23 @@
 import { motion, useAnimation } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
 
-export function HeroSection() {
+interface HeroSectionProps {
+  onOpenMenu?: () => void
+}
+
+export function HeroSection({ onOpenMenu }: HeroSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null)
   const [scrollProgress, setScrollProgress] = useState(0)
   const [isLocked, setIsLocked] = useState(true)
   const accumulatedScroll = useRef(0)
   const scrollThreshold = 600 // Total scroll distance needed to complete animation
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(e => console.log("Autoplay prevented:", e))
+    }
+  }, [])
   
   useEffect(() => {
     if (!isLocked) return
@@ -54,20 +65,25 @@ export function HeroSection() {
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-6 md:px-10">
         <div className="flex items-center gap-4">
           {/* Fixed Logo */}
-          <div className="h-12 w-12 rounded-full bg-black flex items-center justify-center text-white font-display font-bold text-xl">
-            G
-          </div>
+          <img 
+            src="/blacklotus.svg" 
+            alt="Black Lotus" 
+            className="h-12 w-12 rounded-full object-contain"
+          />
           {/* Animated Tagline */}
           <div 
             style={{ opacity: Math.max(0, taglineOpacity) }}
             className="hidden md:flex flex-col text-[11px] leading-tight font-medium uppercase tracking-wide text-black transition-opacity"
           >
             <span>Web & Software Solutions</span>
-            <span className="text-gray-500">// Digital Transformation</span>
+            <span className="text-gray-500">Digital Transformation</span>
           </div>
         </div>
         {/* Fixed Menu Button */}
-        <button className="rounded-full bg-black px-8 py-3 text-sm font-medium text-white hover:bg-gray-900 transition-colors">
+        <button 
+          onClick={onOpenMenu}
+          className="rounded-full bg-black border border-white/20 px-8 py-3 text-sm font-medium text-white hover:bg-zinc-900 transition-colors"
+        >
           Menu
         </button>
       </nav>
@@ -79,13 +95,15 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-black">
           {/* Video */}
           <video 
+            ref={videoRef}
             autoPlay 
             loop 
             muted 
             playsInline 
+            preload="auto"
             className="absolute inset-0 h-full w-full object-cover opacity-80"
           >
-            <source src="https://cdn.coverr.co/videos/coverr-crowd-of-people-walking-1566/1080p.mp4" type="video/mp4" />
+            <source src="/bg-video/1.mp4" type="video/mp4" />
           </video>
           
           {/* Gradient overlay */}
@@ -94,7 +112,7 @@ export function HeroSection() {
           {/* Hero text content */}
           <div className="absolute bottom-8 left-6 md:left-12 max-w-4xl z-20">
             <p className="mb-4 text-[12px] font-sans font-medium tracking-widest uppercase text-white/80">
-              Web & Software Development Agency
+              AFRICA, NIGERIA
             </p>
             <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl text-white leading-[1.05] tracking-tight">
               Engineering ideas into<br />
@@ -106,11 +124,11 @@ export function HeroSection() {
         {/* WHITE HORIZONTAL STRIP with "BLACK LOTUS" */}
         <motion.div 
           style={{ y: stripY }}
-          className="absolute top-0 left-0 right-0 h-[45vh] bg-white z-10 flex items-center justify-center"
+          className="absolute top-0 left-0 right-0 h-[45vh] bg-white/90 backdrop-blur-sm z-10 flex items-center justify-center overflow-hidden"
           transition={{ type: "tween", duration: 0.1 }}
         >
           <h1 
-            className="font-display font-bold text-[13.5vw] leading-none tracking-tighter text-center uppercase text-[#B8B8B8] whitespace-nowrap select-none"
+            className="font-display font-bold text-[13.5vw] leading-none tracking-tighter text-center uppercase whitespace-nowrap select-none text-black/10"
             style={{ transform: 'scaleY(1.1)' }} 
           >
             BLACK LOTUS

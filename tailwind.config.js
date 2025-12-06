@@ -8,8 +8,10 @@ export default {
     extend: {
       fontFamily: {
           sans: ['Switzer', 'Inter', 'system-ui', 'sans-serif'],
+          serif: ['Switzer', 'Inter', 'system-ui', 'sans-serif'],
           display: ['Switzer', 'Inter', 'system-ui', 'sans-serif'],
           impact: ['Switzer', 'Inter', 'system-ui', 'sans-serif'],
+          mono: ['Switzer', 'Inter', 'system-ui', 'sans-serif'],
       },
       colors: {
         'off-black': '#111111',

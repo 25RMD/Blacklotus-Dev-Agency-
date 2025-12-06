@@ -49,9 +49,9 @@ export function Testimonials() {
   }
 
   return (
-    <section className="w-full bg-white min-h-screen py-8 flex flex-col">
+    <section className="w-full bg-white min-h-screen py-8 flex flex-col overflow-hidden">
       {/* Header with consistent padding */}
-      <div className="flex justify-between items-center px-6 md:px-12 lg:px-16 mb-6">
+      <div className="flex justify-between items-center px-6 md:px-12 lg:px-16 mb-6 relative z-10">
         <span className="text-xs font-mono uppercase tracking-widest text-black">
           Testimonials
         </span>
@@ -85,7 +85,7 @@ export function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="flex-shrink-0 w-[85vw] md:w-[50vw] lg:w-[40vw] h-[75vh] p-8 md:p-12 flex flex-col justify-between relative"
+              className="flex-shrink-0 w-[85vw] md:w-[50vw] lg:w-[40vw] h-[75vh] p-8 md:p-12 flex flex-col justify-between relative overflow-hidden"
               style={{
                 backgroundColor: t.bgColor,
                 scrollSnapAlign: 'start'

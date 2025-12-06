@@ -60,7 +60,7 @@ export function CurtainReveal() {
         />
 
         {/* Fixed Gridlines Layer - stays in place while images scroll */}
-        <div className="absolute inset-0 grid grid-cols-5 h-full pointer-events-none">
+        <div className="absolute inset-0 top-[180px] grid grid-cols-5 h-full pointer-events-none [mask-image:linear-gradient(to_bottom,transparent,black_100px)]">
           {[0, 1, 2, 3, 4].map((i) => (
             <motion.div
               key={i}
@@ -71,7 +71,7 @@ export function CurtainReveal() {
         </div>
 
         {/* The Film Strips (images scroll within the sticky container) */}
-        <div className="absolute inset-0 grid grid-cols-5 h-full">
+        <div className="absolute inset-0 top-[180px] grid grid-cols-5 h-full">
           {transforms.map((y, i) => (
             <motion.div
               key={i}
