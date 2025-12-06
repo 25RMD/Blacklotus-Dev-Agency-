@@ -100,7 +100,7 @@ export function GetInTouch() {
                                     <label className="block text-xs text-zinc-400 mb-2">Phone number</label>
                                     <input
                                         type="tel"
-                                        placeholder="+44"
+                                        placeholder="+234"
                                         className="w-full text-4xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black"
                                     />
                                 </motion.div>
@@ -143,7 +143,7 @@ export function GetInTouch() {
                                         <ArrowUpRight className="w-4 h-4" />
                                     </span>
                                 </button>
-                            </div>
+                            </motion.div>
                         </form>
                     </div>
 

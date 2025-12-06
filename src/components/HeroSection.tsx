@@ -9,15 +9,22 @@ export function HeroSection({ onOpenMenu }: HeroSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null)
   const [scrollProgress, setScrollProgress] = useState(0)
   const [isLocked, setIsLocked] = useState(true)
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
   const accumulatedScroll = useRef(0)
   const scrollThreshold = 600 // Total scroll distance needed to complete animation
   const videoRef = useRef<HTMLVideoElement>(null)
+  
+  const videos = ['/bg-video/1.mp4', '/bg-video/2.mp4']
 
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.play().catch(e => console.log("Autoplay prevented:", e))
     }
-  }, [])
+  }, [currentVideoIndex])
+  
+  const handleVideoEnded = () => {
+    setCurrentVideoIndex((prev) => (prev + 1) % videos.length)
+  }
   
   useEffect(() => {
     if (!isLocked) return
@@ -97,14 +104,13 @@ export function HeroSection({ onOpenMenu }: HeroSectionProps) {
           <video 
             ref={videoRef}
             autoPlay 
-            loop 
             muted 
             playsInline 
             preload="auto"
             className="absolute inset-0 h-full w-full object-cover opacity-80"
-          >
-            <source src="/bg-video/1.mp4" type="video/mp4" />
-          </video>
+            onEnded={handleVideoEnded}
+            src={videos[currentVideoIndex]}
+          />
           
           {/* Gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
