@@ -25,20 +25,20 @@ export function CurtainReveal() {
     offset: ["start start", "end end"]
   })
 
-  // Smooth the scroll progress for buttery animations
+  // Smooth the scroll progress for buttery animations with Lenis feel
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
+    stiffness: 50,
+    damping: 40,
+    restDelta: 0.0001
   })
 
-  // Column movement transforms - creates the film strip scrolling effect
+  // Column movement transforms - slower, more gradual scrolling
   const transforms = [
-    useTransform(smoothProgress, [0, 1], ["0%", "-180%"]),
-    useTransform(smoothProgress, [0, 1], ["0%", "-250%"]),
-    useTransform(smoothProgress, [0, 1], ["0%", "-200%"]),
-    useTransform(smoothProgress, [0, 1], ["0%", "-230%"]),
-    useTransform(smoothProgress, [0, 1], ["0%", "-210%"]),
+    useTransform(smoothProgress, [0, 1], ["0%", "-120%"]),
+    useTransform(smoothProgress, [0, 1], ["0%", "-160%"]),
+    useTransform(smoothProgress, [0, 1], ["0%", "-140%"]),
+    useTransform(smoothProgress, [0, 1], ["0%", "-150%"]),
+    useTransform(smoothProgress, [0, 1], ["0%", "-130%"]),
   ]
 
   // Color transitions: black to white halfway through
