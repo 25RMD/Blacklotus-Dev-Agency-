@@ -14,22 +14,22 @@ const projects = [
   },
   {
     id: "02",
+    title: "MAGA Foundation",
+    client: "Making Africa Great Again",
+    year: "2024",
+    role: "Full-Stack Website",
+    description: "A fullstack website for an NGO focused on empowering African communities. (makingafricagreatagain.org)",
+    img: "/projects/ng.jpeg"
+  },
+  {
+    id: "03",
     title: "King Royal Events",
     client: "King Royal Events",
     year: "2024",
     role: "Full-Stack Website",
     description: "A fullstack website for an event center located in Maiduguri. (kingroyal-events.com)",
     img: "/projects/event.jpeg"
-  },
-  {
-    id: "03",
-    title: "Velocity Dashboard",
-    client: "TechVentures",
-    year: "2023",
-    role: "SaaS Platform",
-    description: "High-performance analytics platform for tracking startup growth metrics and velocity.",
-    img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2000&auto=format&fit=crop"
-  },
+  }
 ]
 
 export function ProjectSlider() {
@@ -141,7 +141,7 @@ function ProjectCard({ project, scrollYProgress: _scrollYProgress }: { project: 
           <motion.img
             src={project.img}
             alt={project.title}
-            className="absolute inset-0 w-full h-full object-contain opacity-60 grayscale hover:grayscale-0 transition-all duration-700"
+            className="absolute inset-0 w-full h-full object-contain opacity-80 hover:opacity-100 transition-all duration-700"
           />
         </div>
       </div>
