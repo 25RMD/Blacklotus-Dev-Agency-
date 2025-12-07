@@ -4,28 +4,28 @@ import { motion } from 'framer-motion'
 const testimonials = [
   {
     quote: "Working with this team of brilliant, problem solving, passionate, agile Ninjas is such a joy. Their creative ambition & desire to help bring even the most eye watering & challenging projects to life is second to none.",
-    author: "Nikki Cramphorn",
+    author: "Chioma Okeke",
     company: "Adam&EveDDB",
     bgColor: "#e855a0",
     textColor: "#4a1942"
   },
   {
     quote: "Not content with executing whatever you ask of them to the highest standard, they consistently improve and develop concepts, taking them in exciting new directions I could have never foreseen.",
-    author: "John Wildes",
+    author: "Tunde Bakare",
     company: "Edelman",
     bgColor: "#c8f5e8",
     textColor: "#1a534a"
   },
   {
     quote: "I've worked with Creative Giants for many years, and they never fail to deliver... they jump head feet into all challenges and over-deliver every time. What I especially like about them is that they often enhance the creative, as well as being solutions orientated...",
-    author: "Emilie Verlander",
+    author: "Aisha Mohammed",
     company: "Edelman",
     bgColor: "#1a2744",
     textColor: "#6b9ec4"
   },
   {
     quote: "They built our website in 3 weeks and it looks amazing. Our sales have increased 40% since launch. Highly recommend their services.",
-    author: "Alex Chen",
+    author: "Emeka Nnamdi",
     company: "TechStart",
     bgColor: "#e855a0",
     textColor: "#4a1942"
@@ -49,7 +49,7 @@ export function Testimonials() {
   }
 
   return (
-    <section className="w-full bg-white min-h-screen py-8 flex flex-col overflow-hidden">
+    <section id="testimonials" className="w-full bg-white min-h-screen py-8 flex flex-col overflow-hidden">
       {/* Header with consistent padding */}
       <div className="flex justify-between items-center px-6 md:px-12 lg:px-16 mb-6 relative z-10">
         <span className="text-xs font-mono uppercase tracking-widest text-black">

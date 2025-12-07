@@ -1,9 +1,34 @@
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
+import { FormEvent } from 'react'
 
 export function GetInTouch() {
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault()
+        const form = e.target as HTMLFormElement
+        const formData = new FormData(form)
+        
+        const firstName = formData.get('firstName')
+        const lastName = formData.get('lastName')
+        const email = formData.get('email')
+        const phone = formData.get('phone')
+        const details = formData.get('details')
+
+        const subject = `New Project Inquiry from ${firstName} ${lastName}`
+        const body = `
+Name: ${firstName} ${lastName}
+Email: ${email}
+Phone: ${phone}
+
+Project Details:
+${details}
+        `
+        
+        window.location.href = `mailto:blacklotusenquiry@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    }
+
     return (
-        <section className="w-full bg-[#fdfdfc] py-24 md:py-32">
+        <section id="contact" className="w-full bg-[#fdfdfc] py-24 md:py-32">
             <div className="max-w-[90rem] mx-auto px-6 md:px-12 lg:px-16">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-32">
 
@@ -41,7 +66,7 @@ export function GetInTouch() {
 
                     {/* Right Column - Form */}
                     <div className="lg:col-span-8 lg:pl-12">
-                        <form className="flex flex-col gap-16">
+                        <form className="flex flex-col gap-16" onSubmit={handleSubmit}>
                             {/* Row 1 */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
                                 <motion.div 
@@ -53,6 +78,7 @@ export function GetInTouch() {
                                 >
                                     <label className="block text-xs text-zinc-400 mb-2">First name</label>
                                     <input
+                                        name="firstName"
                                         type="text"
                                         placeholder="Emma"
                                         className="w-full text-4xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black"
@@ -67,6 +93,7 @@ export function GetInTouch() {
                                 >
                                     <label className="block text-xs text-zinc-400 mb-2">Last name</label>
                                     <input
+                                        name="lastName"
                                         type="text"
                                         placeholder="Lewis"
                                         className="w-full text-4xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black"
@@ -85,6 +112,7 @@ export function GetInTouch() {
                                 >
                                     <label className="block text-xs text-zinc-400 mb-2">Email Address</label>
                                     <input
+                                        name="email"
                                         type="email"
                                         placeholder="emma@email.com"
                                         className="w-full text-4xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black"
@@ -99,6 +127,7 @@ export function GetInTouch() {
                                 >
                                     <label className="block text-xs text-zinc-400 mb-2">Phone number</label>
                                     <input
+                                        name="phone"
                                         type="tel"
                                         placeholder="+234"
                                         className="w-full text-4xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black"
@@ -116,6 +145,7 @@ export function GetInTouch() {
                             >
                                 <label className="block text-xs text-zinc-400 mb-2">Project details</label>
                                 <textarea
+                                    name="details"
                                     placeholder="Tell us about your project..."
                                     rows={1}
                                     className="w-full text-4xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black resize-none"

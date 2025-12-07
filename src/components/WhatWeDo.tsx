@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
+import { Globe, Users, Briefcase } from 'lucide-react'
 
 export function WhatWeDo() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -15,13 +16,13 @@ export function WhatWeDo() {
   const words = heroText.split(" ")
 
   const stats = [
-    { icon: "🌐", value: "50+", label: "Successful projects delivered for startups and enterprises" },
-    { icon: "👥", value: "1M+", label: "Users impacted through our digital solutions" },
-    { icon: "📦", value: "15+", label: "Industries served from fintech to healthcare" },
+    { icon: Globe, value: "10+", label: "Successful projects delivered for startups and enterprises" },
+    { icon: Users, value: "1k+", label: "Users impacted through our digital solutions" },
+    { icon: Briefcase, value: "15+", label: "Industries served from fintech to healthcare" },
   ]
 
   return (
-    <section ref={containerRef} className="w-full bg-[#f5f5f0] py-24 md:py-32 px-6 md:px-12 overflow-hidden">
+    <section id="what-we-do" ref={containerRef} className="w-full bg-[#f5f5f0] py-24 md:py-32 px-6 md:px-12 overflow-hidden">
       <div className="max-w-7xl mx-auto relative">
         
         {/* Section Label */}
@@ -72,7 +73,7 @@ export function WhatWeDo() {
               className="flex flex-col"
             >
               <div className="flex items-center gap-3 mb-2">
-                <span className="text-2xl">{stat.icon}</span>
+                <stat.icon className="w-6 h-6 md:w-8 md:h-8 text-black" strokeWidth={1.5} />
                 <span className="text-5xl md:text-6xl font-sans font-medium text-black">{stat.value}</span>
               </div>
               <p className="text-sm text-zinc-500 leading-relaxed max-w-[200px]">{stat.label}</p>

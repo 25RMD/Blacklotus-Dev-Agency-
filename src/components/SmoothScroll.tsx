@@ -1,6 +1,12 @@
 import { useEffect } from 'react'
 import Lenis from 'lenis'
 
+declare global {
+  interface Window {
+    lenis: Lenis
+  }
+}
+
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const lenis = new Lenis({
@@ -10,6 +16,8 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       gestureOrientation: 'vertical',
       smoothWheel: true,
     })
+
+    window.lenis = lenis
 
     function raf(time: number) {
       lenis.raf(time)

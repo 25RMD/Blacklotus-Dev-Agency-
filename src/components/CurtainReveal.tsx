@@ -1,21 +1,23 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import { useCursor } from '../context/CursorContext'
 
 // Define the images and their start positions on the "film strip"
 const images = [
-  { col: 0, src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=500&auto=format&fit=crop", top: "10%" },
-  { col: 0, src: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=500&auto=format&fit=crop", top: "100%" },
-  { col: 1, src: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=500&auto=format&fit=crop", top: "0%" },
-  { col: 1, src: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=500&auto=format&fit=crop", top: "120%" },
-  { col: 2, src: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=500&auto=format&fit=crop", top: "50%" },
-  { col: 3, src: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=500&auto=format&fit=crop", top: "5%" },
-  { col: 3, src: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=500&auto=format&fit=crop", top: "90%" },
-  { col: 4, src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=500&auto=format&fit=crop", top: "20%" },
-  { col: 4, src: "https://images.unsplash.com/photo-1534030347209-467a5b0ad3e6?q=80&w=500&auto=format&fit=crop", top: "110%" },
+  { col: 0, src: "/curtainReveal/1.jpg", top: "10%" },
+  { col: 0, src: "/curtainReveal/2.jpg", top: "100%" },
+  { col: 1, src: "/curtainReveal/3.jpg", top: "0%" },
+  { col: 1, src: "/curtainReveal/4.jpg", top: "120%" },
+  { col: 2, src: "/curtainReveal/5.jpg", top: "50%" },
+  { col: 3, src: "/curtainReveal/6.jpg", top: "5%" },
+  { col: 3, src: "/curtainReveal/7.jpg", top: "90%" },
+  { col: 4, src: "/curtainReveal/8.jpg", top: "20%" },
+  { col: 4, src: "/curtainReveal/9.jpg", top: "110%" },
 ]
 
 export function CurtainReveal() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const { setCursorText, setCursorVariant } = useCursor()
 
   // Track scroll progress through the section
   const { scrollYProgress } = useScroll({
@@ -48,6 +50,7 @@ export function CurtainReveal() {
   return (
     // Outer container creates the scroll track (200vh of scroll distance)
     <section
+      id="process"
       ref={containerRef}
       className="relative h-[200vh]"
     >
@@ -92,7 +95,17 @@ export function CurtainReveal() {
         </div>
 
         {/* The Text Overlay */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none mix-blend-difference z-10">
+        <div 
+          className="absolute inset-0 flex flex-col items-center justify-center mix-blend-difference z-10 pointer-events-auto"
+          onMouseEnter={() => {
+            setCursorText("MAKE IT HAPPEN")
+            setCursorVariant("text")
+          }}
+          onMouseLeave={() => {
+            setCursorText("")
+            setCursorVariant("default")
+          }}
+        >
           <span className="text-white text-xs md:text-sm font-medium tracking-widest uppercase mb-4">Get Started</span>
           <h2 className="text-white text-5xl md:text-8xl font-display text-center leading-[0.9] tracking-tighter">
             Let's make<br />things happen.

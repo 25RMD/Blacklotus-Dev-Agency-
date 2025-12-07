@@ -1,11 +1,7 @@
-import { motion, useAnimation } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
 
-interface HeroSectionProps {
-  onOpenMenu?: () => void
-}
-
-export function HeroSection({ onOpenMenu }: HeroSectionProps) {
+export function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const [scrollProgress, setScrollProgress] = useState(0)
   const [isLocked, setIsLocked] = useState(true)
@@ -66,35 +62,8 @@ export function HeroSection({ onOpenMenu }: HeroSectionProps) {
   const taglineOpacity = 1 - (scrollProgress / 0.075) // Fade out very quickly by 7.5% progress
   
   return (
-    <section ref={sectionRef} className="relative h-screen w-full">
+    <section id="home" ref={sectionRef} className="relative h-screen w-full">
       
-      {/* --- FIXED NAV BAR --- */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-6 md:px-10">
-        <div className="flex items-center gap-4">
-          {/* Fixed Logo */}
-          <img 
-            src="/blacklotus.svg" 
-            alt="Black Lotus" 
-            className="h-12 w-12 rounded-full object-contain"
-          />
-          {/* Animated Tagline */}
-          <div 
-            style={{ opacity: Math.max(0, taglineOpacity) }}
-            className="hidden md:flex flex-col text-[11px] leading-tight font-medium uppercase tracking-wide text-black transition-opacity"
-          >
-            <span>Web & Software Solutions</span>
-            <span className="text-gray-500">Digital Transformation</span>
-          </div>
-        </div>
-        {/* Fixed Menu Button */}
-        <button 
-          onClick={onOpenMenu}
-          className="rounded-full bg-black border border-white/20 px-8 py-3 text-sm font-medium text-white hover:bg-zinc-900 transition-colors"
-        >
-          Menu
-        </button>
-      </nav>
-
       {/* --- MAIN CONTAINER --- */}
       <div className="relative h-screen w-full overflow-hidden">
         

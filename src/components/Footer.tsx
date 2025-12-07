@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import gsap from 'gsap'
 import { ArrowUpRight, Instagram, Linkedin } from 'lucide-react'
 
-const FooterNavItem = ({ label, index, total, color }: { label: string, index: number, total: number, color: string }) => {
+const FooterNavItem = ({ label, href, onClick, index, total, color }: { label: string, href: string, onClick: (e: React.MouseEvent) => void, index: number, total: number, color: string }) => {
   const bgRef = useRef<HTMLDivElement>(null)
   const textRef = useRef<HTMLSpanElement>(null)
   const iconRef = useRef<SVGSVGElement>(null)
@@ -23,7 +23,8 @@ const FooterNavItem = ({ label, index, total, color }: { label: string, index: n
 
   return (
     <a
-      href="#"
+      href={href}
+      onClick={onClick}
       className="relative flex items-center justify-between px-6 md:px-10 py-6 overflow-hidden block"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -53,7 +54,7 @@ const FooterNavItem = ({ label, index, total, color }: { label: string, index: n
   )
 }
 
-export function Footer() {
+export function Footer({ onOpenPrivacy }: { onOpenPrivacy?: () => void }) {
   return (
     <footer className="w-full bg-black text-white relative overflow-hidden border-t border-white/20">
 
@@ -61,7 +62,8 @@ export function Footer() {
       <div className="w-full grid grid-cols-1 lg:grid-cols-3">
 
         {/* COLUMN 1: Brand & Info */}
-        <div className="flex flex-col justify-between p-6 md:p-10 lg:border-r border-white/20">
+        <div className="relative flex flex-col justify-between p-6 md:p-10">
+          <div className="hidden lg:block absolute right-0 top-0 h-full w-px bg-gradient-to-b from-white/20 to-transparent" />
           <div className="space-y-6">
             <div className="flex items-start gap-4">
               <img 
@@ -95,11 +97,27 @@ export function Footer() {
         </div>
 
         {/* COLUMN 2: Navigation */}
-        <div className="flex flex-col lg:border-r border-white/20">
-          {['HOME', 'PROJECTS', 'WHAT WE DO', 'LATEST NEWS', 'GET IN TOUCH'].map((item, i, arr) => (
+        <div className="relative flex flex-col">
+          <div className="hidden lg:block absolute right-0 top-0 h-full w-px bg-gradient-to-b from-white/20 to-transparent" />
+          {[
+            { label: 'HOME', href: '#home' },
+            { label: 'PROJECTS', href: '#projects' },
+            { label: 'WHAT WE DO', href: '#what-we-do' },
+            { label: 'LATEST NEWS', href: '#testimonials' },
+            { label: 'GET IN TOUCH', href: '#contact' }
+          ].map((item, i, arr) => (
             <FooterNavItem 
               key={i}
-              label={item}
+              label={item.label}
+              href={item.href}
+              onClick={(e) => {
+                e.preventDefault()
+                if ((window as any).lenis) {
+                  (window as any).lenis.scrollTo(item.href)
+                } else {
+                  document.querySelector(item.href)?.scrollIntoView({ behavior: 'smooth' })
+                }
+              }}
               index={i}
               total={arr.length}
               color={['#FF00FF', '#00FF00', '#00FFFF', '#FFAA00', '#FFFF00'][i]}

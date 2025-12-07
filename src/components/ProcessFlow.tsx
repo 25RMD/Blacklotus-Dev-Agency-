@@ -9,7 +9,7 @@ export function ProcessFlow() {
   ]
 
   return (
-    <section className="w-full bg-black/85 backdrop-blur-sm border-y border-white/5 py-24 md:py-32">
+    <section id="process" className="w-full bg-black/85 backdrop-blur-sm border-y border-white/5 py-24 md:py-32">
       <div className="max-w-7xl mx-auto px-6">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}

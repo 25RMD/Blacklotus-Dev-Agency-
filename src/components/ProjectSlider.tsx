@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import { motion, useScroll, useTransform, useMotionValueEvent, MotionValue, useSpring } from 'framer-motion'
+import { useCursor } from '../context/CursorContext'
 
 const projects = [
   {
@@ -55,7 +56,7 @@ export function ProjectSlider() {
   })
 
   return (
-    <section ref={targetRef} className="relative h-[400vh] bg-black">
+    <section id="projects" ref={targetRef} className="relative h-[400vh] bg-black">
       {/* Sticky container */}
       <div className="sticky top-0 flex h-screen items-center overflow-x-clip overflow-y-visible">
         {/* Horizontal sliding container */}
@@ -96,8 +97,8 @@ export function ProjectSlider() {
   )
 }
 
-function ProjectCard({ project, scrollYProgress }: { project: typeof projects[0], scrollYProgress: MotionValue<number> }) {
-  const xImage = useTransform(scrollYProgress, [0, 1], ["0%", "15%"])
+function ProjectCard({ project, scrollYProgress: _scrollYProgress }: { project: typeof projects[0], scrollYProgress: MotionValue<number> }) {
+  const { setCursorText, setCursorVariant } = useCursor()
 
   return (
     <div className="relative h-screen w-screen flex-shrink-0 bg-black text-white flex items-center justify-center p-6 md:p-16 box-border">
@@ -126,7 +127,17 @@ function ProjectCard({ project, scrollYProgress }: { project: typeof projects[0]
         </div>
 
         {/* RIGHT: Image */}
-        <div className="md:col-span-6 order-1 md:order-2 relative h-[50vh] md:h-[70vh] w-full overflow-hidden rounded-sm">
+        <div 
+          className="md:col-span-6 order-1 md:order-2 relative h-[50vh] md:h-[70vh] w-full overflow-hidden rounded-sm cursor-none"
+          onMouseEnter={() => {
+            setCursorText("VIEW PROJECT")
+            setCursorVariant("text")
+          }}
+          onMouseLeave={() => {
+            setCursorText("")
+            setCursorVariant("default")
+          }}
+        >
           <motion.img
             src={project.img}
             alt={project.title}

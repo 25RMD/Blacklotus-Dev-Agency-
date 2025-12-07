@@ -1,28 +1,48 @@
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowRight } from 'lucide-react'
 
 interface OverlayMenuProps {
   isOpen: boolean
   onClose: () => void
+  onOpenPrivacy: () => void
 }
 
 const menuItems = [
-  'Home',
-  'Projects',
-  'Process',
-  'Latest News',
-  'Contact'
+  { label: 'Home', id: '#home' },
+  { label: 'What We Do', id: '#what-we-do' },
+  { label: 'Projects', id: '#projects' },
+  { label: 'Process', id: '#process' },
+  { label: 'Testimonials', id: '#testimonials' },
+  { label: 'Contact', id: '#contact' }
 ]
 
-export function OverlayMenu({ isOpen, onClose }: OverlayMenuProps) {
+export function OverlayMenu({ isOpen, onClose, onOpenPrivacy }: OverlayMenuProps) {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null)
+
   // Lock body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
+      window.lenis?.stop()
     } else {
       document.body.style.overflow = 'unset'
+      window.lenis?.start()
     }
   }, [isOpen])
+
+  const handleNavigation = (id: string) => {
+    onClose()
+    // Small delay to allow menu close animation to start
+    setTimeout(() => {
+      if (window.lenis) {
+        window.lenis.scrollTo(id)
+      } else {
+        document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' })
+      }
+    }, 1000)
+  }
 
   return (
     <AnimatePresence>
@@ -31,56 +51,66 @@ export function OverlayMenu({ isOpen, onClose }: OverlayMenuProps) {
           initial={{ y: '-100%' }}
           animate={{ y: 0 }}
           exit={{ y: '-100%' }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.2, ease: [0.19, 1, 0.22, 1] }}
           className="fixed inset-0 z-[100] bg-black text-white flex flex-col"
         >
-          {/* --- HEADER --- */}
-          <div className="w-full flex justify-between items-center px-6 py-6 md:px-10">
-            {/* Logo */}
-            <div className="w-12 h-12 flex items-center justify-center">
-               <img 
-                src="/blacklotus.svg" 
-                alt="Black Lotus" 
-                className="h-10 w-10 object-contain"
-              />
-            </div>
-
-            {/* Close Button */}
-            <button
-              onClick={onClose}
-              className="rounded-full border border-white/20 px-8 py-3 text-sm font-medium text-white hover:bg-white hover:text-black transition-colors"
-            >
-              Close
-            </button>
-          </div>
+          {/* Spacer for fixed Navbar */}
+          <div className="w-full h-32 flex-shrink-0" />
 
           {/* --- MAIN CONTENT (LINKS) --- */}
-          <div className="flex-1 flex flex-col items-center justify-center">
-            <nav className="flex flex-col items-center gap-2 md:gap-4">
+          <div className="flex-1 flex flex-col items-center justify-center min-h-0">
+            <nav 
+              className="flex flex-col items-start gap-2 md:gap-4"
+              onMouseLeave={() => setHoveredItem(null)}
+            >
               {menuItems.map((item, i) => (
                 <motion.a
-                  key={item}
-                  href="#"
-                  initial={{ y: 50, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: 20, opacity: 0 }}
-                  transition={{ delay: 0.1 + i * 0.05, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                  className="text-5xl md:text-7xl lg:text-8xl font-sans font-normal tracking-tight hover:text-zinc-400 transition-colors cursor-pointer text-center"
-                  onClick={onClose}
+                  key={item.label}
+                  href={item.id}
+                  initial={{ y: 100, opacity: 0 }}
+                  animate={{ 
+                    y: 0, 
+                    opacity: hoveredItem && hoveredItem !== item.label ? 0.3 : 1 
+                  }}
+                  exit={{ y: 50, opacity: 0 }}
+                  transition={{ 
+                    y: { delay: 0.4 + i * 0.1, duration: 1.2, ease: [0.19, 1, 0.22, 1] },
+                    opacity: { duration: 0.5 }
+                  }}
+                  className="group flex items-center gap-4 text-5xl md:text-7xl lg:text-8xl font-sans font-normal tracking-tight cursor-pointer"
+                  onMouseEnter={() => setHoveredItem(item.label)}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    handleNavigation(item.id)
+                  }}
                 >
-                  {item}
+                  {/* Arrow Reveal */}
+                  <motion.span
+                    initial={{ width: 0, opacity: 0 }}
+                    animate={{ 
+                      width: hoveredItem === item.label ? 'auto' : 0,
+                      opacity: hoveredItem === item.label ? 1 : 0
+                    }}
+                    className="overflow-hidden flex items-center"
+                  >
+                    <ArrowRight className="w-8 h-8 md:w-12 md:h-12 mr-2 md:mr-4" />
+                  </motion.span>
+
+                  <span className="group-hover:translate-x-2 transition-transform duration-300">
+                    {item.label}
+                  </span>
                 </motion.a>
               ))}
             </nav>
           </div>
 
           {/* --- FOOTER --- */}
-          <div className="w-full grid grid-cols-1 md:grid-cols-3 items-end gap-8 px-6 py-8 md:px-10 pb-10">
+          <div className="w-full grid grid-cols-1 md:grid-cols-3 items-end gap-8 px-6 py-8 md:px-10 pb-10 flex-shrink-0">
             
             {/* Left: Copyright */}
             <div className="flex flex-col gap-1 text-xs md:text-sm text-zinc-400 font-sans">
               <p>©2025</p>
-              <p className="hover:text-white cursor-pointer transition-colors">Privacy Policy | Cookies</p>
+              <p onClick={onOpenPrivacy} className="hover:text-white cursor-pointer transition-colors">Privacy Policy | Cookies</p>
             </div>
 
             {/* Center: Address */}
@@ -93,8 +123,18 @@ export function OverlayMenu({ isOpen, onClose }: OverlayMenuProps) {
 
             {/* Right: Video Thumbnail */}
             <div className="flex justify-start md:justify-end">
-              <div className="relative w-48 h-28 bg-zinc-900 rounded overflow-hidden group cursor-pointer">
+              <div 
+                className="relative w-48 h-28 bg-zinc-900 rounded overflow-hidden group cursor-pointer"
+                onMouseEnter={() => videoRef.current?.play()}
+                onMouseLeave={() => {
+                  if (videoRef.current) {
+                    videoRef.current.pause()
+                    videoRef.current.currentTime = 0
+                  }
+                }}
+              >
                 <video 
+                  ref={videoRef}
                   muted 
                   loop 
                   playsInline
