@@ -35,7 +35,7 @@ function App() {
             <CursorProvider>
               <SmoothScroll>
                 <CustomCursor />
-                <main className="bg-white min-h-screen w-full overflow-x-clip selection:bg-black selection:text-white cursor-none">
+                <main className="bg-white min-h-screen w-full overflow-x-clip selection:bg-black selection:text-white md:cursor-none">
                   <Navbar isMenuOpen={isMenuOpen} onToggleMenu={() => setIsMenuOpen(!isMenuOpen)} />
                   <OverlayMenu 
                     isOpen={isMenuOpen} 
