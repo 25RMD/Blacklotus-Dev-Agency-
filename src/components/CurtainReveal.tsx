@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import { useCursor } from '../context/CursorContext'
 
 // Define the images and their start positions on the "film strip"
@@ -25,24 +25,31 @@ export function CurtainReveal() {
     offset: ["start start", "end end"]
   })
 
+  // Smooth the scroll progress for buttery animations
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  })
+
   // Column movement transforms - creates the film strip scrolling effect
   const transforms = [
-    useTransform(scrollYProgress, [0, 1], ["0%", "-180%"]),
-    useTransform(scrollYProgress, [0, 1], ["0%", "-250%"]),
-    useTransform(scrollYProgress, [0, 1], ["0%", "-200%"]),
-    useTransform(scrollYProgress, [0, 1], ["0%", "-230%"]),
-    useTransform(scrollYProgress, [0, 1], ["0%", "-210%"]),
+    useTransform(smoothProgress, [0, 1], ["0%", "-180%"]),
+    useTransform(smoothProgress, [0, 1], ["0%", "-250%"]),
+    useTransform(smoothProgress, [0, 1], ["0%", "-200%"]),
+    useTransform(smoothProgress, [0, 1], ["0%", "-230%"]),
+    useTransform(smoothProgress, [0, 1], ["0%", "-210%"]),
   ]
 
   // Color transitions: black to white halfway through
   const backgroundColor = useTransform(
-    scrollYProgress,
+    smoothProgress,
     [0.4, 0.6],
     ["#000000", "#ffffff"]
   )
 
   const borderColor = useTransform(
-    scrollYProgress,
+    smoothProgress,
     [0.4, 0.6],
     ["rgba(255, 255, 255, 0.15)", "rgba(0, 0, 0, 0.35)"]
   )

@@ -65,10 +65,10 @@ export function Navbar({ isMenuOpen, onToggleMenu }: NavbarProps) {
       {/* Menu Button */}
       <button 
         onClick={onToggleMenu}
-        className={`pointer-events-auto relative overflow-hidden rounded-full border px-8 py-3 text-sm font-medium transition-all duration-500 w-[110px] ${
+        className={`pointer-events-auto relative overflow-hidden rounded-full px-8 py-3 text-sm font-medium transition-all duration-500 w-[110px] ${
           isMenuOpen 
-            ? 'bg-white text-black border-white' 
-            : 'bg-black text-white border-white/20 hover:bg-zinc-900'
+            ? 'bg-white text-black' 
+            : 'bg-black text-white border border-white/10 hover:bg-zinc-900'
         }`}
       >
         <div className="relative h-5 w-full">
