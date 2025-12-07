@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import { Navbar } from './components/Navbar'
 import { OverlayMenu } from './components/OverlayMenu'
 import { HeroSection } from './components/HeroSection'
@@ -22,42 +22,37 @@ function App() {
 
   return (
     <>
-      <AnimatePresence mode="wait">
-        {isLoading ? (
+      {/* Main content - always rendered, loading screen slides up to reveal it */}
+      <CursorProvider>
+        <SmoothScroll>
+          <CustomCursor />
+          <main className="bg-white min-h-screen w-full overflow-x-clip selection:bg-black selection:text-white md:cursor-none">
+            <Navbar isMenuOpen={isMenuOpen} onToggleMenu={() => setIsMenuOpen(!isMenuOpen)} />
+            <OverlayMenu 
+              isOpen={isMenuOpen} 
+              onClose={() => setIsMenuOpen(false)} 
+              onOpenPrivacy={() => {
+                setIsMenuOpen(false)
+                setIsPrivacyOpen(true)
+              }}
+            />
+            <HeroSection />
+            <WhatWeDo />
+            <ProjectSlider />
+            <CurtainReveal />
+            <Testimonials />
+            <GetInTouch />
+            <Footer onOpenPrivacy={() => setIsPrivacyOpen(true)} />
+          </main>
+        </SmoothScroll>
+        {/* Privacy Policy outside SmoothScroll so Lenis doesn't intercept its scroll events */}
+        <PrivacyPolicy isOpen={isPrivacyOpen} onClose={() => setIsPrivacyOpen(false)} />
+      </CursorProvider>
+
+      {/* Loading screen - slides up to reveal content */}
+      <AnimatePresence>
+        {isLoading && (
           <LoadingScreen key="loader" onLoadingComplete={() => setIsLoading(false)} />
-        ) : (
-          <motion.div
-            key="main"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <CursorProvider>
-              <SmoothScroll>
-                <CustomCursor />
-                <main className="bg-white min-h-screen w-full overflow-x-clip selection:bg-black selection:text-white md:cursor-none">
-                  <Navbar isMenuOpen={isMenuOpen} onToggleMenu={() => setIsMenuOpen(!isMenuOpen)} />
-                  <OverlayMenu 
-                    isOpen={isMenuOpen} 
-                    onClose={() => setIsMenuOpen(false)} 
-                    onOpenPrivacy={() => {
-                      setIsMenuOpen(false)
-                      setIsPrivacyOpen(true)
-                    }}
-                  />
-                  <HeroSection />
-                  <WhatWeDo />
-                  <ProjectSlider />
-                  <CurtainReveal />
-                  <Testimonials />
-                  <GetInTouch />
-                  <Footer onOpenPrivacy={() => setIsPrivacyOpen(true)} />
-                </main>
-              </SmoothScroll>
-              {/* Privacy Policy outside SmoothScroll so Lenis doesn't intercept its scroll events */}
-              <PrivacyPolicy isOpen={isPrivacyOpen} onClose={() => setIsPrivacyOpen(false)} />
-            </CursorProvider>
-          </motion.div>
         )}
       </AnimatePresence>
     </>

@@ -16,7 +16,6 @@ const LOADING_STATES = [
 export function LoadingScreen({ onLoadingComplete }: LoadingScreenProps) {
   const [progress, setProgress] = useState(0)
   const [loadingStateIndex, setLoadingStateIndex] = useState(0)
-  const [isExiting, setIsExiting] = useState(false)
 
   // Handle Progress logic
   useEffect(() => {
@@ -45,39 +44,28 @@ export function LoadingScreen({ onLoadingComplete }: LoadingScreenProps) {
     return () => clearInterval(interval)
   }, [])
 
-  // Trigger Exit Animation when progress hits 100
+  // Trigger completion when progress hits 100
   useEffect(() => {
     if (progress >= 100) {
-      // Small pause at 100% before animating out
-      const timeout = setTimeout(() => {
-        setIsExiting(true)
-      }, 500)
-      return () => clearTimeout(timeout)
-    }
-  }, [progress])
-
-  // Trigger Parent Callback after exit animation finishes
-  useEffect(() => {
-    if (isExiting) {
-      // Wait for the slide-up animation (0.8s) to finish
+      // Small pause at 100% before triggering exit
       const timeout = setTimeout(() => {
         onLoadingComplete()
-      }, 800)
+      }, 600)
       return () => clearTimeout(timeout)
     }
-  }, [isExiting, onLoadingComplete])
+  }, [progress, onLoadingComplete])
 
   return (
     <motion.div
       className="fixed inset-0 z-[999] flex flex-col items-center justify-between bg-neutral-950 text-white overflow-hidden font-sans"
       initial={{ y: 0 }}
-      animate={{ 
-        y: isExiting ? "-100vh" : "0",
-        borderBottomLeftRadius: isExiting ? "100px" : "0px",
-        borderBottomRightRadius: isExiting ? "100px" : "0px",
+      exit={{ 
+        y: "-100%",
+        borderBottomLeftRadius: "50px",
+        borderBottomRightRadius: "50px",
       }}
       transition={{ 
-        duration: 0.8, 
+        duration: 1, 
         ease: [0.76, 0, 0.24, 1] // "Quart" easing for a sharp, premium feel
       }}
     >
