@@ -7,16 +7,36 @@ interface NavbarProps {
 }
 
 export function Navbar({ isMenuOpen, onToggleMenu }: NavbarProps) {
-  const [scrollbarWidth, setScrollbarWidth] = useState(0)
+  const [hasScrolled, setHasScrolled] = useState(false)
 
   useEffect(() => {
-    setScrollbarWidth(window.innerWidth - document.documentElement.clientWidth)
+    const handleScroll = () => {
+      // Check both regular scroll AND hero strip progress
+      const heroProgress = window.heroStripProgress || 0
+      setHasScrolled(window.scrollY > 10 || heroProgress > 0.05)
+    }
+    
+    // Check initial scroll position
+    handleScroll()
+    
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    
+    // Also listen to wheel events for when Lenis is stopped (during hero strip animation)
+    const handleWheel = () => {
+      // Small delay to let progress update
+      requestAnimationFrame(handleScroll)
+    }
+    window.addEventListener('wheel', handleWheel, { passive: true })
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('wheel', handleWheel)
+    }
   }, [])
 
   return (
     <nav 
-      className="fixed top-0 left-0 z-[101] flex items-center justify-between px-6 py-6 md:px-10 pointer-events-none transition-[right] duration-0"
-      style={{ right: isMenuOpen ? `${scrollbarWidth}px` : '0px' }}
+      className="fixed top-0 left-0 right-0 z-[101] flex items-center justify-between px-6 py-6 md:px-10 pointer-events-none"
     >
       {/* Logo & Tagline */}
       <div className="flex items-center gap-4 pointer-events-auto">
@@ -25,17 +45,18 @@ export function Navbar({ isMenuOpen, onToggleMenu }: NavbarProps) {
           alt="Black Lotus" 
           className="h-12 w-12 rounded-full object-contain"
         />
-        {/* Tagline - Hidden when menu is open to avoid clutter/contrast issues */}
+        {/* Tagline - Hidden when menu is open or when scrolled */}
         <AnimatePresence>
-          {!isMenuOpen && (
+          {!isMenuOpen && !hasScrolled && (
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="hidden md:flex flex-col text-[11px] leading-tight font-medium uppercase tracking-wide text-white/70 mix-blend-difference"
+              transition={{ duration: 0.2 }}
+              className="flex flex-col text-[9px] md:text-[11px] leading-tight font-medium uppercase tracking-wide text-black"
             >
               <span>Web & Software Solutions</span>
-              <span className="text-white/50">Digital Transformation</span>
+              <span className="text-black/70">Digital Transformation</span>
             </motion.div>
           )}
         </AnimatePresence>

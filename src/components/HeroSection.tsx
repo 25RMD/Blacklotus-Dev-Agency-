@@ -1,16 +1,32 @@
-import { motion } from 'framer-motion'
+import { motion, useSpring, useTransform } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
+
+declare global {
+  interface Window {
+    heroStripProgress: number
+  }
+}
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const [scrollProgress, setScrollProgress] = useState(0)
   const [isLocked, setIsLocked] = useState(true)
+  const [hasLeftHero, setHasLeftHero] = useState(false)
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
   const accumulatedScroll = useRef(0)
   const scrollThreshold = 600 // Total scroll distance needed to complete animation
   const videoRef = useRef<HTMLVideoElement>(null)
   
   const videos = ['/bg-video/1.mp4', '/bg-video/2.mp4']
+
+  // Use spring for smooth Lenis-like animation
+  const scrollProgressSpring = useSpring(0, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  })
+  
+  // Transform spring value to strip position
+  const stripY = useTransform(scrollProgressSpring, [0, 1], ['0vh', '-50vh'])
 
   useEffect(() => {
     if (videoRef.current) {
@@ -21,6 +37,47 @@ export function HeroSection() {
   const handleVideoEnded = () => {
     setCurrentVideoIndex((prev) => (prev + 1) % videos.length)
   }
+
+  // Detect when user scrolls back to top and reset the strip
+  // Use native scroll event since Lenis might be stopped
+  useEffect(() => {
+    const handleScroll = () => {
+      const scroll = window.scrollY
+      
+      // Mark that we've left the hero section
+      if (!hasLeftHero && scroll > window.innerHeight) {
+        setHasLeftHero(true)
+      }
+      
+      // If we've left the hero section and scrolled back to the very top
+      if (hasLeftHero && scroll < 10) {
+        // Reset the animation state
+        scrollProgressSpring.set(0)
+        accumulatedScroll.current = 0
+        window.heroStripProgress = 0
+        setHasLeftHero(false)
+        // Delay setting isLocked to allow Lenis to properly stop
+        setTimeout(() => {
+          setIsLocked(true)
+        }, 100)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [hasLeftHero, scrollProgressSpring])
+
+  // Stop/start Lenis based on lock state
+  useEffect(() => {
+    const lenis = window.lenis
+    if (!lenis) return
+
+    if (isLocked) {
+      lenis.stop()
+    } else {
+      lenis.start()
+    }
+  }, [isLocked])
   
   useEffect(() => {
     if (!isLocked) return
@@ -38,27 +95,23 @@ export function HeroSection() {
       
       // Calculate progress (0 to 1)
       const progress = accumulatedScroll.current / scrollThreshold
-      setScrollProgress(progress)
+      scrollProgressSpring.set(progress)
+      
+      // Expose progress globally for Navbar
+      window.heroStripProgress = progress
       
       // Unlock when we reach 90% progress
       if (progress >= 0.9) {
         setIsLocked(false)
-        document.body.style.overflow = ''
       }
     }
     
-    // Lock scroll
-    document.body.style.overflow = 'hidden'
     window.addEventListener('wheel', handleWheel, { passive: false })
     
     return () => {
       window.removeEventListener('wheel', handleWheel)
-      document.body.style.overflow = ''
     }
-  }, [isLocked])
-
-  // Calculate strip position based on progress
-  const stripY = `${-scrollProgress * 50}vh`
+  }, [isLocked, scrollProgressSpring])
   
   return (
     <section id="home" ref={sectionRef} className="relative h-screen w-full">
@@ -98,15 +151,31 @@ export function HeroSection() {
         {/* WHITE HORIZONTAL STRIP with "BLACK LOTUS" */}
         <motion.div 
           style={{ y: stripY }}
-          className="absolute top-0 left-0 right-0 h-[45vh] bg-white/90 backdrop-blur-sm z-10 flex items-center justify-center overflow-hidden"
-          transition={{ type: "tween", duration: 0.1 }}
+          className="absolute top-0 left-0 right-0 h-[45vh] bg-white/90 backdrop-blur-sm z-10 flex items-end justify-center overflow-hidden"
         >
-          <h1 
-            className="font-display font-bold text-[13.5vw] leading-none tracking-tighter text-center uppercase whitespace-nowrap select-none text-black/10"
-            style={{ transform: 'scaleY(1.1)' }} 
-          >
-            BLACK LOTUS
-          </h1>
+          <div className="w-full relative flex items-end justify-center pointer-events-none overflow-hidden h-[40vh]" style={{ transform: 'translateY(20px)' }}>
+            <svg
+              viewBox="0 0 100 20"
+              preserveAspectRatio="none"
+              className="w-full h-full"
+            >
+              <text
+                x="50%"
+                y="50%"
+                textAnchor="middle"
+                dominantBaseline="central"
+                textLength="100"
+                lengthAdjust="spacingAndGlyphs"
+                fill="rgba(0, 0, 0, 0.1)"
+                style={{
+                  fontFamily: 'Impact, "Arial Narrow Bold", sans-serif',
+                  fontSize: '20px',
+                }}
+              >
+                BLACK LOTUS
+              </text>
+            </svg>
+          </div>
         </motion.div>
 
       </div>

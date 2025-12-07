@@ -70,48 +70,14 @@
   background-clip: text;
 }
 
-/* Custom Scrollbar - sleek minimal design */
+/* Hide scrollbar globally */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  display: none;
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 4px;
-  border: 2px solid transparent;
-  background-clip: padding-box;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.5);
-  border: 2px solid transparent;
-  background-clip: padding-box;
-}
-
-/* Firefox scrollbar */
 * {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
-}
-
-/* Dark mode scrollbar for dark backgrounds */
-.bg-black ::-webkit-scrollbar-thumb,
-[class*="bg-zinc-9"] ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
-  border: 2px solid transparent;
-  background-clip: padding-box;
-}
-
-.bg-black ::-webkit-scrollbar-thumb:hover,
-[class*="bg-zinc-9"] ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.5);
-  border: 2px solid transparent;
-  background-clip: padding-box;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Hide scrollbar for horizontal scroll sections */
