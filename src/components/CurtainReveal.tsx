@@ -63,23 +63,23 @@ export function CurtainReveal() {
         />
 
         {/* Fixed Gridlines Layer - stays in place while images scroll */}
-        <div className="absolute inset-0 top-[180px] grid grid-cols-5 h-full pointer-events-none [mask-image:linear-gradient(to_bottom,transparent,black_100px)]">
+        <div className="absolute inset-0 top-[180px] grid grid-cols-3 md:grid-cols-5 h-full pointer-events-none [mask-image:linear-gradient(to_bottom,transparent,black_100px)]">
           {[0, 1, 2, 3, 4].map((i) => (
             <motion.div
               key={i}
               style={{ borderLeftColor: borderColor }}
-              className="w-full h-full border-l"
+              className={`w-full h-full border-l ${i > 2 ? 'hidden md:block' : ''}`}
             />
           ))}
         </div>
 
         {/* The Film Strips (images scroll within the sticky container) */}
-        <div className="absolute inset-0 top-[180px] grid grid-cols-5 h-full">
+        <div className="absolute inset-0 top-[180px] grid grid-cols-3 md:grid-cols-5 h-full">
           {transforms.map((y, i) => (
             <motion.div
               key={i}
               style={{ y }}
-              className="relative w-full h-[300%] bg-transparent"
+              className={`relative w-full h-[300%] bg-transparent ${i > 2 ? 'hidden md:block' : ''}`}
             >
               {images.filter(img => img.col === i).map((img, idx) => (
                 <div

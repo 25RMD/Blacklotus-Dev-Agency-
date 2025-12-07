@@ -59,7 +59,6 @@ export function HeroSection() {
 
   // Calculate strip position based on progress
   const stripY = `${-scrollProgress * 50}vh`
-  const taglineOpacity = 1 - (scrollProgress / 0.075) // Fade out very quickly by 7.5% progress
   
   return (
     <section id="home" ref={sectionRef} className="relative h-screen w-full">

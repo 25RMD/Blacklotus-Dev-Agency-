@@ -54,7 +54,7 @@ const FooterNavItem = ({ label, href, onClick, index, total, color }: { label: s
   )
 }
 
-export function Footer({ onOpenPrivacy }: { onOpenPrivacy?: () => void }) {
+export function Footer({ onOpenPrivacy: _onOpenPrivacy }: { onOpenPrivacy?: () => void }) {
   return (
     <footer className="w-full bg-black text-white relative overflow-hidden border-t border-white/20">
 

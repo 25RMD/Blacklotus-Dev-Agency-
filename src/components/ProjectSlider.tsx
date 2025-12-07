@@ -69,7 +69,7 @@ export function ProjectSlider() {
         {/* Bottom Footer Bar - constrained width */}
         <motion.div 
           style={{ y: yFooter }}
-          className="absolute bottom-18 left-0 w-full z-50 px-6 md:px-16 pb-8 flex justify-center"
+          className="absolute bottom-4 md:bottom-18 left-0 w-full z-50 px-6 md:px-16 pb-4 md:pb-8 flex justify-center"
         >
           <div className="w-full max-w-7xl">
             {/* Progress bar acts as top divider */}
@@ -101,25 +101,25 @@ function ProjectCard({ project, scrollYProgress: _scrollYProgress }: { project: 
   const { setCursorText, setCursorVariant } = useCursor()
 
   return (
-    <div className="relative h-screen w-screen flex-shrink-0 bg-black text-white flex items-center justify-center p-6 md:p-16 box-border">
+    <div className="relative h-screen w-screen flex-shrink-0 bg-black text-white flex items-start md:items-center justify-center pt-20 md:pt-0 p-6 pb-24 md:p-16 box-border">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/0 via-zinc-900/0 to-black/80 z-10 pointer-events-none" />
 
-      <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-12 gap-6 items-center relative z-20">
+      <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-center relative z-20">
 
         {/* LEFT: Title - high z-index to appear above image */}
         <div className="md:col-span-4 md:col-start-2 order-2 md:order-1 relative z-50 overflow-visible">
-          <span className="block text-xs font-mono text-zinc-400 mb-4 uppercase tracking-widest">
+          <span className="block text-xs font-mono text-zinc-400 mb-2 md:mb-4 uppercase tracking-widest">
             project {project.id}
           </span>
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.9] tracking-tighter mb-6">
+          <h2 className="text-3xl md:text-6xl lg:text-7xl font-bold leading-[0.9] tracking-tighter mb-3 md:mb-6">
             {project.title}
           </h2>
-          <div className="h-px w-12 bg-white/30 my-6" />
+          <div className="h-px w-12 bg-white/30 my-3 md:my-6" />
           <p className="text-zinc-400 text-sm md:text-base max-w-xs leading-relaxed">
             {project.description}
           </p>
-          <div className="mt-8 flex gap-4">
+          <div className="mt-4 md:mt-8 flex gap-4">
             <span className="px-3 py-1 border border-white/20 rounded-full text-xs uppercase tracking-wider">
               {project.role}
             </span>
@@ -128,7 +128,7 @@ function ProjectCard({ project, scrollYProgress: _scrollYProgress }: { project: 
 
         {/* RIGHT: Image */}
         <div 
-          className="md:col-span-6 order-1 md:order-2 relative h-[50vh] md:h-[70vh] w-full overflow-hidden rounded-sm cursor-none"
+          className="md:col-span-6 order-1 md:order-2 relative h-[30vh] md:h-[70vh] w-full overflow-hidden rounded-sm cursor-none"
           onMouseEnter={() => {
             setCursorText("VIEW PROJECT")
             setCursorVariant("text")

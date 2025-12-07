@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
-import { FormEvent } from 'react'
+import type { FormEvent } from 'react'
 
 export function GetInTouch() {
     const handleSubmit = (e: FormEvent) => {
@@ -81,7 +81,7 @@ ${details}
                                         name="firstName"
                                         type="text"
                                         placeholder="Emma"
-                                        className="w-full text-4xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black"
+                                        className="w-full text-2xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black"
                                     />
                                 </motion.div>
                                 <motion.div 
@@ -96,7 +96,7 @@ ${details}
                                         name="lastName"
                                         type="text"
                                         placeholder="Lewis"
-                                        className="w-full text-4xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black"
+                                        className="w-full text-2xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black"
                                     />
                                 </motion.div>
                             </div>
@@ -115,7 +115,7 @@ ${details}
                                         name="email"
                                         type="email"
                                         placeholder="emma@email.com"
-                                        className="w-full text-4xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black"
+                                        className="w-full text-2xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black"
                                     />
                                 </motion.div>
                                 <motion.div 
@@ -130,7 +130,7 @@ ${details}
                                         name="phone"
                                         type="tel"
                                         placeholder="+234"
-                                        className="w-full text-4xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black"
+                                        className="w-full text-2xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black"
                                     />
                                 </motion.div>
                             </div>
@@ -148,7 +148,7 @@ ${details}
                                     name="details"
                                     placeholder="Tell us about your project..."
                                     rows={1}
-                                    className="w-full text-4xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black resize-none"
+                                    className="w-full text-2xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black resize-none"
                                     onInput={(e) => {
                                         e.currentTarget.style.height = 'auto';
                                         e.currentTarget.style.height = e.currentTarget.scrollHeight + 'px';
