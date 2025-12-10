@@ -57,7 +57,7 @@ export function LoadingScreen({ onLoadingComplete }: LoadingScreenProps) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-[999] flex flex-col items-center justify-between bg-neutral-950 text-white overflow-hidden font-sans"
+      className="fixed inset-0 z-[999] flex flex-col items-center justify-between bg-black text-white overflow-hidden font-sans"
       initial={{ y: 0 }}
       exit={{
         y: "-100%",
