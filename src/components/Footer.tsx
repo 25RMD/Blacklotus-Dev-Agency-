@@ -66,9 +66,9 @@ export function Footer({ onOpenPrivacy: _onOpenPrivacy }: { onOpenPrivacy?: () =
           <div className="hidden lg:block absolute right-0 top-0 h-full w-px bg-gradient-to-b from-white/20 to-transparent" />
           <div className="space-y-6">
             <div className="flex items-start gap-4">
-              <img 
-                src="/blacklotus.svg" 
-                alt="Black Lotus" 
+              <img
+                src="/BL-logo.jpg"
+                alt="Black Lotus"
                 className="w-8 h-8 rounded-full object-contain"
               />
               <div className="text-xs font-bold uppercase leading-tight tracking-wide mt-1">
@@ -106,7 +106,7 @@ export function Footer({ onOpenPrivacy: _onOpenPrivacy }: { onOpenPrivacy?: () =
             { label: 'LATEST NEWS', href: '#testimonials' },
             { label: 'GET IN TOUCH', href: '#contact' }
           ].map((item, i, arr) => (
-            <FooterNavItem 
+            <FooterNavItem
               key={i}
               label={item.label}
               href={item.href}

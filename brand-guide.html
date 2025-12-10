@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Lotus Brand Guide</title>
+
+    <!-- Switzer Font -->
+    <style>
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb977efde095c9ce551dd_Switzer-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abbacd113fcc08efe66918_Switzer-Light.woff') format('woff');
+            font-weight: 300;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb977e5f5d00647df12b7_Switzer-Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb9770a14b6e6d06a8ddb_Switzer-Semibold.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb9778041c4a0e5ae1faf_Switzer-Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        :root {
+            --off-black: #111111;
+            --pure-black: #000000;
+            --pure-white: #FFFFFF;
+            --warm-white: #fdfdfc;
+            --cream: #f5f5f0;
+            --zinc-400: #a1a1aa;
+            --zinc-500: #71717a;
+            --zinc-600: #52525b;
+            --zinc-900: #18181b;
+        }
+
+        /* A4 Page Setup */
+        @page {
+            size: A4;
+            margin: 15mm 12mm;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 10pt;
+        }
+
+        body {
+            font-family: 'Switzer', 'Inter', system-ui, sans-serif;
+            font-size: 9pt;
+            line-height: 1.5;
+            color: var(--off-black);
+            background: var(--pure-white);
+            -webkit-font-smoothing: antialiased;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                font-size: 9pt;
+            }
+
+            .page {
+                page-break-after: always;
+                page-break-inside: avoid;
+                height: 257mm;
+                /* A4 height minus margins */
+                overflow: hidden;
+            }
+
+            .page:last-child {
+                page-break-after: auto;
+            }
+
+            .no-break {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* Page Container - A4 simulation */
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Cover Page */
+        .cover {
+            height: 297mm;
+            background: var(--pure-black);
+            color: var(--pure-white);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 15mm;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to right, rgba(128, 128, 128, 0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(128, 128, 128, 0.08) 1px, transparent 1px);
+            background-size: 10mm 10mm;
+            pointer-events: none;
+        }
+
+        .cover-header {
+            display: flex;
+            align-items: center;
+            gap: 4mm;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-logo {
+            width: 12mm;
+            height: 12mm;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .cover-tagline {
+            font-size: 7pt;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--zinc-400);
+        }
+
+        .cover-main {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-title {
+            font-size: 48pt;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 0.9;
+            margin-bottom: 6mm;
+        }
+
+        .cover-subtitle {
+            font-size: 11pt;
+            font-weight: 300;
+            color: var(--zinc-400);
+            max-width: 120mm;
+            line-height: 1.5;
+        }
+
+        .cover-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-version {
+            font-size: 7pt;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--zinc-500);
+        }
+
+        /* Content Page */
+        .content-page {
+            padding: 12mm 15mm;
+            height: 297mm;
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 8mm;
+        }
+
+        .section-number {
+            font-size: 7pt;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--zinc-500);
+            margin-bottom: 2mm;
+        }
+
+        .section-title {
+            font-size: 22pt;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 4mm;
+            color: var(--off-black);
+        }
+
+        .section-intro {
+            font-size: 10pt;
+            font-weight: 300;
+            color: var(--zinc-600);
+            margin-bottom: 6mm;
+            max-width: 150mm;
+            line-height: 1.5;
+        }
+
+        /* Subsection */
+        .subsection {
+            margin-bottom: 5mm;
+        }
+
+        .subsection-title {
+            font-size: 10pt;
+            font-weight: 600;
+            margin-bottom: 2mm;
+            color: var(--off-black);
+        }
+
+        .subsection-content {
+            font-size: 9pt;
+            color: var(--zinc-600);
+            line-height: 1.5;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: var(--cream);
+            padding: 5mm 6mm;
+            margin: 4mm 0;
+            border-left: 1mm solid var(--off-black);
+        }
+
+        .highlight-box.dark {
+            background: var(--off-black);
+            color: var(--pure-white);
+            border-left-color: var(--pure-white);
+        }
+
+        .tagline {
+            font-size: 16pt;
+            font-weight: 500;
+            font-style: italic;
+            letter-spacing: -0.02em;
+            line-height: 1.3;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 3mm 0;
+            font-size: 8pt;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 2mm 3mm;
+            border-bottom: 0.3mm solid #e5e5e5;
+        }
+
+        th {
+            font-size: 7pt;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--zinc-500);
+            background: var(--cream);
+        }
+
+        /* Color Swatches */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3mm;
+            margin: 3mm 0;
+        }
+
+        .color-swatch {
+            border: 0.3mm solid #e5e5e5;
+            overflow: hidden;
+        }
+
+        .color-swatch-preview {
+            height: 12mm;
+        }
+
+        .color-swatch-info {
+            padding: 2mm;
+            background: var(--pure-white);
+        }
+
+        .color-swatch-name {
+            font-weight: 600;
+            font-size: 8pt;
+            margin-bottom: 1mm;
+        }
+
+        .color-swatch-hex {
+            font-family: 'SF Mono', 'Monaco', monospace;
+            font-size: 7pt;
+            color: var(--zinc-500);
+        }
+
+        /* Typography Specimens */
+        .type-specimen {
+            margin: 3mm 0;
+            padding: 4mm;
+            background: var(--cream);
+        }
+
+        .type-label {
+            font-size: 7pt;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--zinc-500);
+            margin-bottom: 2mm;
+        }
+
+        .type-hero {
+            font-size: 28pt;
+            font-weight: 500;
+            letter-spacing: -0.03em;
+            line-height: 1;
+        }
+
+        .type-h2 {
+            font-size: 18pt;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .type-h3 {
+            font-size: 12pt;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .type-body {
+            font-size: 9pt;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        .type-label-specimen {
+            font-size: 8pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        /* Two Column Layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8mm;
+        }
+
+        .three-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 4mm;
+        }
+
+        /* Lists */
+        ul {
+            margin: 2mm 0;
+            padding-left: 5mm;
+            font-size: 9pt;
+        }
+
+        li {
+            margin-bottom: 1.5mm;
+            color: var(--zinc-600);
+            line-height: 1.4;
+        }
+
+        /* Code */
+        code {
+            font-family: 'SF Mono', 'Monaco', monospace;
+            font-size: 8pt;
+            background: var(--cream);
+            padding: 0.5mm 1.5mm;
+            border-radius: 0.5mm;
+        }
+
+        /* Trait Pills */
+        .trait-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2mm;
+            margin: 3mm 0;
+        }
+
+        .trait-pill {
+            background: var(--off-black);
+            color: var(--pure-white);
+            padding: 2mm 4mm;
+            font-size: 7pt;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Divider */
+        .divider {
+            height: 0.3mm;
+            background: #e5e5e5;
+            margin: 6mm 0;
+        }
+
+        /* Do/Don't */
+        .do-dont {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4mm;
+            margin: 4mm 0;
+        }
+
+        .do-box,
+        .dont-box {
+            padding: 4mm;
+            font-size: 8pt;
+        }
+
+        .do-box {
+            background: #e8f5e8;
+            border-left: 1mm solid #22c55e;
+        }
+
+        .dont-box {
+            background: #fce8e8;
+            border-left: 1mm solid #ef4444;
+        }
+
+        .do-box h4,
+        .dont-box h4 {
+            font-size: 9pt;
+            font-weight: 700;
+            margin-bottom: 2mm;
+        }
+
+        .do-box ul,
+        .dont-box ul {
+            padding-left: 4mm;
+            font-size: 8pt;
+        }
+
+        /* Spacing Visual */
+        .spacing-visual {
+            display: flex;
+            align-items: flex-end;
+            gap: 2mm;
+            margin: 4mm 0;
+        }
+
+        .spacing-block {
+            background: var(--off-black);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6pt;
+        }
+
+        /* Accent Colors */
+        .accent-grid {
+            display: flex;
+            gap: 0;
+            margin: 4mm 0;
+            height: 10mm;
+        }
+
+        .accent-bar {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6pt;
+            font-weight: 600;
+        }
+
+        /* Stats */
+        .stat-number {
+            font-size: 28pt;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 1mm;
+        }
+
+        /* Quick Reference */
+        .quick-ref {
+            background: var(--off-black);
+            color: var(--pure-white);
+            padding: 8mm;
+        }
+
+        .quick-ref h2 {
+            font-size: 14pt;
+            font-weight: 600;
+            margin-bottom: 5mm;
+            letter-spacing: -0.02em;
+        }
+
+        .quick-ref-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5mm;
+        }
+
+        .quick-ref-item h4 {
+            font-size: 7pt;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--zinc-400);
+            margin-bottom: 2mm;
+        }
+
+        .quick-ref-item p {
+            font-size: 8pt;
+            color: var(--pure-white);
+            line-height: 1.4;
+        }
+
+        /* Footer */
+        .guide-footer {
+            text-align: center;
+            padding: 8mm;
+            color: var(--zinc-500);
+            font-size: 8pt;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        /* TOC */
+        .toc-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2mm 0;
+            border-bottom: 0.3mm solid #e5e5e5;
+            font-size: 9pt;
+        }
+
+        .toc-item strong {
+            margin-right: 3mm;
+            color: var(--zinc-500);
+        }
+
+        .toc-desc {
+            color: var(--zinc-400);
+            font-size: 8pt;
+        }
+
+        /* Page Numbers */
+        .page-number {
+            position: absolute;
+            bottom: 8mm;
+            right: 15mm;
+            font-size: 7pt;
+            color: var(--zinc-400);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PAGE 1: COVER -->
+    <div class="page">
+        <div class="cover">
+            <div class="cover-header">
+                <img src="./public/BL-logo.jpg" alt="Black Lotus" class="cover-logo"
+                    onerror="this.style.display='none'">
+                <div>
+                    <div class="cover-tagline">Web & Software Solutions</div>
+                    <div class="cover-tagline">Digital Transformation</div>
+                </div>
+            </div>
+
+            <div class="cover-main">
+                <h1 class="cover-title">Brand<br>Guide</h1>
+                <p class="cover-subtitle">A comprehensive guide to the Black Lotus brand identity, visual language, and
+                    communication standards.</p>
+            </div>
+
+            <div class="cover-footer">
+                <div class="cover-version">Version 1.0</div>
+                <div class="cover-version">December 2025</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: CONTENTS + BRAND POSITION -->
+    <div class="page content-page">
+        <div class="section">
+            <div class="section-number">00</div>
+            <h2 class="section-title">Contents</h2>
+
+            <div class="toc-item"><span><strong>01</strong> Brand Position</span><span class="toc-desc">Who we are, our
+                    niche</span></div>
+            <div class="toc-item"><span><strong>02</strong> Brand Tagline</span><span class="toc-desc">Primary and
+                    supporting</span></div>
+            <div class="toc-item"><span><strong>03</strong> Brand Personality</span><span class="toc-desc">Character &
+                    archetype</span></div>
+            <div class="toc-item"><span><strong>04</strong> Brand Aesthetics</span><span class="toc-desc">Visual
+                    identity & mood</span></div>
+            <div class="toc-item"><span><strong>05</strong> Colors</span><span class="toc-desc">Color palettes</span>
+            </div>
+            <div class="toc-item"><span><strong>06</strong> Typography</span><span class="toc-desc">Fonts & type
+                    scale</span></div>
+            <div class="toc-item"><span><strong>07</strong> Spacing</span><span class="toc-desc">Spacing system</span>
+            </div>
+            <div class="toc-item"><span><strong>08</strong> Messaging & Tone</span><span class="toc-desc">Voice &
+                    writing</span></div>
+            <div class="toc-item"><span><strong>09</strong> Iconography</span><span class="toc-desc">Icon usage</span>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section">
+            <div class="section-number">01</div>
+            <h2 class="section-title">Brand Position</h2>
+            <p class="section-intro">Black Lotus is a premium web and software development agency based in Africa,
+                Nigeria. We position ourselves as a partner, not just a vendor.</p>
+
+            <div class="two-col">
+                <div class="subsection">
+                    <h3 class="subsection-title">Who We Are</h3>
+                    <p class="subsection-content">A premium agency dedicated to engineering ideas into digital reality.
+                        We build high-performance, scalable solutions for modern businesses.</p>
+                </div>
+                <div class="subsection">
+                    <h3 class="subsection-title">Our Niche</h3>
+                    <p class="subsection-content">Building scalable digital solutions for startups seeking platforms and
+                        enterprises modernizing legacy systems.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 4mm;">
+                <p
+                    style="font-size: 8pt; font-weight: 600; margin-bottom: 2mm; text-transform: uppercase; letter-spacing: 0.1em;">
+                    Value Proposition</p>
+                <ul style="margin: 0; font-size: 8pt;">
+                    <li><strong>Beyond traditional:</strong> We empower businesses to realize their digital ambitions
+                    </li>
+                    <li><strong>Partner-first:</strong> Clients don't hire us; they partner with us</li>
+                    <li><strong>Full-spectrum:</strong> Websites to full-stack apps to mobile solutions</li>
+                </ul>
+            </div>
+        </div>
+        <span class="page-number">2</span>
+    </div>
+
+    <!-- PAGE 3: TAGLINE + PERSONALITY -->
+    <div class="page content-page">
+        <div class="section">
+            <div class="section-number">02</div>
+            <h2 class="section-title">Brand Tagline</h2>
+
+            <div class="highlight-box dark">
+                <p class="tagline">"Engineering ideas into digital reality."</p>
+            </div>
+
+            <div class="two-col" style="margin-top: 4mm;">
+                <div class="subsection">
+                    <h3 class="subsection-title">Supporting Descriptors</h3>
+                    <ul>
+                        <li>Web & Software Solutions</li>
+                        <li>Digital Transformation</li>
+                    </ul>
+                </div>
+                <div class="subsection">
+                    <h3 class="subsection-title">Alternate Taglines</h3>
+                    <ul>
+                        <li><em>"Imagination is the limit"</em></li>
+                        <li><em>"Turning your vision into reality today"</em></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section">
+            <div class="section-number">03</div>
+            <h2 class="section-title">Brand Personality</h2>
+
+            <div class="subsection">
+                <h3 class="subsection-title">Character Traits</h3>
+                <div class="trait-grid">
+                    <span class="trait-pill">Innovative</span>
+                    <span class="trait-pill">Premium</span>
+                    <span class="trait-pill">Problem-Solving</span>
+                    <span class="trait-pill">Collaborative</span>
+                    <span class="trait-pill">Ambitious</span>
+                    <span class="trait-pill">Reliable</span>
+                </div>
+            </div>
+
+            <div class="two-col" style="margin-top: 4mm;">
+                <div class="subsection">
+                    <h3 class="subsection-title">Brand Archetype</h3>
+                    <p class="subsection-content"><strong>The Creator + The Sage</strong></p>
+                    <ul style="font-size: 8pt;">
+                        <li><strong>Creator:</strong> We build and bring ideas to life</li>
+                        <li><strong>Sage:</strong> We provide expertise and guidance</li>
+                    </ul>
+                </div>
+                <div class="subsection">
+                    <h3 class="subsection-title">Human Persona</h3>
+                    <p class="subsection-content">Black Lotus is like a <strong>brilliant, passionate ninja</strong> —
+                        jumping into challenges and transforming complex problems into elegant solutions with precision.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section">
+            <div class="section-number">04</div>
+            <h2 class="section-title">Brand Aesthetics</h2>
+
+            <table>
+                <tr>
+                    <th>Element</th>
+                    <th>Style</th>
+                </tr>
+                <tr>
+                    <td>Aesthetic</td>
+                    <td>Minimal, bold, high-contrast</td>
+                </tr>
+                <tr>
+                    <td>Mood</td>
+                    <td>Premium, sophisticated, cutting-edge</td>
+                </tr>
+                <tr>
+                    <td>Design Language</td>
+                    <td>Modern brutalism meets elegant minimalism</td>
+                </tr>
+                <tr>
+                    <td>Visual Weight</td>
+                    <td>Heavy typography with generous whitespace</td>
+                </tr>
+            </table>
+
+            <div class="two-col" style="margin-top: 4mm;">
+                <div class="subsection">
+                    <h3 class="subsection-title">Visual Themes</h3>
+                    <ul style="font-size: 8pt;">
+                        <li>Cinematic hero experiences</li>
+                        <li>Architectural grid patterns</li>
+                        <li>Curtain/reveal animations</li>
+                        <li>High contrast palettes</li>
+                    </ul>
+                </div>
+                <div class="subsection">
+                    <h3 class="subsection-title">Textures & Effects</h3>
+                    <ul style="font-size: 8pt;">
+                        <li>Noise/grain overlays</li>
+                        <li>Gradient overlays</li>
+                        <li>Glassmorphism</li>
+                        <li>Corner brackets</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <span class="page-number">3</span>
+    </div>
+
+    <!-- PAGE 4: COLORS -->
+    <div class="page content-page">
+        <div class="section">
+            <div class="section-number">05</div>
+            <h2 class="section-title">Colors</h2>
+            <p class="section-intro">Our color palette is built on high-contrast blacks and whites, with vibrant accents
+                for interactive elements.</p>
+
+            <div class="subsection">
+                <h3 class="subsection-title">Primary Palette</h3>
+                <div class="color-grid">
+                    <div class="color-swatch">
+                        <div class="color-swatch-preview" style="background: #111111;"></div>
+                        <div class="color-swatch-info">
+                            <div class="color-swatch-name">Off Black</div>
+                            <div class="color-swatch-hex">#111111</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-swatch-preview" style="background: #000000;"></div>
+                        <div class="color-swatch-info">
+                            <div class="color-swatch-name">Pure Black</div>
+                            <div class="color-swatch-hex">#000000</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-swatch-preview" style="background: #FFFFFF; border: 0.3mm solid #e5e5e5;">
+                        </div>
+                        <div class="color-swatch-info">
+                            <div class="color-swatch-name">Pure White</div>
+                            <div class="color-swatch-hex">#FFFFFF</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-swatch-preview" style="background: #f5f5f0; border: 0.3mm solid #e5e5e5;">
+                        </div>
+                        <div class="color-swatch-info">
+                            <div class="color-swatch-name">Cream</div>
+                            <div class="color-swatch-hex">#f5f5f0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3 class="subsection-title">Neutral Scale (Zinc)</h3>
+                <div class="color-grid">
+                    <div class="color-swatch">
+                        <div class="color-swatch-preview" style="background: #a1a1aa;"></div>
+                        <div class="color-swatch-info">
+                            <div class="color-swatch-name">Zinc 400</div>
+                            <div class="color-swatch-hex">#a1a1aa</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-swatch-preview" style="background: #71717a;"></div>
+                        <div class="color-swatch-info">
+                            <div class="color-swatch-name">Zinc 500</div>
+                            <div class="color-swatch-hex">#71717a</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-swatch-preview" style="background: #52525b;"></div>
+                        <div class="color-swatch-info">
+                            <div class="color-swatch-name">Zinc 600</div>
+                            <div class="color-swatch-hex">#52525b</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-swatch-preview" style="background: #18181b;"></div>
+                        <div class="color-swatch-info">
+                            <div class="color-swatch-name">Zinc 900</div>
+                            <div class="color-swatch-hex">#18181b</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3 class="subsection-title">Accent Colors (Interactive)</h3>
+                <div class="accent-grid">
+                    <div class="accent-bar" style="background: #FF00FF; color: #000;">Magenta</div>
+                    <div class="accent-bar" style="background: #00FF00; color: #000;">Green</div>
+                    <div class="accent-bar" style="background: #00FFFF; color: #000;">Cyan</div>
+                    <div class="accent-bar" style="background: #FFAA00; color: #000;">Orange</div>
+                    <div class="accent-bar" style="background: #FFFF00; color: #000;">Yellow</div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3 class="subsection-title">Testimonial Palette</h3>
+                <div class="three-col">
+                    <div class="color-swatch">
+                        <div class="color-swatch-preview" style="background: #e855a0;"></div>
+                        <div class="color-swatch-info">
+                            <div class="color-swatch-name">Pink</div>
+                            <div class="color-swatch-hex">#e855a0 / #4a1942</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-swatch-preview" style="background: #c8f5e8;"></div>
+                        <div class="color-swatch-info">
+                            <div class="color-swatch-name">Mint</div>
+                            <div class="color-swatch-hex">#c8f5e8 / #1a534a</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-swatch-preview" style="background: #1a2744;"></div>
+                        <div class="color-swatch-info">
+                            <div class="color-swatch-name">Navy</div>
+                            <div class="color-swatch-hex">#1a2744 / #6b9ec4</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span class="page-number">4</span>
+    </div>
+
+    <!-- PAGE 5: TYPOGRAPHY -->
+    <div class="page content-page">
+        <div class="section">
+            <div class="section-number">06</div>
+            <h2 class="section-title">Typography</h2>
+            <p class="section-intro">Switzer is our primary typeface — a modern, geometric sans-serif that conveys
+                professionalism.</p>
+
+            <div class="two-col">
+                <div class="subsection">
+                    <h3 class="subsection-title">Font Family</h3>
+                    <table>
+                        <tr>
+                            <th>Usage</th>
+                            <th>Font</th>
+                        </tr>
+                        <tr>
+                            <td>Primary</td>
+                            <td><strong>Switzer</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Fallbacks</td>
+                            <td>Inter, system-ui, sans-serif</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="subsection">
+                    <h3 class="subsection-title">Font Weights</h3>
+                    <table>
+                        <tr>
+                            <th>Weight</th>
+                            <th>Usage</th>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 300;">Light (300)</td>
+                            <td>Display text</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 400;">Regular (400)</td>
+                            <td>Body text</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">Medium (500)</td>
+                            <td>Subheadings</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">Semibold (600)</td>
+                            <td>Headings</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 700;">Bold (700)</td>
+                            <td>CTAs</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="subsection" style="margin-top: 5mm;">
+                <h3 class="subsection-title">Type Scale</h3>
+
+                <div class="type-specimen">
+                    <div class="type-label">Hero H1 — 48pt Medium, Tight Tracking</div>
+                    <div class="type-hero">Engineering ideas</div>
+                </div>
+
+                <div class="type-specimen">
+                    <div class="type-label">Section H2 — 32pt Semibold, Tight</div>
+                    <div class="type-h2">What We Do</div>
+                </div>
+
+                <div class="type-specimen">
+                    <div class="type-label">Card H3 — 18pt Semibold</div>
+                    <div class="type-h3">Website Development</div>
+                </div>
+
+                <div class="type-specimen">
+                    <div class="type-label">Body — 12pt Regular, 1.6 Line Height</div>
+                    <div class="type-body">We are a premium web and software development agency dedicated to engineering
+                        ideas into digital reality.</div>
+                </div>
+
+                <div class="type-specimen">
+                    <div class="type-label">Label — 10pt Bold, Uppercase, Wide Tracking</div>
+                    <div class="type-label-specimen">GET IN TOUCH</div>
+                </div>
+            </div>
+        </div>
+        <span class="page-number">5</span>
+    </div>
+
+    <!-- PAGE 6: SPACING + MESSAGING -->
+    <div class="page content-page">
+        <div class="section">
+            <div class="section-number">07</div>
+            <h2 class="section-title">Spacing</h2>
+
+            <div class="two-col">
+                <div class="subsection">
+                    <h3 class="subsection-title">Spacing Scale</h3>
+                    <div class="spacing-visual">
+                        <div class="spacing-block" style="width: 8mm; height: 8mm;">8</div>
+                        <div class="spacing-block" style="width: 10mm; height: 10mm;">16</div>
+                        <div class="spacing-block" style="width: 12mm; height: 12mm;">24</div>
+                        <div class="spacing-block" style="width: 14mm; height: 14mm;">32</div>
+                        <div class="spacing-block" style="width: 18mm; height: 18mm;">48</div>
+                        <div class="spacing-block" style="width: 22mm; height: 22mm;">64</div>
+                        <div class="spacing-block" style="width: 28mm; height: 28mm;">96</div>
+                    </div>
+                </div>
+                <div class="subsection">
+                    <h3 class="subsection-title">Containers & Grid</h3>
+                    <table>
+                        <tr>
+                            <td>Content</td>
+                            <td><code>max-w-7xl</code> (80rem)</td>
+                        </tr>
+                        <tr>
+                            <td>Wide</td>
+                            <td><code>max-w-[90rem]</code></td>
+                        </tr>
+                        <tr>
+                            <td>Grid</td>
+                            <td>12 columns (desktop)</td>
+                        </tr>
+                        <tr>
+                            <td>Gap</td>
+                            <td>24px – 64px</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section">
+            <div class="section-number">08</div>
+            <h2 class="section-title">Messaging & Tone</h2>
+
+            <div class="subsection">
+                <h3 class="subsection-title">Core Messages</h3>
+                <div class="highlight-box" style="margin-bottom: 3mm;">
+                    <p
+                        style="font-size: 7pt; color: var(--zinc-500); margin-bottom: 1mm; text-transform: uppercase; letter-spacing: 0.1em;">
+                        Transformation</p>
+                    <p style="font-size: 11pt; font-weight: 500;">"Engineering ideas into digital reality."</p>
+                </div>
+                <div class="highlight-box" style="margin-bottom: 3mm;">
+                    <p
+                        style="font-size: 7pt; color: var(--zinc-500); margin-bottom: 1mm; text-transform: uppercase; letter-spacing: 0.1em;">
+                        Identity</p>
+                    <p style="font-size: 9pt;">"We are developers, designers, strategists and problem-solvers."</p>
+                </div>
+            </div>
+
+            <div class="two-col" style="margin-top: 4mm;">
+                <div class="subsection">
+                    <h3 class="subsection-title">Proof Points</h3>
+                    <div style="display: flex; gap: 5mm;">
+                        <div><span class="stat-number">10+</span>
+                            <p style="font-size: 7pt; color: var(--zinc-500);">Projects</p>
+                        </div>
+                        <div><span class="stat-number">1k+</span>
+                            <p style="font-size: 7pt; color: var(--zinc-500);">Users</p>
+                        </div>
+                        <div><span class="stat-number">15+</span>
+                            <p style="font-size: 7pt; color: var(--zinc-500);">Industries</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="subsection">
+                    <h3 class="subsection-title">Voice Attributes</h3>
+                    <ul style="font-size: 8pt;">
+                        <li><strong>Confident</strong> — Bold without arrogance</li>
+                        <li><strong>Professional</strong> — Articulate, not stuffy</li>
+                        <li><strong>Direct</strong> — Clear and concise</li>
+                        <li><strong>Warm</strong> — Approachable, inviting</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="do-dont">
+                <div class="do-box">
+                    <h4>✓ DO</h4>
+                    <ul>
+                        <li>Use active voice</li>
+                        <li>Lead with benefits</li>
+                        <li>Be specific about outcomes</li>
+                        <li>Keep sentences punchy</li>
+                    </ul>
+                </div>
+                <div class="dont-box">
+                    <h4>✗ DON'T</h4>
+                    <ul>
+                        <li>Use jargon without context</li>
+                        <li>Make empty promises</li>
+                        <li>Be overly formal</li>
+                        <li>Overcomplicate ideas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <span class="page-number">6</span>
+    </div>
+
+    <!-- PAGE 7: ICONS + QUICK REF -->
+    <div class="page content-page">
+        <div class="section">
+            <div class="section-number">09</div>
+            <h2 class="section-title">Iconography</h2>
+
+            <div class="two-col">
+                <div class="subsection">
+                    <h3 class="subsection-title">Icon Library</h3>
+                    <table>
+                        <tr>
+                            <td>Library</td>
+                            <td>Lucide React</td>
+                        </tr>
+                        <tr>
+                            <td>Style</td>
+                            <td>Stroke-based (outline)</td>
+                        </tr>
+                        <tr>
+                            <td>Stroke Width</td>
+                            <td>1.5 – 2</td>
+                        </tr>
+                        <tr>
+                            <td>Corner Radius</td>
+                            <td>Slightly rounded</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="subsection">
+                    <h3 class="subsection-title">Icon Sizing</h3>
+                    <table>
+                        <tr>
+                            <td>Navigation arrows</td>
+                            <td>16px × 16px</td>
+                        </tr>
+                        <tr>
+                            <td>Service cards</td>
+                            <td>24px × 24px</td>
+                        </tr>
+                        <tr>
+                            <td>Statistics</td>
+                            <td>24px – 32px</td>
+                        </tr>
+                        <tr>
+                            <td>Menu items</td>
+                            <td>32px – 48px</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="subsection" style="margin-top: 4mm;">
+                <h3 class="subsection-title">Core Icons</h3>
+                <table>
+                    <tr>
+                        <th>Icon</th>
+                        <th>Context</th>
+                        <th>Icon</th>
+                        <th>Context</th>
+                    </tr>
+                    <tr>
+                        <td>Server</td>
+                        <td>Website Dev</td>
+                        <td>Zap</td>
+                        <td>Web Apps</td>
+                    </tr>
+                    <tr>
+                        <td>Globe</td>
+                        <td>E-Commerce</td>
+                        <td>Database</td>
+                        <td>Maintenance</td>
+                    </tr>
+                    <tr>
+                        <td>Users</td>
+                        <td>User stats</td>
+                        <td>Briefcase</td>
+                        <td>Industries</td>
+                    </tr>
+                    <tr>
+                        <td>ArrowUpRight</td>
+                        <td>External links</td>
+                        <td>ArrowRight</td>
+                        <td>Navigation</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="quick-ref">
+            <h2>Quick Reference</h2>
+            <div class="quick-ref-grid">
+                <div class="quick-ref-item">
+                    <h4>Brand Essence</h4>
+                    <p>Premium digital agency that engineers ideas into reality</p>
+                </div>
+                <div class="quick-ref-item">
+                    <h4>Primary Colors</h4>
+                    <p>#111111 (Off Black)<br>#FFFFFF (White)<br>#f5f5f0 (Cream)</p>
+                </div>
+                <div class="quick-ref-item">
+                    <h4>Primary Font</h4>
+                    <p>Switzer (300-700)<br>Tight tracking: headings<br>Wide tracking: labels</p>
+                </div>
+                <div class="quick-ref-item">
+                    <h4>Tagline</h4>
+                    <p>"Engineering ideas into digital reality."</p>
+                </div>
+                <div class="quick-ref-item">
+                    <h4>Icon Library</h4>
+                    <p>Lucide React<br>Stroke: 1.5 weight</p>
+                </div>
+                <div class="quick-ref-item">
+                    <h4>Contact</h4>
+                    <p>blacklotusenquiry@gmail.com<br>Africa, Nigeria</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="guide-footer" style="position: relative; margin-top: 8mm;">
+            <p><strong>Brand Guide v1.0</strong> — December 2025 — Black Lotus Development Agency LTD</p>
+        </div>
+        <span class="page-number">7</span>
+    </div>
+
+</body>
+
+</html>
