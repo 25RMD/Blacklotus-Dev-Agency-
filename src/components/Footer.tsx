@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import gsap from 'gsap'
-import { ArrowUpRight, Instagram, Linkedin } from 'lucide-react'
+import { ArrowUpRight, Instagram, Facebook } from 'lucide-react'
 
 const FooterNavItem = ({ label, href, onClick, index, total, color }: { label: string, href: string, onClick: (e: React.MouseEvent) => void, index: number, total: number, color: string }) => {
   const bgRef = useRef<HTMLDivElement>(null)
@@ -90,8 +90,12 @@ export function Footer({ onOpenPrivacy: _onOpenPrivacy }: { onOpenPrivacy?: () =
               </a>
             </div>
             <div className="flex gap-4">
-              <Instagram className="w-4 h-4 text-zinc-500 hover:text-white transition-colors cursor-pointer" />
-              <Linkedin className="w-4 h-4 text-zinc-500 hover:text-white transition-colors cursor-pointer" />
+              <a href="https://www.instagram.com/blacklotusdev" target="_blank" rel="noopener noreferrer">
+                <Instagram className="w-4 h-4 text-zinc-500 hover:text-white transition-colors cursor-pointer" />
+              </a>
+              <a href="https://www.facebook.com/share/1BooF4RPbd/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">
+                <Facebook className="w-4 h-4 text-zinc-500 hover:text-white transition-colors cursor-pointer" />
+              </a>
             </div>
           </div>
         </div>
