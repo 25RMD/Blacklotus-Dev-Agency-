@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Lotus Instagram Posts</title>
+
+    <style>
+        /* --- FONTS --- */
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb977efde095c9ce551dd_Switzer-Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abbacd113fcc08efe66918_Switzer-Light.woff') format('woff');
+            font-weight: 300;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb977e5f5d00647df12b7_Switzer-Medium.woff2') format('woff2');
+            font-weight: 500;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb9770a14b6e6d06a8ddb_Switzer-Semibold.woff2') format('woff2');
+            font-weight: 600;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb9778041c4a0e5ae1faf_Switzer-Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+
+        /* --- BRAND COLORS --- */
+        :root {
+            --off-black: #111111;
+            --pure-black: #000000;
+            --pure-white: #FFFFFF;
+            --cream: #f5f5f0;
+            --zinc-500: #71717a;
+            --zinc-600: #52525b;
+            --navy: #1a2744;
+        }
+
+        /* --- PAGE SETUP --- */
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Switzer', sans-serif;
+            background: #f0f0f0;
+            color: var(--off-black);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            background: white;
+            margin: 0 auto;
+            padding: 15mm;
+            display: flex;
+            flex-direction: column;
+            page-break-after: always;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .page {
+                margin: 0;
+                border: none;
+            }
+        }
+
+        /* --- HEADER --- */
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10mm;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5mm;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-logo {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .post-number {
+            font-size: 10pt;
+            font-weight: 600;
+            color: var(--zinc-500);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .post-title {
+            font-size: 10pt;
+            font-weight: 600;
+            color: var(--off-black);
+        }
+
+        /* --- INSTAGRAM POST CONTAINER --- */
+        .insta-visual {
+            width: 1080px;
+            height: 1080px;
+            max-width: 100%;
+            max-height: 180mm;
+            aspect-ratio: 1/1;
+            margin: 0 auto 10mm auto;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* --- BRAND BACKGROUNDS --- */
+        .bg-black {
+            background-color: var(--pure-black);
+            color: white;
+        }
+
+        .bg-off-black {
+            background-color: var(--off-black);
+            color: white;
+        }
+
+        .bg-white {
+            background-color: var(--pure-white);
+            color: var(--off-black);
+        }
+
+        .bg-cream {
+            background-color: var(--cream);
+            color: var(--off-black);
+        }
+
+        .bg-navy {
+            background-color: var(--navy);
+            color: white;
+        }
+
+        /* --- BRAND TYPOGRAPHY --- */
+        .tracking-tight {
+            letter-spacing: -0.02em;
+        }
+
+        .tracking-tighter {
+            letter-spacing: -0.04em;
+        }
+
+        .tracking-widest {
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .font-light {
+            font-weight: 300;
+        }
+
+        .font-regular {
+            font-weight: 400;
+        }
+
+        .font-medium {
+            font-weight: 500;
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        /* --- POST SPECIFIC STYLES --- */
+        .content-layer {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-center {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .hero-text {
+            font-size: 5rem;
+            line-height: 0.95;
+            text-align: center;
+        }
+
+        .corner-label {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            opacity: 0.6;
+            text-transform: uppercase;
+        }
+
+        .corner-logo {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            opacity: 0.8;
+        }
+
+        .about-text {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            padding: 0 80px;
+            text-align: left;
+        }
+
+        .project-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 60px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 50%, transparent 100%);
+            z-index: 5;
+        }
+
+        .services-list {
+            list-style: none;
+            width: 100%;
+            padding: 0 80px;
+        }
+
+        .services-item {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 20px;
+        }
+
+        .services-item:last-child {
+            border-bottom: none;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            stroke-width: 1.5;
+            opacity: 0.8;
+        }
+
+        .quote-mark {
+            font-size: 8rem;
+            line-height: 0;
+            opacity: 0.2;
+            margin-bottom: 40px;
+            font-family: serif;
+        }
+
+        .quote-text {
+            font-family: 'Switzer', sans-serif;
+            font-weight: 300;
+            font-style: italic;
+            font-size: 3.2rem;
+            line-height: 1.2;
+            padding: 0 80px;
+            text-align: center;
+        }
+
+        /* --- CAPTION --- */
+        .caption-container {
+            background: #f9f9f9;
+            padding: 8mm;
+            border-radius: 4mm;
+            flex-grow: 1;
+        }
+
+        .caption-label {
+            font-size: 8pt;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--zinc-500);
+            margin-bottom: 4mm;
+            display: block;
+            font-weight: 600;
+        }
+
+        .caption-text {
+            font-size: 10pt;
+            line-height: 1.6;
+            color: var(--zinc-600);
+            white-space: pre-wrap;
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- POST 1: Brand Identity Reveal -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left"><img src="./public/BL-logo.jpg" class="header-logo"><span class="post-number">Post
+                    01</span></div><span class="post-title">Brand Identity Reveal</span>
+        </div>
+
+        <div class="insta-visual bg-black">
+            <div class="content-layer">
+                <img src="./public/BL-logo.jpg" alt="Black Lotus" class="logo-center">
+                <div
+                    style="margin-top: 40px; font-size: 1.2rem; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.7;">
+                    Black Lotus</div>
+            </div>
+        </div>
+
+        <div class="caption-container"><span class="caption-label">Caption</span>
+            <div class="caption-text">Black Lotus Development Agency
+                Engineering ideas into digital reality.
+
+                #BlackLotusDev #DigitalTransformation</div>
+        </div>
+    </div>
+
+    <!-- POST 2: Tagline -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left"><img src="./public/BL-logo.jpg" class="header-logo"><span class="post-number">Post
+                    02</span></div><span class="post-title">Tagline Statement</span>
+        </div>
+
+        <div class="insta-visual bg-black">
+            <div class="content-layer">
+                <h1 class="hero-text font-medium tracking-tighter">
+                    Engineering<br>
+                    ideas into<br>
+                    <span style="font-family: serif; font-style: italic; opacity: 0.7;">digital reality.</span>
+                </h1>
+            </div>
+        </div>
+
+        <div class="caption-container"><span class="caption-label">Caption</span>
+            <div class="caption-text">We turn bold ideas into high-performance digital products.
+                Websites. Apps. Platforms. Full digital ecosystems.</div>
+        </div>
+    </div>
+
+    <!-- POST 3: About Us -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left"><img src="./public/BL-logo.jpg" class="header-logo"><span class="post-number">Post
+                    03</span></div><span class="post-title">About Us</span>
+        </div>
+
+        <div class="insta-visual bg-white">
+            <div class="content-layer" style="align-items: flex-start;">
+                <div class="about-text font-regular tracking-tight" style="color: var(--off-black);">
+                    We are developers, designers, strategists and <span
+                        style="font-family: serif; font-style: italic;">problem-solvers.</span>
+                </div>
+                <div
+                    style="padding: 0 80px; margin-top: 40px; font-size: 1.5rem; color: var(--zinc-500); font-weight: 400; text-align: left;">
+                    Building powerful digital products that drive business growth.
+                </div>
+            </div>
+        </div>
+
+        <div class="caption-container"><span class="caption-label">Caption</span>
+            <div class="caption-text">We are developers, designers, strategists, and problem-solvers.
+
+                We build powerful digital products that drive business growth.</div>
+        </div>
+    </div>
+
+    <!-- POST 4: Project 01 -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left"><img src="./public/BL-logo.jpg" class="header-logo"><span class="post-number">Post
+                    04</span></div><span class="post-title">Project Showcase 01</span>
+        </div>
+
+        <div class="insta-visual bg-black">
+            <img src="./public/projects/wellness.jpeg" class="project-img">
+            <div class="project-overlay">
+                <div
+                    style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 15px; font-weight: 600;">
+                    Project 01</div>
+                <div style="font-size: 3.5rem; font-weight: 600; line-height: 1; letter-spacing: -0.03em;">EE Wellness
+                    Hub</div>
+                <div style="margin-top: 15px; font-size: 1.2rem; opacity: 0.8;">Web Application • Mobile App</div>
+            </div>
+        </div>
+
+        <div class="caption-container"><span class="caption-label">Caption</span>
+            <div class="caption-text">Project 01 — EE Wellness Hub
+                A complete digital ecosystem: website + mobile app.
+
+                Full-stack engineering. Scalable architecture. Premium experience.</div>
+        </div>
+    </div>
+
+    <!-- POST 5: Philosophy -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left"><img src="./public/BL-logo.jpg" class="header-logo"><span class="post-number">Post
+                    05</span></div><span class="post-title">Philosophy</span>
+        </div>
+
+        <div class="insta-visual bg-black">
+            <div class="content-layer">
+                <h1 class="hero-text font-light tracking-tighter" style="font-size: 4.5rem;">
+                    We make<br>
+                    seemingly<br>
+                    impossible<br>
+                    projects<br>
+                    <span class="font-bold">happen.</span>
+                </h1>
+            </div>
+        </div>
+
+        <div class="caption-container"><span class="caption-label">Caption</span>
+            <div class="caption-text">Our clients don't hire us — they partner with us.
+                Together, we turn complexity into clarity.
+
+                Premium engineering. Bold creativity. Reliable execution.</div>
+        </div>
+    </div>
+
+    <!-- POST 6: Project 02 -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left"><img src="./public/BL-logo.jpg" class="header-logo"><span class="post-number">Post
+                    06</span></div><span class="post-title">Project Showcase 02</span>
+        </div>
+
+        <div class="insta-visual bg-black">
+            <img src="./public/projects/event.jpeg" class="project-img">
+            <div class="project-overlay">
+                <div
+                    style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 15px; font-weight: 600;">
+                    Project 02</div>
+                <div style="font-size: 3.5rem; font-weight: 600; line-height: 1; letter-spacing: -0.03em;">Event
+                    Platform</div>
+                <div style="margin-top: 15px; font-size: 1.2rem; opacity: 0.8;">Platform Architecture • Design</div>
+            </div>
+        </div>
+
+        <div class="caption-container"><span class="caption-label">Caption</span>
+            <div class="caption-text">Another snapshot of how we engineer digital experiences.
+
+                From idea → design → engineering → launch → growth.</div>
+        </div>
+    </div>
+
+    <!-- POST 7: Services -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left"><img src="./public/BL-logo.jpg" class="header-logo"><span class="post-number">Post
+                    07</span></div><span class="post-title">Services</span>
+        </div>
+
+        <div class="insta-visual bg-black">
+            <div class="content-layer">
+                <ul class="services-list">
+                    <li class="services-item">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                        </svg>
+                        Web Development
+                    </li>
+                    <li class="services-item">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                        </svg>
+                        Software Engineering
+                    </li>
+                    <li class="services-item">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path
+                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                            </path>
+                        </svg>
+                        Product Strategy
+                    </li>
+                    <li class="services-item">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <polyline points="16 18 22 12 16 6"></polyline>
+                            <polyline points="8 6 2 12 8 18"></polyline>
+                        </svg>
+                        Digital Transformation
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="caption-container"><span class="caption-label">Caption</span>
+            <div class="caption-text">What we do:
+                • Web & Software Solutions
+                • Full-Stack App Development
+                • Product Strategy
+                • Digital Transformation
+
+                High-performance. Scalable. Built for the future.</div>
+        </div>
+    </div>
+
+    <!-- POST 8: Testimonial -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left"><img src="./public/BL-logo.jpg" class="header-logo"><span class="post-number">Post
+                    08</span></div><span class="post-title">Testimonial</span>
+        </div>
+
+        <div class="insta-visual bg-black">
+            <div class="content-layer">
+                <div class="quote-mark">"</div>
+                <div class="quote-text">
+                    Brilliant, problem-solving, passionate, agile ninjas.
+                </div>
+                <div
+                    style="margin-top: 40px; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.2em; opacity: 0.7; font-weight: 600;">
+                    Client Partner
+                </div>
+            </div>
+        </div>
+
+        <div class="caption-container"><span class="caption-label">Caption</span>
+            <div class="caption-text">"Brilliant, problem-solving, passionate, agile ninjas."
+
+                — Client Partner
+
+                We over-deliver. Every time.</div>
+        </div>
+    </div>
+
+    <!-- POST 9: CTA -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left"><img src="./public/BL-logo.jpg" class="header-logo"><span class="post-number">Post
+                    09</span></div><span class="post-title">Connect</span>
+        </div>
+
+        <div class="insta-visual bg-white">
+            <div class="content-layer">
+                <div
+                    style="font-size: 4rem; font-weight: 500; letter-spacing: -0.04em; line-height: 1; text-align: center; color: var(--off-black);">
+                    Ready to bring<br>your idea to life?
+                </div>
+                <div style="margin-top: 30px; font-size: 1.5rem; color: var(--zinc-600); font-weight: 300;">
+                    Let's build something extraordinary.
+                </div>
+                <div
+                    style="margin-top: 60px; padding: 15px 40px; border: 1px solid #eee; border-radius: 50px; font-size: 1.2rem; color: var(--off-black);">
+                    blacklotusenquiry@gmail.com
+                </div>
+            </div>
+        </div>
+
+        <div class="caption-container"><span class="caption-label">Caption</span>
+            <div class="caption-text">Ready to bring your idea to life?
+                Let's build something extraordinary.
+
+                📩 blacklotusenquiry@gmail.com
+                🌍 blacklotusdev.org</div>
+        </div>
+    </div>
+
+</body>
+
+</html>

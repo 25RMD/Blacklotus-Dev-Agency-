@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react'
 import { motion, useScroll, useTransform, useMotionValueEvent, MotionValue, useSpring } from 'framer-motion'
-import { useCursor } from '../context/CursorContext'
 
 const projects = [
   {
@@ -44,7 +43,7 @@ export function ProjectSlider() {
   const xRaw = useTransform(scrollYProgress, [0.1, 0.9], [0, -(projects.length - 1) * 100])
   const xSpring = useSpring(xRaw, { stiffness: 100, damping: 30, restDelta: 0.001 })
   const x = useTransform(xSpring, (value) => `${value}vw`)
-  
+
   const progressScale = useTransform(scrollYProgress, [0.1, 0.9], [0, 1])
   const yFooter = useTransform(scrollYProgress, [0, 1], [0, -20])
 
@@ -67,7 +66,7 @@ export function ProjectSlider() {
         </motion.div>
 
         {/* Bottom Footer Bar - constrained width */}
-        <motion.div 
+        <motion.div
           style={{ y: yFooter }}
           className="absolute bottom-4 md:bottom-18 left-0 w-full z-50 px-6 md:px-16 pb-4 md:pb-8 flex justify-center"
         >
@@ -98,8 +97,6 @@ export function ProjectSlider() {
 }
 
 function ProjectCard({ project, scrollYProgress: _scrollYProgress }: { project: typeof projects[0], scrollYProgress: MotionValue<number> }) {
-  const { setCursorText, setCursorVariant } = useCursor()
-
   return (
     <div className="relative h-screen w-screen flex-shrink-0 bg-black text-white flex items-start md:items-center justify-center pt-20 md:pt-0 p-6 pb-24 md:p-16 box-border">
       {/* Background gradient */}
@@ -112,7 +109,7 @@ function ProjectCard({ project, scrollYProgress: _scrollYProgress }: { project: 
           <span className="block text-xs font-mono text-zinc-400 mb-2 md:mb-4 uppercase tracking-widest">
             project {project.id}
           </span>
-          <h2 className="text-3xl md:text-6xl lg:text-7xl font-bold leading-[0.9] tracking-tighter mb-3 md:mb-6">
+          <h2 className="text-3xl md:text-6xl lg:text-7xl font-display font-bold leading-[0.9] tracking-tighter mb-3 md:mb-6 mix-blend-difference">
             {project.title}
           </h2>
           <div className="h-px w-12 bg-white/30 my-3 md:my-6" />
@@ -127,17 +124,7 @@ function ProjectCard({ project, scrollYProgress: _scrollYProgress }: { project: 
         </div>
 
         {/* RIGHT: Image */}
-        <div 
-          className="md:col-span-6 order-1 md:order-2 relative h-[30vh] md:h-[70vh] w-full overflow-hidden rounded-sm cursor-none"
-          onMouseEnter={() => {
-            setCursorText("VIEW PROJECT")
-            setCursorVariant("text")
-          }}
-          onMouseLeave={() => {
-            setCursorText("")
-            setCursorVariant("default")
-          }}
-        >
+        <div className="md:col-span-6 order-1 md:order-2 relative h-[30vh] md:h-[70vh] w-full overflow-hidden rounded-sm">
           <motion.img
             src={project.img}
             alt={project.title}

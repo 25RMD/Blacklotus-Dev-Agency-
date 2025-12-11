@@ -19,7 +19,7 @@ export function CustomCursor() {
       const isSmallScreen = window.innerWidth < 768
       setIsMobile(isTouchDevice || isSmallScreen)
     }
-    
+
     checkMobile()
     window.addEventListener('resize', checkMobile)
     return () => window.removeEventListener('resize', checkMobile)
@@ -27,7 +27,7 @@ export function CustomCursor() {
 
   useEffect(() => {
     if (isMobile) return
-    
+
     const moveCursor = (e: MouseEvent) => {
       mouseX.set(e.clientX)
       mouseY.set(e.clientY)
@@ -71,10 +71,19 @@ export function CustomCursor() {
         x: cursorX,
         y: cursorY,
       }}
+      initial={{
+        height: 12,
+        width: 12,
+        backgroundColor: "#fff",
+        mixBlendMode: "difference",
+        x: "-50%",
+        y: "-50%",
+        borderRadius: "50%",
+      }}
       variants={variants}
       animate={cursorVariant}
     >
-      <motion.span 
+      <motion.span
         initial={{ opacity: 0 }}
         animate={{ opacity: cursorVariant === 'text' ? 1 : 0 }}
         className="text-black text-[10px] font-bold uppercase tracking-widest whitespace-nowrap"

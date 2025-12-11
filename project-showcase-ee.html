@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EE Wellness Hub - Project Showcase Carousel</title>
+
+    <style>
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb977efde095c9ce551dd_Switzer-Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abbacd113fcc08efe66918_Switzer-Light.woff') format('woff');
+            font-weight: 300;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb977e5f5d00647df12b7_Switzer-Medium.woff2') format('woff2');
+            font-weight: 500;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb9770a14b6e6d06a8ddb_Switzer-Semibold.woff2') format('woff2');
+            font-weight: 600;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb9778041c4a0e5ae1faf_Switzer-Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+
+        :root {
+            --pure-black: #000000;
+            --off-black: #111111;
+            --pure-white: #FFFFFF;
+            --zinc-400: #a1a1aa;
+            --zinc-500: #71717a;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Switzer', sans-serif;
+            background: #e5e5e5;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            background: white;
+            margin: 0 auto 20px auto;
+            padding: 12mm;
+            display: flex;
+            flex-direction: column;
+            page-break-after: always;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .page {
+                margin: 0;
+            }
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8mm;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 4mm;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-logo {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .post-number {
+            font-size: 9pt;
+            font-weight: 600;
+            color: var(--zinc-500);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .post-title {
+            font-size: 9pt;
+            font-weight: 600;
+        }
+
+        /* Instagram Square - 1:1 */
+        .insta-visual {
+            width: 180mm;
+            height: 180mm;
+            max-width: 100%;
+            margin: 0 auto 8mm auto;
+            position: relative;
+            overflow: hidden;
+            background: var(--pure-black);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Slide Indicator */
+        .slide-indicator {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            z-index: 100;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .dot.active {
+            background: white;
+        }
+
+        /* Project Label */
+        .project-label {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            z-index: 50;
+        }
+
+        .project-tag {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            opacity: 0.6;
+            margin-bottom: 6px;
+        }
+
+        .project-name {
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            line-height: 1;
+        }
+
+        .project-type {
+            font-size: 11px;
+            opacity: 0.7;
+            margin-top: 8px;
+            font-weight: 400;
+        }
+
+        /* Browser Mockup */
+        .browser-mockup {
+            width: 90%;
+            max-width: 600px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+        }
+
+        .browser-bar {
+            height: 28px;
+            background: #2d2d2d;
+            padding: 0 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .browser-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .dot-red {
+            background: #ff5f57;
+        }
+
+        .dot-yellow {
+            background: #febc2e;
+        }
+
+        .dot-green {
+            background: #28c840;
+        }
+
+        .browser-content img {
+            width: 100%;
+            display: block;
+        }
+
+        /* Phone Mockup */
+        .phone-mockup {
+            width: 180px;
+            background: #1a1a1a;
+            border-radius: 28px;
+            padding: 8px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+        }
+
+        .phone-notch {
+            width: 80px;
+            height: 20px;
+            background: #1a1a1a;
+            border-radius: 0 0 14px 14px;
+            margin: -8px auto 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .phone-screen {
+            border-radius: 20px;
+            overflow: hidden;
+            background: white;
+            margin-top: -12px;
+        }
+
+        .phone-screen img {
+            width: 100%;
+            display: block;
+        }
+
+        .phone-screen.with-padding {
+            padding-top: 20px;
+            background: white;
+        }
+
+        /* Centered Phone */
+        .centered-phone {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            gap: 30px;
+        }
+
+        .centered-phone .phone-mockup {
+            width: 200px;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            position: absolute;
+            bottom: 50px;
+            right: 30px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            max-width: 280px;
+            justify-content: flex-end;
+        }
+
+        .tech-badge {
+            padding: 5px 10px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            font-size: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* Caption */
+        .caption-container {
+            background: #f8f8f8;
+            padding: 6mm;
+            border-radius: 3mm;
+            flex-grow: 1;
+        }
+
+        .caption-label {
+            font-size: 7pt;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--zinc-500);
+            margin-bottom: 3mm;
+            display: block;
+            font-weight: 600;
+        }
+
+        .caption-text {
+            font-size: 9pt;
+            line-height: 1.5;
+            color: #52525b;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SLIDE 1: Cover (Desktop Hero) -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left">
+                <img src="./public/BL-logo.jpg" class="header-logo">
+                <span class="post-number">Slide 1 of 6</span>
+            </div>
+            <span class="post-title">EE Wellness Hub • Cover</span>
+        </div>
+
+        <div class="insta-visual">
+            <div class="project-label">
+                <div class="project-tag">Selected Work</div>
+                <div class="project-name">EE Wellness Hub</div>
+                <div class="project-type">Holistic Wellness Platform</div>
+            </div>
+
+            <div class="browser-mockup">
+                <div class="browser-bar">
+                    <div class="browser-dot dot-red"></div>
+                    <div class="browser-dot dot-yellow"></div>
+                    <div class="browser-dot dot-green"></div>
+                </div>
+                <div class="browser-content">
+                    <img src="./public/showcase/ee-desktop-hero.png" alt="EE Wellness Desktop Hero">
+                </div>
+            </div>
+
+            <div class="tech-stack">
+                <span class="tech-badge">React</span>
+                <span class="tech-badge">Vite</span>
+                <span class="tech-badge">Tailwind</span>
+                <span class="tech-badge">Framer Motion</span>
+            </div>
+
+            <div class="slide-indicator">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <div class="caption-container">
+            <span class="caption-label">Caption</span>
+            <div class="caption-text">Project: EE Wellness Hub
+
+                A comprehensive digital wellness platform connecting users with holistic health resources. Featuring
+                immersive zones, expert journals, and seamless reservations.
+
+                #WellnessTech #WebDesign #ReactJS</div>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: Mobile Hero -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left">
+                <img src="./public/BL-logo.jpg" class="header-logo">
+                <span class="post-number">Slide 2 of 6</span>
+            </div>
+            <span class="post-title">EE Wellness Hub • Mobile</span>
+        </div>
+
+        <div class="insta-visual">
+            <div class="project-label">
+                <div class="project-tag">Responsive</div>
+                <div class="project-name">Mobile First</div>
+            </div>
+
+            <div class="centered-phone">
+                <div class="phone-mockup">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <img src="./public/showcase/ee-mobile-hero.png" alt="EE Wellness Mobile Hero">
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-indicator">
+                <div class="dot"></div>
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <div class="caption-container">
+            <span class="caption-label">Caption</span>
+            <div class="caption-text">Designed for on-the-go access. A powerful wellness companion in your pocket.</div>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: Desktop Experience -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left">
+                <img src="./public/BL-logo.jpg" class="header-logo">
+                <span class="post-number">Slide 3 of 6</span>
+            </div>
+            <span class="post-title">EE Wellness Hub • Experience</span>
+        </div>
+
+        <div class="insta-visual">
+            <div class="project-label">
+                <div class="project-tag">Interface</div>
+                <div class="project-name">The Experience</div>
+            </div>
+
+            <div class="browser-mockup">
+                <div class="browser-bar">
+                    <div class="browser-dot dot-red"></div>
+                    <div class="browser-dot dot-yellow"></div>
+                    <div class="browser-dot dot-green"></div>
+                </div>
+                <div class="browser-content">
+                    <img src="./public/showcase/ee-desktop-zones.png" alt="EE Wellness Desktop Zones">
+                </div>
+            </div>
+
+            <div class="slide-indicator">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <div class="caption-container">
+            <span class="caption-label">Caption</span>
+            <div class="caption-text">Three zones. One goal.
+                We created distinct digital environments for Gym, Spa, and Lounge experiences.</div>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: Mobile Zones -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left">
+                <img src="./public/BL-logo.jpg" class="header-logo">
+                <span class="post-number">Slide 4 of 6</span>
+            </div>
+            <span class="post-title">EE Wellness Hub • Mobile UI</span>
+        </div>
+
+        <div class="insta-visual">
+            <div class="project-label">
+                <div class="project-tag">Mobile UI</div>
+                <div class="project-name">Intuitive Cards</div>
+            </div>
+
+            <div class="centered-phone">
+                <div class="phone-mockup">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen with-padding">
+                        <img src="./public/showcase/ee-mobile-zones.png" alt="EE Wellness Mobile Zones">
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide-indicator">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <div class="caption-container">
+            <span class="caption-label">Caption</span>
+            <div class="caption-text">Seamless navigation through complex service offerings. Clean, card-based UI for
+                effortless browsing.</div>
+        </div>
+    </div>
+
+    <!-- SLIDE 5: Content/Blog -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left">
+                <img src="./public/BL-logo.jpg" class="header-logo">
+                <span class="post-number">Slide 5 of 6</span>
+            </div>
+            <span class="post-title">EE Wellness Hub • Content</span>
+        </div>
+
+        <div class="insta-visual">
+            <div class="project-label">
+                <div class="project-tag">Editorial</div>
+                <div class="project-name">The Journal</div>
+            </div>
+
+            <div class="centered-phone">
+                <div class="phone-mockup">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen with-padding">
+                        <img src="./public/showcase/ee-mobile-journal.png" alt="EE Wellness Journal">
+                    </div>
+                </div>
+            </div>
+
+            <div class="tech-stack">
+                <span class="tech-badge">GSAP</span>
+                <span class="tech-badge">CMS</span>
+                <span class="tech-badge">React</span>
+            </div>
+
+            <div class="slide-indicator">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot active"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <div class="caption-container">
+            <span class="caption-label">Caption</span>
+            <div class="caption-text">Insights for better living.
+                A beautiful, readable editorial experience for wellness content.</div>
+        </div>
+    </div>
+
+    <!-- SLIDE 6: CTA -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left">
+                <img src="./public/BL-logo.jpg" class="header-logo">
+                <span class="post-number">Slide 6 of 6</span>
+            </div>
+            <span class="post-title">EE Wellness Hub • Get In Touch</span>
+        </div>
+
+        <div class="insta-visual" style="flex-direction: column; gap: 30px;">
+            <div class="project-label">
+                <div class="project-tag">Let's Work Together</div>
+                <div class="project-name" style="font-size: 36px;">Ready to build<br>your platform?</div>
+            </div>
+
+            <div style="text-align: center; margin-top: auto; margin-bottom: auto;">
+                <div style="font-size: 14px; opacity: 0.6; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.2em;">Get In Touch</div>
+                <div style="font-size: 24px; font-weight: 500; margin-bottom: 30px;">blacklotusenquiry@gmail.com</div>
+                <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                    <span class="tech-badge" style="font-size: 10px; padding: 8px 16px;">Web Development</span>
+                    <span class="tech-badge" style="font-size: 10px; padding: 8px 16px;">Web Applications</span>
+                    <span class="tech-badge" style="font-size: 10px; padding: 8px 16px;">E-Commerce</span>
+                </div>
+            </div>
+
+            <div style="position: absolute; bottom: 50px; left: 30px; right: 30px; text-align: center;">
+                <div style="font-size: 11px; opacity: 0.5; line-height: 1.6;">Engineering ideas into digital reality.<br>Nigeria, Africa</div>
+            </div>
+
+            <div class="slide-indicator">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot active"></div>
+            </div>
+        </div>
+
+        <div class="caption-container">
+            <span class="caption-label">Caption</span>
+            <div class="caption-text">Ready to bring your vision to life?
+
+Let's partner together to build something extraordinary.
+
+📩 blacklotusenquiry@gmail.com
+🌍 blacklotus.dev
+
+#WebDevelopment #DigitalAgency #BuildWithUs</div>
+        </div>
+    </div>
+
+</body>
+
+</html>

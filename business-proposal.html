@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Lotus - Business Proposal</title>
+
+    <style>
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb977efde095c9ce551dd_Switzer-Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abbacd113fcc08efe66918_Switzer-Light.woff') format('woff');
+            font-weight: 300;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb977e5f5d00647df12b7_Switzer-Medium.woff2') format('woff2');
+            font-weight: 500;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb9770a14b6e6d06a8ddb_Switzer-Semibold.woff2') format('woff2');
+            font-weight: 600;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb9778041c4a0e5ae1faf_Switzer-Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+
+        :root {
+            --pure-black: #000000;
+            --pure-white: #FFFFFF;
+            --cream: #f5f5f0;
+            --zinc-200: #e4e4e7;
+            --zinc-400: #a1a1aa;
+            --zinc-500: #71717a;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Switzer', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #e5e5e5;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            line-height: 1.5;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            background: white;
+            margin: 0 auto 20px auto;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            page-break-after: always;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .page {
+                margin: 0;
+            }
+        }
+
+        /* ===== COVER PAGE ===== */
+        .cover-page {
+            background: var(--pure-black);
+            color: var(--pure-white);
+            padding: 15mm;
+            justify-content: space-between;
+        }
+
+        .cover-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .cover-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .cover-taglines {
+            display: flex;
+            flex-direction: column;
+            font-size: 9px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            opacity: 0.8;
+        }
+
+        .cover-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20mm 0;
+        }
+
+        .cover-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            opacity: 0.5;
+            margin-bottom: 8mm;
+        }
+
+        .cover-title {
+            font-size: 56px;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+            margin-bottom: 8mm;
+        }
+
+        .cover-subtitle {
+            font-size: 16px;
+            font-weight: 300;
+            opacity: 0.7;
+            max-width: 380px;
+            line-height: 1.6;
+        }
+
+        .cover-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 8mm;
+        }
+
+        .cover-contact {
+            font-size: 10px;
+            opacity: 0.6;
+            line-height: 1.8;
+        }
+
+        .cover-date {
+            font-size: 10px;
+            opacity: 0.5;
+            text-align: right;
+        }
+
+        /* ===== CONTENT PAGES ===== */
+        .content-page {
+            padding: 15mm;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10mm;
+            padding-bottom: 4mm;
+            border-bottom: 1px solid var(--zinc-200);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-logo {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .header-title {
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--zinc-500);
+        }
+
+        .page-number {
+            font-size: 9px;
+            font-weight: 600;
+            color: var(--zinc-500);
+        }
+
+        .section-label {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--zinc-500);
+            margin-bottom: 4mm;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--pure-black);
+            margin-bottom: 6mm;
+        }
+
+        .section-intro {
+            font-size: 12px;
+            color: var(--zinc-500);
+            max-width: 480px;
+            line-height: 1.7;
+            margin-bottom: 10mm;
+        }
+
+        /* ===== WHO WE ARE ===== */
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8mm;
+            margin-bottom: 10mm;
+        }
+
+        .intro-box {
+            background: var(--cream);
+            padding: 6mm;
+            border-radius: 3mm;
+        }
+
+        .intro-box-title {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--pure-black);
+            margin-bottom: 3mm;
+        }
+
+        .intro-box-text {
+            font-size: 10px;
+            color: var(--zinc-500);
+            line-height: 1.7;
+        }
+
+        .tagline-box {
+            background: var(--pure-black);
+            color: var(--pure-white);
+            padding: 8mm;
+            border-radius: 3mm;
+            text-align: center;
+            margin-bottom: 10mm;
+        }
+
+        .tagline-text {
+            font-size: 18px;
+            font-weight: 500;
+            font-style: italic;
+            letter-spacing: -0.01em;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6mm;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 6mm 4mm;
+            background: var(--cream);
+            border-radius: 3mm;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--pure-black);
+            letter-spacing: -0.02em;
+        }
+
+        .stat-label {
+            font-size: 9px;
+            color: var(--zinc-500);
+            margin-top: 2mm;
+            line-height: 1.5;
+        }
+
+        /* ===== SERVICES ===== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6mm;
+        }
+
+        .service-card {
+            background: var(--pure-black);
+            color: var(--pure-white);
+            padding: 6mm;
+            border-radius: 3mm;
+        }
+
+        .service-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--pure-black);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 4mm;
+        }
+
+        .service-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: white;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .service-title {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 2mm;
+        }
+
+        .service-desc {
+            font-size: 9px;
+            opacity: 0.7;
+            line-height: 1.6;
+        }
+
+        .service-features {
+            margin-top: 3mm;
+            padding-top: 3mm;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .service-feature {
+            font-size: 8px;
+            opacity: 0.6;
+            margin-bottom: 1.5mm;
+            padding-left: 3mm;
+            position: relative;
+        }
+
+        .service-feature::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            opacity: 0.5;
+        }
+
+        /* ===== PROCESS ===== */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4mm;
+        }
+
+        .process-step {
+            background: var(--cream);
+            padding: 5mm;
+            border-radius: 3mm;
+            position: relative;
+        }
+
+        .process-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--pure-black);
+            opacity: 0.15;
+            position: absolute;
+            top: 3mm;
+            right: 4mm;
+        }
+
+        .process-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--pure-black);
+            margin-bottom: 2mm;
+        }
+
+        .process-desc {
+            font-size: 8px;
+            color: var(--zinc-500);
+            line-height: 1.6;
+        }
+
+        /* ===== INDUSTRIES ===== */
+        .industries-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3mm;
+        }
+
+        .industry-tag {
+            padding: 2.5mm 5mm;
+            background: var(--cream);
+            border-radius: 20px;
+            font-size: 9px;
+            font-weight: 500;
+            color: var(--pure-black);
+        }
+
+        /* ===== WHY CHOOSE US ===== */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5mm;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 3mm;
+            padding: 4mm;
+            background: var(--cream);
+            border-radius: 3mm;
+        }
+
+        .benefit-check {
+            width: 16px;
+            height: 16px;
+            background: var(--pure-black);
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .benefit-check svg {
+            width: 10px;
+            height: 10px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .benefit-text {
+            font-size: 9px;
+            color: var(--pure-black);
+            line-height: 1.5;
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonial-box {
+            background: var(--pure-black);
+            color: var(--pure-white);
+            padding: 8mm;
+            border-radius: 3mm;
+            margin-bottom: 6mm;
+        }
+
+        .testimonial-quote {
+            font-size: 12px;
+            font-weight: 300;
+            line-height: 1.8;
+            font-style: italic;
+            margin-bottom: 4mm;
+        }
+
+        .testimonial-author {
+            font-size: 9px;
+            opacity: 0.6;
+        }
+
+        /* ===== CONTACT PAGE ===== */
+        .contact-section {
+            background: var(--pure-black);
+            color: var(--pure-white);
+            padding: 10mm;
+            border-radius: 4mm;
+            margin-top: auto;
+        }
+
+        .contact-title {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 6mm;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8mm;
+        }
+
+        .contact-item {
+            margin-bottom: 4mm;
+        }
+
+        .contact-label {
+            font-size: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            opacity: 0.5;
+            margin-bottom: 1.5mm;
+        }
+
+        .contact-value {
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .cta-text {
+            font-size: 11px;
+            opacity: 0.7;
+            line-height: 1.7;
+            max-width: 300px;
+        }
+
+        /* ===== PRICING SECTION ===== */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5mm;
+        }
+
+        .pricing-card {
+            border: 1px solid var(--zinc-200);
+            border-radius: 3mm;
+            padding: 5mm;
+            text-align: center;
+        }
+
+        .pricing-card.featured {
+            background: var(--pure-black);
+            color: var(--pure-white);
+            border: none;
+        }
+
+        .pricing-tier {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 2mm;
+        }
+
+        .pricing-card.featured .pricing-tier {
+            opacity: 0.6;
+        }
+
+        .pricing-range {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 3mm;
+        }
+
+        .pricing-desc {
+            font-size: 8px;
+            opacity: 0.6;
+            line-height: 1.6;
+        }
+
+        .pricing-features {
+            margin-top: 4mm;
+            padding-top: 4mm;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .pricing-card.featured .pricing-features {
+            border-top-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .pricing-feature {
+            font-size: 8px;
+            margin-bottom: 2mm;
+            padding-left: 3mm;
+            position: relative;
+        }
+
+        .pricing-feature::before {
+            content: "✓";
+            position: absolute;
+            left: -1mm;
+            font-size: 7px;
+        }
+
+        /* ===== FOOTER ===== */
+        .page-footer {
+            margin-top: auto;
+            padding-top: 6mm;
+            border-top: 1px solid var(--zinc-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text {
+            font-size: 8px;
+            color: var(--zinc-500);
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--zinc-200);
+            margin: 8mm 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PAGE 1: COVER -->
+    <div class="page cover-page">
+        <div class="cover-header">
+            <img src="./public/BL-logo.jpg" class="cover-logo" alt="Black Lotus">
+            <div class="cover-taglines">
+                <span>Web & Software Solutions</span>
+                <span>Digital Transformation</span>
+            </div>
+        </div>
+
+        <div class="cover-main">
+            <div class="cover-label">Business Proposal</div>
+            <h1 class="cover-title">Engineering<br>Ideas Into<br>Digital Reality</h1>
+            <p class="cover-subtitle">A partnership proposal for premium web and software development services tailored
+                to your business needs.</p>
+        </div>
+
+        <div class="cover-footer">
+            <div class="cover-contact">
+                <div>blacklotusenquiry@gmail.com</div>
+                <div>Nigeria, Africa</div>
+            </div>
+            <div class="cover-date">
+                <div>December 2025</div>
+                <div>Proposal Document</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: WHO WE ARE + SERVICES -->
+    <div class="page content-page">
+        <div class="page-header">
+            <div class="header-left">
+                <img src="./public/BL-logo.jpg" class="header-logo" alt="Black Lotus">
+                <span class="header-title">Black Lotus Development Agency</span>
+            </div>
+            <span class="page-number">01</span>
+        </div>
+
+        <div class="section-label">About Us</div>
+        <h2 class="section-title">Who We Are</h2>
+        <p class="section-intro">Black Lotus is a premium web and software development agency dedicated to transforming
+            your digital ambitions into reality. We don't just build websites — we partner with you to create powerful
+            digital products that drive business growth.</p>
+
+        <div class="intro-grid">
+            <div class="intro-box">
+                <div class="intro-box-title">Our Approach</div>
+                <div class="intro-box-text">We go beyond the traditional agency model. From startups seeking scalable
+                    platforms to enterprises modernizing legacy systems — we have the experience, dedication, and
+                    resources to make seemingly impossible projects happen.</div>
+            </div>
+            <div class="intro-box">
+                <div class="intro-box-title">Our Promise</div>
+                <div class="intro-box-text">Our clients don't hire us; they partner with us. And in doing so, become
+                    industry leaders themselves. We deliver high-performance, scalable solutions built with the latest
+                    technologies.</div>
+            </div>
+        </div>
+
+        <div class="tagline-box">
+            <div class="tagline-text">"Imagination is the limit. Share your ideas with us, and we'll begin turning your
+                vision into reality today."</div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-value">10+</div>
+                <div class="stat-label">Successful projects delivered for startups and enterprises</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">1k+</div>
+                <div class="stat-label">Users impacted through our digital solutions</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">15+</div>
+                <div class="stat-label">Industries served from fintech to healthcare</div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span class="footer-text">Black Lotus Development Agency</span>
+            <span class="footer-text">blacklotusenquiry@gmail.com</span>
+        </div>
+    </div>
+
+    <!-- PAGE 3: SERVICES -->
+    <div class="page content-page">
+        <div class="page-header">
+            <div class="header-left">
+                <img src="./public/BL-logo.jpg" class="header-logo" alt="Black Lotus">
+                <span class="header-title">Black Lotus Development Agency</span>
+            </div>
+            <span class="page-number">02</span>
+        </div>
+
+        <div class="section-label">Our Services</div>
+        <h2 class="section-title">What We Build</h2>
+        <p class="section-intro">We offer full-spectrum digital solutions — from beautiful websites to complex web
+            applications. Every project is crafted with precision, performance, and scalability in mind.</p>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                        <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                        <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                        <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                    </svg>
+                </div>
+                <div class="service-title">Website Development</div>
+                <div class="service-desc">Beautiful, fast websites that look great on any device and help you attract
+                    more customers.</div>
+                <div class="service-features">
+                    <div class="service-feature">Responsive design for all devices</div>
+                    <div class="service-feature">SEO optimized for visibility</div>
+                    <div class="service-feature">Fast loading performance</div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                </div>
+                <div class="service-title">Web Applications</div>
+                <div class="service-desc">Custom apps and dashboards to run your business more efficiently and
+                    scale with your growth.</div>
+                <div class="service-features">
+                    <div class="service-feature">Custom functionality</div>
+                    <div class="service-feature">User authentication & security</div>
+                    <div class="service-feature">Database integration</div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path
+                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                        </path>
+                    </svg>
+                </div>
+                <div class="service-title">E-Commerce Solutions</div>
+                <div class="service-desc">Online stores that make it easy for customers to buy from you, with secure
+                    payment integration.</div>
+                <div class="service-features">
+                    <div class="service-feature">Product management</div>
+                    <div class="service-feature">Secure checkout</div>
+                    <div class="service-feature">Inventory tracking</div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24">
+                        <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                    </svg>
+                </div>
+                <div class="service-title">Maintenance & Support</div>
+                <div class="service-desc">We keep your site running smoothly with ongoing updates, security patches, and
+                    quick fixes.</div>
+                <div class="service-features">
+                    <div class="service-feature">Regular updates & backups</div>
+                    <div class="service-feature">Security monitoring</div>
+                    <div class="service-feature">Priority support</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section-label">Industries We Serve</div>
+        <div class="industries-grid">
+            <span class="industry-tag">Fintech</span>
+            <span class="industry-tag">Healthcare</span>
+            <span class="industry-tag">Wellness</span>
+            <span class="industry-tag">NGOs & Non-profits</span>
+            <span class="industry-tag">Event Management</span>
+            <span class="industry-tag">E-commerce</span>
+            <span class="industry-tag">Education</span>
+            <span class="industry-tag">Real Estate</span>
+            <span class="industry-tag">Hospitality</span>
+            <span class="industry-tag">Logistics</span>
+        </div>
+
+        <div class="page-footer">
+            <span class="footer-text">Black Lotus Development Agency</span>
+            <span class="footer-text">blacklotusenquiry@gmail.com</span>
+        </div>
+    </div>
+
+    <!-- PAGE 4: PROCESS + WHY US -->
+    <div class="page content-page">
+        <div class="page-header">
+            <div class="header-left">
+                <img src="./public/BL-logo.jpg" class="header-logo" alt="Black Lotus">
+                <span class="header-title">Black Lotus Development Agency</span>
+            </div>
+            <span class="page-number">03</span>
+        </div>
+
+        <div class="section-label">Our Process</div>
+        <h2 class="section-title">How We Work</h2>
+        <p class="section-intro">A streamlined process that keeps you informed at every stage while delivering
+            exceptional results.</p>
+
+        <div class="process-grid">
+            <div class="process-step">
+                <div class="process-number">01</div>
+                <div class="process-title">Discovery</div>
+                <div class="process-desc">We learn about your business, goals, and vision. This helps us understand
+                    exactly what you need.</div>
+            </div>
+            <div class="process-step">
+                <div class="process-number">02</div>
+                <div class="process-title">Design</div>
+                <div class="process-desc">We create mockups and prototypes. You'll see your project before we build it.
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="process-number">03</div>
+                <div class="process-title">Develop</div>
+                <div class="process-desc">We build your project using modern, scalable technologies with regular
+                    updates.</div>
+            </div>
+            <div class="process-step">
+                <div class="process-number">04</div>
+                <div class="process-title">Deliver</div>
+                <div class="process-desc">We launch your project and provide training and ongoing support.</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section-label">Why Choose Us</div>
+        <h2 class="section-title">The Black Lotus Difference</h2>
+
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <div class="benefit-check">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <div class="benefit-text"><strong>Partner-First Approach</strong> — We work with you, not just for you.
+                    Your success is our success.</div>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-check">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <div class="benefit-text"><strong>Modern Technology</strong> — React, Next.js, Tailwind, and the latest
+                    tools for optimal performance.</div>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-check">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <div class="benefit-text"><strong>Clear Communication</strong> — Regular updates, no jargon, and
+                    transparent timelines.</div>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-check">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <div class="benefit-text"><strong>We Over-Deliver</strong> — We go above and beyond to exceed
+                    expectations, every time.</div>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-check">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <div class="benefit-text"><strong>Scalable Solutions</strong> — Built to grow with your business, not
+                    hold you back.</div>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-check">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <div class="benefit-text"><strong>Ongoing Support</strong> — We're here for you long after launch with
+                    maintenance plans.</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="testimonial-box">
+            <div class="testimonial-quote">"Brilliant, problem-solving, passionate ninjas. They have the creative
+                ambition and desire to bring even the most challenging projects to life. They execute to the highest
+                standard and over-deliver every time."</div>
+            <div class="testimonial-author">— Client Testimonial</div>
+        </div>
+
+        <div class="page-footer">
+            <span class="footer-text">Black Lotus Development Agency</span>
+            <span class="footer-text">blacklotusenquiry@gmail.com</span>
+        </div>
+    </div>
+
+    <!-- PAGE 5: PRICING + CONTACT -->
+    <div class="page content-page">
+        <div class="page-header">
+            <div class="header-left">
+                <img src="./public/BL-logo.jpg" class="header-logo" alt="Black Lotus">
+                <span class="header-title">Black Lotus Development Agency</span>
+            </div>
+            <span class="page-number">04</span>
+        </div>
+
+        <div class="section-label">Investment</div>
+        <h2 class="section-title">Pricing Overview</h2>
+        <p class="section-intro">Every project is unique. These ranges give you an idea of investment levels. We'll
+            provide a detailed quote after our discovery call.</p>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="pricing-tier">Starter</div>
+                <div class="pricing-range">$2,000+</div>
+                <div class="pricing-desc">Perfect for small businesses needing a professional online presence.</div>
+                <div class="pricing-features">
+                    <div class="pricing-feature">Landing pages</div>
+                    <div class="pricing-feature">Portfolio sites</div>
+                    <div class="pricing-feature">Basic business sites</div>
+                    <div class="pricing-feature">2-3 week delivery</div>
+                </div>
+            </div>
+
+            <div class="pricing-card featured">
+                <div class="pricing-tier">Professional</div>
+                <div class="pricing-range">$5,000+</div>
+                <div class="pricing-desc">For growing businesses requiring advanced functionality.</div>
+                <div class="pricing-features">
+                    <div class="pricing-feature">Multi-page websites</div>
+                    <div class="pricing-feature">E-commerce stores</div>
+                    <div class="pricing-feature">CMS integration</div>
+                    <div class="pricing-feature">4-6 week delivery</div>
+                </div>
+            </div>
+
+            <div class="pricing-card">
+                <div class="pricing-tier">Enterprise</div>
+                <div class="pricing-range">$10,000+</div>
+                <div class="pricing-desc">Complex solutions for established businesses and enterprises.</div>
+                <div class="pricing-features">
+                    <div class="pricing-feature">Custom web apps</div>
+                    <div class="pricing-feature">Complex integrations</div>
+                    <div class="pricing-feature">Scalable architecture</div>
+                    <div class="pricing-feature">6-12 week delivery</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section-label">Ongoing Support</div>
+        <div class="intro-grid">
+            <div class="intro-box">
+                <div class="intro-box-title">Monthly Maintenance</div>
+                <div class="intro-box-text">Starting at $150/month. Includes regular updates, security patches, backups,
+                    and priority support to keep your site running smoothly.</div>
+            </div>
+            <div class="intro-box">
+                <div class="intro-box-title">Flexible Payment</div>
+                <div class="intro-box-text">We offer milestone-based payments: 50% upfront to begin, 50% upon
+                    completion. Custom arrangements available for larger projects.</div>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <div class="contact-title">Let's Build Something Great</div>
+            <div class="contact-grid">
+                <div>
+                    <div class="contact-item">
+                        <div class="contact-label">Email</div>
+                        <div class="contact-value">blacklotusenquiry@gmail.com</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-label">Location</div>
+                        <div class="contact-value">Nigeria, Africa</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-label">Response Time</div>
+                        <div class="contact-value">Within 24 hours</div>
+                    </div>
+                </div>
+                <div>
+                    <p class="cta-text">Ready to kick start a discovery session? Share your ideas with us, and we'll
+                        begin turning your vision into reality today.</p>
+                    <p class="cta-text" style="margin-top: 4mm; opacity: 0.5;">We look forward to partnering with you.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

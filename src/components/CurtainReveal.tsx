@@ -1,6 +1,5 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
-import { useCursor } from '../context/CursorContext'
 
 // Define the images and their start positions on the "film strip"
 const images = [
@@ -17,7 +16,6 @@ const images = [
 
 export function CurtainReveal() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const { setCursorText, setCursorVariant } = useCursor()
 
   // Track scroll progress through the section
   const { scrollYProgress } = useScroll({
@@ -102,17 +100,7 @@ export function CurtainReveal() {
         </div>
 
         {/* The Text Overlay */}
-        <div 
-          className="absolute inset-0 flex flex-col items-center justify-center mix-blend-difference z-10 pointer-events-auto"
-          onMouseEnter={() => {
-            setCursorText("MAKE IT HAPPEN")
-            setCursorVariant("text")
-          }}
-          onMouseLeave={() => {
-            setCursorText("")
-            setCursorVariant("default")
-          }}
-        >
+        <div className="absolute inset-0 flex flex-col items-center justify-center mix-blend-difference z-10">
           <span className="text-white text-xs md:text-sm font-medium tracking-widest uppercase mb-4">Get Started</span>
           <h2 className="text-white text-5xl md:text-8xl font-display text-center leading-[0.9] tracking-tighter">
             Let's make<br />things happen.
