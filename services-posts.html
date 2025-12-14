@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Lotus Services Posts</title>
+
+    <style>
+        /* --- FONTS --- */
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb977efde095c9ce551dd_Switzer-Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abbacd113fcc08efe66918_Switzer-Light.woff') format('woff');
+            font-weight: 300;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb977e5f5d00647df12b7_Switzer-Medium.woff2') format('woff2');
+            font-weight: 500;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb9770a14b6e6d06a8ddb_Switzer-Semibold.woff2') format('woff2');
+            font-weight: 600;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb9778041c4a0e5ae1faf_Switzer-Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+
+        /* --- BRAND COLORS --- */
+        :root {
+            --off-black: #111111;
+            --pure-black: #000000;
+            --pure-white: #FFFFFF;
+            --cream: #f5f5f0;
+            --zinc-500: #71717a;
+            --zinc-600: #52525b;
+            --navy: #1a2744;
+        }
+
+        /* --- PAGE SETUP --- */
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Switzer', sans-serif;
+            background: #f0f0f0;
+            color: var(--off-black);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            /* A4 Height */
+            background: white;
+            margin: 0 auto;
+            padding: 10mm;
+            display: flex;
+            flex-direction: column;
+            /* Stack header, visual, caption */
+            align-items: center;
+            page-break-after: always;
+            page-break-inside: avoid;
+            /* Prevent page breaks inside */
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .page {
+                margin: 0;
+                border: none;
+                height: 100vh;
+                page-break-after: always;
+                break-after: page;
+            }
+        }
+
+        /* --- HEADER --- */
+        .post-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5mm;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 3mm;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-logo {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .post-number {
+            font-size: 10pt;
+            font-weight: 600;
+            color: var(--zinc-500);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .post-title {
+            font-size: 10pt;
+            font-weight: 600;
+            color: var(--off-black);
+        }
+
+        /* --- INSTAGRAM STORY CONTAINER (9:16) --- */
+        .visual-wrapper {
+            width: 378px;
+            /* 1080 * 0.35 */
+            height: 672px;
+            /* 1920 * 0.35 */
+            margin: 0 auto 10mm auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .insta-visual {
+            width: 1080px;
+            height: 1920px;
+            transform: scale(0.35);
+            transform-origin: 0 0;
+
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            /* Align content to bottom */
+            background: #000;
+            /* Fallback */
+        }
+
+        /* --- BACKGROUND IMAGES --- */
+        .bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .bg-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.9) 100%);
+            z-index: 2;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        .content-layer {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            padding: 80px 60px 120px 60px;
+            /* Bottom padding for safe area */
+            color: white;
+        }
+
+        .service-title {
+            font-size: 6rem;
+            line-height: 0.9;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        .service-desc {
+            font-size: 2rem;
+            line-height: 1.4;
+            font-weight: 400;
+            opacity: 0.8;
+            max-width: 900px;
+            letter-spacing: -0.01em;
+        }
+
+        /* --- DECORATIVE ELEMENTS --- */
+        .corner-logo {
+            position: absolute;
+            top: 60px;
+            left: 60px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            opacity: 1;
+            z-index: 20;
+        }
+
+        .top-right-label {
+            position: absolute;
+            top: 75px;
+            right: 60px;
+            font-size: 24px;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: lowercase;
+            opacity: 0.8;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 25px;
+            border-radius: 100px;
+            backdrop-filter: blur(10px);
+            color: white;
+        }
+
+        /* --- CAPTION --- */
+        .caption-container {
+            width: 100%;
+            background: #f9f9f9;
+            padding: 6mm;
+            border-radius: 3mm;
+            margin-top: 10mm;
+        }
+
+        .caption-label {
+            font-size: 8pt;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--zinc-500);
+            margin-bottom: 3mm;
+            display: block;
+            font-weight: 600;
+        }
+
+        .caption-text {
+            font-size: 9pt;
+            line-height: 1.6;
+            color: var(--zinc-600);
+            white-space: pre-wrap;
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- POST 1: Website Development -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left"><img src="./public/BL-logo.jpg" class="header-logo"><span class="post-number">Story
+                    01</span></div>
+            <span class="post-title">Website Development</span>
+        </div>
+
+        <div class="visual-wrapper">
+            <div class="insta-visual">
+                <img src="./public/services/website development.jpg" class="bg-image">
+                <div class="bg-overlay"></div>
+                <img src="./public/BL-logo.jpg" class="corner-logo">
+                <div class="top-right-label">services</div>
+
+                <div class="content-layer">
+                    <h1 class="service-title">
+                        Website<br>Development
+                    </h1>
+                    <p class="service-desc">
+                        Designing clear, user focused layouts that make it easy for visitors to browse and take action.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="caption-container"><span class="caption-label">Caption</span>
+            <div class="caption-text">Your website is your digital storefront. We make it unforgettable.
+
+                Beautiful, fast, and responsive websites that convert visitors into customers.
+
+                #WebDevelopment #WebDesign #BlackLotus</div>
+        </div>
+    </div>
+
+    <!-- POST 2: Mobile Applications -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left"><img src="./public/BL-logo.jpg" class="header-logo"><span class="post-number">Story
+                    02</span></div>
+            <span class="post-title">Mobile Applications</span>
+        </div>
+
+        <div class="visual-wrapper">
+            <div class="insta-visual">
+                <img src="./public/services/mobile apps.jpg" class="bg-image">
+                <div class="bg-overlay"></div>
+                <img src="./public/BL-logo.jpg" class="corner-logo">
+                <div class="top-right-label">services</div>
+
+                <div class="content-layer">
+                    <h1 class="service-title">
+                        Mobile<br>Applications
+                    </h1>
+                    <p class="service-desc">
+                        Native iOS and Android apps that feel clear, intuitive, and pleasant to use from the first tap.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="caption-container"><span class="caption-label">Caption</span>
+            <div class="caption-text">Your business in their pocket.
+
+                We design and build native mobile applications that provide a seamless user experience on iOS and
+                Android.
+
+                #MobileApp #iOS #Android #AppDesign</div>
+        </div>
+    </div>
+
+    <!-- POST 3: Infrastructure & Scaling -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left"><img src="./public/BL-logo.jpg" class="header-logo"><span class="post-number">Story
+                    03</span></div>
+            <span class="post-title">Infrastructure & Scaling</span>
+        </div>
+
+        <div class="visual-wrapper">
+            <div class="insta-visual">
+                <img src="./public/services/infrastructure.jpg" class="bg-image">
+                <div class="bg-overlay"></div>
+                <img src="./public/BL-logo.jpg" class="corner-logo">
+                <div class="top-right-label">services</div>
+
+                <div class="content-layer">
+                    <h1 class="service-title">
+                        Infrastructure<br>& Scaling
+                    </h1>
+                    <p class="service-desc">
+                        Robust. Scalable. Future-proof. We build the foundation for your digital growth to handle any
+                        traffic.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="caption-container"><span class="caption-label">Caption</span>
+            <div class="caption-text">Built to grow with you.
+
+                We design robust infrastructure that handles traffic spikes and scales effortlessly as your business
+                expands.
+
+                #CloudInfrastructure #Scalability #DevOps</div>
+        </div>
+    </div>
+
+    <!-- POST 4: Maintenance & Support -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left"><img src="./public/BL-logo.jpg" class="header-logo"><span class="post-number">Story
+                    04</span></div>
+            <span class="post-title">Maintenance & Support</span>
+        </div>
+
+        <div class="visual-wrapper">
+            <div class="insta-visual">
+                <img src="./public/services/maintenance.jpg" class="bg-image">
+                <div class="bg-overlay"></div>
+                <img src="./public/BL-logo.jpg" class="corner-logo">
+                <div class="top-right-label">services</div>
+
+                <div class="content-layer">
+                    <h1 class="service-title">
+                        Maintenance<br>& Support
+                    </h1>
+                    <p class="service-desc">
+                        We keep your site running smoothly and fix issues fast. Peace of mind included.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="caption-container"><span class="caption-label">Caption</span>
+            <div class="caption-text">Peace of mind included.
+
+                We provide ongoing maintenance and rapid support so you can focus on your business, not your website.
+
+                #WebSupport #Maintenance #Reliability</div>
+        </div>
+    </div>
+
+</body>
+
+</html>

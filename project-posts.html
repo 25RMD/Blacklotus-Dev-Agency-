@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Lotus Project Posts</title>
+
+    <style>
+        /* --- FONTS --- */
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb977efde095c9ce551dd_Switzer-Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abbacd113fcc08efe66918_Switzer-Light.woff') format('woff');
+            font-weight: 300;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb977e5f5d00647df12b7_Switzer-Medium.woff2') format('woff2');
+            font-weight: 500;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb9770a14b6e6d06a8ddb_Switzer-Semibold.woff2') format('woff2');
+            font-weight: 600;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb9778041c4a0e5ae1faf_Switzer-Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+
+        /* --- BRAND COLORS --- */
+        :root {
+            --off-black: #111111;
+            --pure-black: #000000;
+            --pure-white: #FFFFFF;
+            --cream: #f5f5f0;
+            --zinc-500: #71717a;
+            --zinc-600: #52525b;
+            --zinc-700: #3f3f46;
+            --zinc-800: #27272a;
+        }
+
+        /* --- PAGE SETUP --- */
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Switzer', sans-serif;
+            background: #f0f0f0;
+            color: var(--off-black);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            background: white;
+            margin: 0 auto;
+            padding: 10mm;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            page-break-after: always;
+            page-break-inside: avoid;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .page {
+                margin: 0;
+                border: none;
+                height: 100vh;
+                page-break-after: always;
+                break-after: page;
+            }
+        }
+
+        /* --- HEADER --- */
+        .post-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5mm;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 3mm;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-logo {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .post-number {
+            font-size: 10pt;
+            font-weight: 600;
+            color: var(--zinc-500);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .post-title-header {
+            font-size: 10pt;
+            font-weight: 600;
+            color: var(--off-black);
+        }
+
+        /* --- INSTAGRAM STORY CONTAINER (9:16) --- */
+        .visual-wrapper {
+            width: 378px;
+            height: 672px;
+            margin: 0 auto 10mm auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .insta-visual {
+            width: 1080px;
+            height: 1920px;
+            transform: scale(0.35);
+            transform-origin: 0 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            background: var(--pure-black);
+            color: white;
+        }
+
+        /* --- CONTENT LAYOUT --- */
+        .story-content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            padding: 80px 70px;
+        }
+
+        /* --- TAGLINE (Mobile Optimized) --- */
+        .tagline {
+            font-size: 72px;
+            font-weight: 500;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-top: 20px;
+            margin-bottom: 50px;
+        }
+
+        /* --- VIDEO/SCREENSHOT CONTAINER --- */
+        .video-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-frame {
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: var(--zinc-800);
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--zinc-500);
+            font-size: 32px;
+            gap: 24px;
+        }
+
+        .video-placeholder svg {
+            width: 100px;
+            height: 100px;
+            opacity: 0.5;
+        }
+
+        .video-frame video,
+        .video-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* --- PROJECT DETAILS (Mobile Optimized) --- */
+        .project-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px 80px;
+            padding-top: 50px;
+            margin-top: 50px;
+            border-top: 1px solid var(--zinc-700);
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .detail-label {
+            font-size: 28px;
+            color: var(--zinc-500);
+            text-transform: capitalize;
+            font-weight: 400;
+        }
+
+        .detail-value {
+            font-size: 36px;
+            font-weight: 600;
+            color: white;
+            line-height: 1.2;
+        }
+
+        .tools-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .tools-list span {
+            font-weight: 500;
+        }
+
+        /* --- CAPTION --- */
+        .caption-container {
+            width: 100%;
+            background: #f9f9f9;
+            padding: 6mm;
+            border-radius: 3mm;
+            margin-top: 10mm;
+        }
+
+        .caption-label {
+            font-size: 8pt;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--zinc-500);
+            margin-bottom: 3mm;
+            display: block;
+            font-weight: 600;
+        }
+
+        .caption-text {
+            font-size: 9pt;
+            line-height: 1.6;
+            color: var(--zinc-600);
+            white-space: pre-wrap;
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PROJECT 1: Black Lotus Website -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left">
+                <img src="./public/BL-logo.jpg" class="header-logo">
+                <span class="post-number">Project 01</span>
+            </div>
+            <span class="post-title-header">Black Lotus</span>
+        </div>
+
+        <div class="visual-wrapper">
+            <div class="insta-visual">
+                <div class="story-content">
+                    <!-- Tagline -->
+                    <h1 class="tagline">Crafting Digital<br>Experiences</h1>
+
+                    <!-- Video Container -->
+                    <div class="video-container">
+                        <div class="video-frame">
+                            <video src="./public/projects/bl.mp4" autoplay loop muted playsinline></video>
+                        </div>
+                    </div>
+
+                    <!-- Project Details -->
+                    <div class="project-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Client</span>
+                            <span class="detail-value">Black Lotus</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Tools used</span>
+                            <div class="detail-value tools-list">
+                                <span>Vite + React</span>
+                                <span>Framer Motion</span>
+                                <span>GSAP</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Country</span>
+                            <span class="detail-value">Nigeria</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">What company do?</span>
+                            <span class="detail-value">Digital Agency</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="caption-container">
+            <span class="caption-label">Caption</span>
+            <div class="caption-text">✨ Our own digital home — Black Lotus
+
+                We built our agency website to showcase what we do best: crafting premium digital experiences that
+                convert.
+
+                🛠️ Tools: Vite + React, Framer Motion, GSAP
+                🔗 Visit: blacklotus.dev
+
+                #WebDesign #WebDevelopment #BlackLotus #DigitalAgency</div>
+        </div>
+    </div>
+
+    <!-- PROJECT 2: EE Wellness Hub -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left">
+                <img src="./public/BL-logo.jpg" class="header-logo">
+                <span class="post-number">Project 02</span>
+            </div>
+            <span class="post-title-header">EE Wellness Hub</span>
+        </div>
+
+        <div class="visual-wrapper">
+            <div class="insta-visual">
+                <div class="story-content">
+                    <!-- Tagline -->
+                    <h1 class="tagline">Empowering Your<br>Wellness Journey</h1>
+
+                    <!-- Video/Screenshot Container -->
+                    <div class="video-container">
+                        <div class="video-frame">
+                            <div class="video-placeholder">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span>Add video here</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Details -->
+                    <div class="project-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Client</span>
+                            <span class="detail-value">EE Wellness Hub</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Tools used</span>
+                            <div class="detail-value tools-list">
+                                <span>Vite + React</span>
+                                <span>Framer Motion</span>
+                                <span>GSAP</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Country</span>
+                            <span class="detail-value">Nigeria</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">What company do?</span>
+                            <span class="detail-value">Wellness & Health</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="caption-container">
+            <span class="caption-label">Caption</span>
+            <div class="caption-text">✨ Project Showcase: EE Wellness Hub
+
+                A modern, high-performance website for EE Wellness Hub — empowering people on their wellness journey.
+
+                🛠️ Tools: Vite + React, Framer Motion, GSAP
+                🔗 Visit: eewellnesshub.com
+
+                #WebDesign #WebDevelopment #FullStack #BlackLotus #Wellness</div>
+        </div>
+    </div>
+
+</body>
+
+</html>

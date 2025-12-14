@@ -10,4 +10,14 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  // Serve static files from public directory
+  publicDir: 'public',
+  build: {
+    rollupOptions: {
+      input: {
+        main: fileURLToPath(new URL('./index.html', import.meta.url)),
+        email: fileURLToPath(new URL('./email.html', import.meta.url)),
+      },
+    },
+  },
 })
