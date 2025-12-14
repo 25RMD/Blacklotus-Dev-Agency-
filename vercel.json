@@ -1,0 +1,12 @@
+{
+    "rewrites": [
+        {
+            "source": "/email",
+            "destination": "/email.html"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/index.html"
+        }
+    ]
+}
