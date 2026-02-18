@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Lotus - Service Agreement</title>
+
+    <style>
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb977efde095c9ce551dd_Switzer-Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abbacd113fcc08efe66918_Switzer-Light.woff') format('woff');
+            font-weight: 300;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb977e5f5d00647df12b7_Switzer-Medium.woff2') format('woff2');
+            font-weight: 500;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb9770a14b6e6d06a8ddb_Switzer-Semibold.woff2') format('woff2');
+            font-weight: 600;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb9778041c4a0e5ae1faf_Switzer-Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+
+        :root {
+            --pure-black: #000000;
+            --pure-white: #FFFFFF;
+            --cream: #f5f5f0;
+            --zinc-200: #e4e4e7;
+            --zinc-400: #a1a1aa;
+            --zinc-500: #71717a;
+            --accent-green: #10b981;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Switzer', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #e5e5e5;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            line-height: 1.5;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            background: white;
+            margin: 0 auto 20px auto;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            page-break-after: always;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .page {
+                margin: 0;
+            }
+        }
+
+        /* ===== COVER PAGE ===== */
+        .cover-page {
+            background: var(--pure-black);
+            color: var(--pure-white);
+            padding: 15mm;
+            justify-content: space-between;
+        }
+
+        .cover-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .cover-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .cover-taglines {
+            display: flex;
+            flex-direction: column;
+            font-size: 9px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            opacity: 0.8;
+        }
+
+        .cover-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20mm 0;
+        }
+
+        .cover-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            opacity: 0.5;
+            margin-bottom: 8mm;
+        }
+
+        .cover-title {
+            font-size: 52px;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+            margin-bottom: 8mm;
+        }
+
+        .cover-subtitle {
+            font-size: 16px;
+            font-weight: 300;
+            opacity: 0.7;
+            max-width: 400px;
+            line-height: 1.6;
+        }
+
+        .cover-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 8mm;
+        }
+
+        .cover-contact {
+            font-size: 10px;
+            opacity: 0.6;
+            line-height: 1.8;
+        }
+
+        .cover-date {
+            font-size: 10px;
+            opacity: 0.5;
+            text-align: right;
+        }
+
+        /* ===== CONTENT PAGES ===== */
+        .content-page {
+            padding: 15mm;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10mm;
+            padding-bottom: 4mm;
+            border-bottom: 1px solid var(--zinc-200);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-logo {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .header-title {
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--zinc-500);
+        }
+
+        .page-number {
+            font-size: 9px;
+            font-weight: 600;
+            color: var(--zinc-500);
+        }
+
+        .section-label {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--zinc-500);
+            margin-bottom: 4mm;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--pure-black);
+            margin-bottom: 6mm;
+        }
+
+        .section-intro {
+            font-size: 12px;
+            color: var(--zinc-500);
+            max-width: 520px;
+            line-height: 1.7;
+            margin-bottom: 10mm;
+        }
+
+        /* ===== DELIVERABLES GRID ===== */
+        .deliverables-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 5mm;
+            margin-bottom: 10mm;
+        }
+
+        .deliverable-card {
+            background: var(--cream);
+            padding: 6mm;
+            border-radius: 3mm;
+            display: flex;
+            gap: 5mm;
+            align-items: flex-start;
+        }
+
+        .deliverable-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--pure-black);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .deliverable-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: white;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .deliverable-content {
+            flex: 1;
+        }
+
+        .deliverable-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--pure-black);
+            margin-bottom: 2mm;
+        }
+
+        .deliverable-desc {
+            font-size: 10px;
+            color: var(--zinc-500);
+            line-height: 1.6;
+        }
+
+        /* ===== TIMELINE BOX ===== */
+        .timeline-box {
+            background: var(--pure-black);
+            color: var(--pure-white);
+            padding: 8mm;
+            border-radius: 3mm;
+            display: flex;
+            align-items: center;
+            gap: 8mm;
+            margin-bottom: 10mm;
+        }
+
+        .timeline-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .timeline-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: white;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-label {
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            opacity: 0.5;
+            margin-bottom: 2mm;
+        }
+
+        .timeline-value {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .timeline-note {
+            font-size: 10px;
+            opacity: 0.6;
+            margin-top: 1mm;
+        }
+
+        /* ===== PAYMENT SECTION ===== */
+        .payment-section {
+            margin-bottom: 10mm;
+        }
+
+        .payment-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5mm;
+        }
+
+        .payment-card {
+            border: 1px solid var(--zinc-200);
+            border-radius: 3mm;
+            padding: 6mm;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .payment-card.phase-1 {
+            background: var(--pure-black);
+            color: var(--pure-white);
+            border: none;
+        }
+
+        .payment-card.phase-2 {
+            background: var(--cream);
+        }
+
+        .payment-phase {
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 3mm;
+        }
+
+        .payment-card.phase-1 .payment-phase {
+            opacity: 0.5;
+        }
+
+        .payment-card.phase-2 .payment-phase {
+            color: var(--zinc-500);
+        }
+
+        .payment-amount {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 2mm;
+        }
+
+        .payment-percentage {
+            font-size: 11px;
+            font-weight: 500;
+            margin-bottom: 4mm;
+        }
+
+        .payment-card.phase-1 .payment-percentage {
+            opacity: 0.7;
+        }
+
+        .payment-card.phase-2 .payment-percentage {
+            color: var(--zinc-500);
+        }
+
+        .payment-desc {
+            font-size: 10px;
+            line-height: 1.6;
+        }
+
+        .payment-card.phase-1 .payment-desc {
+            opacity: 0.6;
+        }
+
+        .payment-card.phase-2 .payment-desc {
+            color: var(--zinc-500);
+        }
+
+        .payment-badge {
+            position: absolute;
+            top: 4mm;
+            right: 4mm;
+            background: var(--accent-green);
+            color: white;
+            font-size: 7px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 1.5mm 3mm;
+            border-radius: 20px;
+        }
+
+        /* ===== TOTAL BOX ===== */
+        .total-box {
+            background: var(--cream);
+            padding: 6mm 8mm;
+            border-radius: 3mm;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10mm;
+        }
+
+        .total-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--zinc-500);
+        }
+
+        .total-amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--pure-black);
+            letter-spacing: -0.02em;
+        }
+
+        /* ===== SIGNATURE SECTION ===== */
+        .signature-section {
+            margin-top: auto;
+            padding-top: 8mm;
+            border-top: 1px solid var(--zinc-200);
+        }
+
+        .signature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10mm;
+        }
+
+        .signature-box {
+            padding: 5mm;
+        }
+
+        .signature-label {
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--zinc-500);
+            margin-bottom: 3mm;
+        }
+
+        .signature-line {
+            border-bottom: 1px solid var(--zinc-200);
+            height: 15mm;
+            margin-bottom: 2mm;
+        }
+
+        .signature-name {
+            font-size: 10px;
+            color: var(--zinc-500);
+        }
+
+        .signature-date {
+            font-size: 9px;
+            color: var(--zinc-400);
+            margin-top: 2mm;
+        }
+
+        /* ===== FOOTER ===== */
+        .page-footer {
+            margin-top: auto;
+            padding-top: 6mm;
+            border-top: 1px solid var(--zinc-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text {
+            font-size: 8px;
+            color: var(--zinc-500);
+        }
+
+        /* ===== CONTACT SECTION ===== */
+        .contact-section {
+            background: var(--pure-black);
+            color: var(--pure-white);
+            padding: 8mm;
+            border-radius: 3mm;
+            margin-top: auto;
+        }
+
+        .contact-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4mm;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6mm;
+        }
+
+        .contact-item {
+            margin-bottom: 3mm;
+        }
+
+        .contact-label {
+            font-size: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            opacity: 0.5;
+            margin-bottom: 1mm;
+        }
+
+        .contact-value {
+            font-size: 10px;
+            font-weight: 500;
+        }
+
+        .cta-text {
+            font-size: 10px;
+            opacity: 0.7;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PAGE 1: COVER -->
+    <div class="page cover-page">
+        <div class="cover-header">
+            <img src="./public/BL-logo.jpg" class="cover-logo" alt="Black Lotus">
+            <div class="cover-taglines">
+                <span>Web & Software Solutions</span>
+                <span>Digital Transformation</span>
+            </div>
+        </div>
+
+        <div class="cover-main">
+            <div class="cover-label">Service Agreement</div>
+            <h1 class="cover-title">Website<br>Development<br>Agreement</h1>
+            <p class="cover-subtitle">A service contract for custom website development with blog system integration and
+                conversion-optimized design.</p>
+        </div>
+
+        <div class="cover-footer">
+            <div class="cover-contact">
+                <div>blacklotusenquiry@gmail.com</div>
+                <div>Nigeria, Africa</div>
+            </div>
+            <div class="cover-date">
+                <div>January 2026</div>
+                <div>Service Agreement</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: PROJECT SCOPE & DELIVERABLES -->
+    <div class="page content-page">
+        <div class="page-header">
+            <div class="header-left">
+                <img src="./public/BL-logo.jpg" class="header-logo" alt="Black Lotus">
+                <span class="header-title">Black Lotus Development Agency</span>
+            </div>
+            <span class="page-number">01</span>
+        </div>
+
+        <div class="section-label">What This Covers</div>
+        <h2 class="section-title">Project Scope & Deliverables</h2>
+        <p class="section-intro">This agreement outlines the complete scope of work for your custom website development
+            project, including all deliverables and features.</p>
+
+        <div class="deliverables-grid">
+            <div class="deliverable-card">
+                <div class="deliverable-icon">
+                    <svg viewBox="0 0 24 24">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                </div>
+                <div class="deliverable-content">
+                    <div class="deliverable-title">Custom Build</div>
+                    <div class="deliverable-desc">A high-performance, mobile-first website built for speed — not a slow
+                        WordPress template. Hand-crafted with modern technologies for maximum performance and
+                        reliability.</div>
+                </div>
+            </div>
+
+            <div class="deliverable-card">
+                <div class="deliverable-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 20h9"></path>
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                    </svg>
+                </div>
+                <div class="deliverable-content">
+                    <div class="deliverable-title">Blog System</div>
+                    <div class="deliverable-desc">A simple, custom dashboard for you to post and manage your articles
+                        easily. No technical knowledge required — intuitive interface for seamless content management.
+                    </div>
+                </div>
+            </div>
+
+            <div class="deliverable-card">
+                <div class="deliverable-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                </div>
+                <div class="deliverable-content">
+                    <div class="deliverable-title">Conversion Optimization</div>
+                    <div class="deliverable-desc">Every page specifically structured to drive parents to "Book a Free
+                        Trial" on WhatsApp. Strategic placement of call-to-actions and persuasive design elements.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline Box -->
+        <div class="timeline-box">
+            <div class="timeline-icon">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+            </div>
+            <div class="timeline-content">
+                <div class="timeline-label">Project Timeline</div>
+                <div class="timeline-value">3 Weeks</div>
+                <div class="timeline-note">From start to finish, including revisions</div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span class="footer-text">Black Lotus Development Agency</span>
+            <span class="footer-text">blacklotusenquiry@gmail.com</span>
+        </div>
+    </div>
+
+    <!-- PAGE 3: PAYMENT TERMS -->
+    <div class="page content-page">
+        <div class="page-header">
+            <div class="header-left">
+                <img src="./public/BL-logo.jpg" class="header-logo" alt="Black Lotus">
+                <span class="header-title">Black Lotus Development Agency</span>
+            </div>
+            <span class="page-number">02</span>
+        </div>
+
+        <div class="section-label">Investment</div>
+        <h2 class="section-title">Payment Terms</h2>
+        <p class="section-intro">The project follows a two-phase payment structure designed to protect both parties and
+            ensure a smooth development process.</p>
+
+        <div class="payment-section">
+            <div class="payment-grid">
+                <div class="payment-card phase-1">
+                    <div class="payment-badge">Kick Off</div>
+                    <div class="payment-phase">Phase 1: Deposit</div>
+                    <div class="payment-amount">₦250,000</div>
+                    <div class="payment-percentage">50% of Total</div>
+                    <div class="payment-desc">Required to begin Phase 1: Structure & Content Architecture. This covers
+                        initial planning, wireframes, and content strategy development.</div>
+                </div>
+
+                <div class="payment-card phase-2">
+                    <div class="payment-phase">Phase 2: Completion</div>
+                    <div class="payment-amount">₦250,000</div>
+                    <div class="payment-percentage">50% of Total</div>
+                    <div class="payment-desc">Due once the site is ready to go live. This covers final development,
+                        testing, blog system setup, and deployment.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="total-box">
+            <div class="total-label">Total Project Investment</div>
+            <div class="total-amount">₦500,000</div>
+        </div>
+
+        <!-- Signature Section -->
+        <div class="signature-section">
+            <div class="signature-grid">
+                <div class="signature-box">
+                    <div class="signature-label">Client Signature</div>
+                    <div class="signature-line"></div>
+                    <div class="signature-name">Name: _____________________</div>
+                    <div class="signature-date">Date: _____________________</div>
+                </div>
+                <div class="signature-box">
+                    <div class="signature-label">Black Lotus Representative</div>
+                    <div class="signature-line"></div>
+                    <div class="signature-name">Name: _____________________</div>
+                    <div class="signature-date">Date: _____________________</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="contact-section">
+            <div class="contact-title">Ready to Get Started?</div>
+            <div class="contact-grid">
+                <div>
+                    <div class="contact-item">
+                        <div class="contact-label">Email</div>
+                        <div class="contact-value">blacklotusenquiry@gmail.com</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-label">Location</div>
+                        <div class="contact-value">Nigeria, Africa</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="cta-text">Once the deposit is received, we'll schedule a kickoff call to discuss your
+                        content needs and begin building your high-performance website.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

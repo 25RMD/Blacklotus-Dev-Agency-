@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Highlights - Black Lotus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #111111;
+            --text-color: #ffffff;
+            --accent-color: #333333;
+            --highlight-size: 120px;
+            --border-width: 2px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            font-weight: 300;
+            letter-spacing: -0.05em;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            text-transform: uppercase;
+        }
+
+        .highlights-container {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .highlight-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .highlight-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .highlight-circle {
+            width: var(--highlight-size);
+            height: var(--highlight-size);
+            border-radius: 50%;
+            padding: 4px;
+            /* Space for the border */
+            background: linear-gradient(45deg, #333, #666);
+            /* Placeholder gradient border */
+            background-clip: content-box;
+            /* Ensure image fits inside */
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Instagram-like gradient border effect */
+        .highlight-circle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            padding: 2px;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.8;
+        }
+
+        .highlight-circle img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--bg-color);
+            /* Inner border to separate image from gradient */
+            background-color: #000;
+        }
+
+        .highlight-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            opacity: 0.9;
+        }
+
+        .download-hint {
+            margin-top: 4rem;
+            font-size: 0.75rem;
+            color: #666;
+            max-width: 300px;
+            line-height: 1.5;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #111;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Black Lotus Highlights</h1>
+
+    <div class="highlights-container">
+        <!-- Projects Highlight -->
+        <div class="highlight-item">
+            <div class="highlight-circle">
+                <img src="C:/Users/RAUM/.gemini/antigravity/brain/30a56812-5776-4f32-8648-c23e771bd459/highlight_projects_pure_black_1765826504005.png"
+                    alt="Projects Highlight Cover">
+            </div>
+            <span class="highlight-label">Projects</span>
+        </div>
+
+        <!-- Services Highlight -->
+        <div class="highlight-item">
+            <div class="highlight-circle">
+                <img src="C:/Users/RAUM/.gemini/antigravity/brain/30a56812-5776-4f32-8648-c23e771bd459/highlight_services_pure_black_1765826518313.png"
+                    alt="Services Highlight Cover">
+            </div>
+            <span class="highlight-label">Services</span>
+        </div>
+
+        <!-- Contact Highlight -->
+        <div class="highlight-item">
+            <div class="highlight-circle">
+                <img src="C:/Users/RAUM/.gemini/antigravity/brain/30a56812-5776-4f32-8648-c23e771bd459/highlight_contact_refined_1765826361509.png"
+                    alt="Contact Highlight Cover">
+            </div>
+            <span class="highlight-label">Contact</span>
+        </div>
+    </div>
+
+    <div class="download-hint">
+        Right-click on an image to save it as your Instagram Highlight cover.
+    </div>
+
+</body>
+
+</html>
