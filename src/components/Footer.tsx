@@ -186,8 +186,7 @@ export function Footer({
           </div>
         </div>
       </div>
-
-      {/* Massive Bottom Text - scaled to exactly fill its container
+      {/* Massive Bottom Text - scaled to exactly fill its container */}
       <div className='w-full relative flex items-end justify-center pointer-events-none overflow-hidden -mt-2 h-[40vh]'>
         <svg
           viewBox='0 0 100 20'
@@ -210,7 +209,7 @@ export function Footer({
             BLACK LOTUS
           </text>
         </svg>
-      </div> */}
+      </div>
     </footer>
   )
 }

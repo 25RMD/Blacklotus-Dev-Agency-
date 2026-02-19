@@ -1,20 +1,15 @@
-// app/routes/blog-post.tsx
-// import { type Route } from ".react-router/types/src/routes/+types/blog-post.ts"
+import type { Route } from "./+types/blog-post.ts"
 import fs from "node:fs"
 import matter from "gray-matter"
 import ReactMarkdown from "react-markdown"
 import SyntaxHighlighter from "react-syntax-highlighter/dist/esm/prism"
 import { vs } from "react-syntax-highlighter/dist/esm/styles/prism"
 import { Twitter, Linkedin, Link as LinkIcon, User } from "lucide-react"
-import { Layout } from "./index"
 import { BlogLayout } from "./blog-list"
 import { useLocation } from "react-router"
 import { useEffect, useState } from "react"
 
-export async function loader(
-  { params }
-  //  Route.LoaderArgs
-) {
+export async function loader({ params }: Route.LoaderArgs) {
   // Read the Obsidian file based on the URL slug
   const file = fs.readFileSync(`./src/content/posts/${params.slug}.md`, "utf-8")
   const { data, content } = matter(file)
@@ -25,7 +20,6 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
   const { metadata, content } = loaderData
   const [blogUrl, setBlogUrl] = useState<String>()
   useEffect(() => {
-    console.log(window?.location)
     setBlogUrl(window?.location.toString())
   }, [])
   const location = useLocation()
@@ -54,7 +48,6 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
               components={{
                 code({ node, inline, className, children, ...props }: any) {
                   const match = /language-(\w+)/.exec(className || "")
-                  console.log(match)
                   return !inline && match ? (
                     <SyntaxHighlighter
                       style={vs}

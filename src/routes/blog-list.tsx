@@ -1,5 +1,3 @@
-// app/routes/blog-list.tsx
-// import { type Route } from "./+types/BlogList"
 import fs from "node:fs"
 import matter from "gray-matter"
 import { Link, useLoaderData } from "react-router"
