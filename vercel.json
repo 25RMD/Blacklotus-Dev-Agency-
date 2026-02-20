@@ -1,0 +1,10 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/client",
+  "rewrites": [
+    {
+      "source": "/((?!assets|favicon|projects|services|showcase|bg-video|curtainReveal).*)",
+      "destination": "/__spa-fallback.html"
+    }
+  ]
+}

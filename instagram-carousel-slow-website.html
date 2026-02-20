@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Carousel - 3 Reasons Your Website is Slow</title>
+
+    <style>
+        /* --- FONTS --- */
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb977efde095c9ce551dd_Switzer-Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abbacd113fcc08efe66918_Switzer-Light.woff') format('woff');
+            font-weight: 300;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb977e5f5d00647df12b7_Switzer-Medium.woff2') format('woff2');
+            font-weight: 500;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb9770a14b6e6d06a8ddb_Switzer-Semibold.woff2') format('woff2');
+            font-weight: 600;
+        }
+
+        @font-face {
+            font-family: 'Switzer';
+            src: url('https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb9778041c4a0e5ae1faf_Switzer-Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+
+        /* --- BRAND COLORS --- */
+        :root {
+            --off-black: #111111;
+            --pure-black: #000000;
+            --pure-white: #FFFFFF;
+            --cream: #f5f5f0;
+            --zinc-500: #71717a;
+            --zinc-600: #52525b;
+        }
+
+        /* --- PAGE SETUP --- */
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Switzer', sans-serif;
+            background: #f0f0f0;
+            color: var(--off-black);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            background: white;
+            margin: 0 auto;
+            padding: 15mm;
+            display: flex;
+            flex-direction: column;
+            page-break-after: always;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .page {
+                margin: 0;
+                border: none;
+            }
+        }
+
+        /* --- HEADER --- */
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10mm;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5mm;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-logo {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .post-number {
+            font-size: 10pt;
+            font-weight: 600;
+            color: var(--zinc-500);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .post-title {
+            font-size: 10pt;
+            font-weight: 600;
+            color: var(--off-black);
+        }
+
+        /* --- INSTAGRAM POST CONTAINER --- */
+        .insta-visual {
+            width: 1080px;
+            height: 1080px;
+            max-width: 100%;
+            max-height: 180mm;
+            aspect-ratio: 1/1;
+            margin: 0 auto 10mm auto;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* --- BRAND BACKGROUNDS --- */
+        .bg-black {
+            background-color: var(--pure-black);
+            color: white;
+        }
+
+        .bg-off-black {
+            background-color: var(--off-black);
+            color: white;
+        }
+
+        .bg-white {
+            background-color: var(--pure-white);
+            color: var(--off-black);
+        }
+
+        .bg-cream {
+            background-color: var(--cream);
+            color: var(--off-black);
+        }
+
+        /* --- BRAND TYPOGRAPHY --- */
+        .tracking-tight {
+            letter-spacing: -0.02em;
+        }
+
+        .tracking-tighter {
+            letter-spacing: -0.04em;
+        }
+
+        .tracking-widest {
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .font-light {
+            font-weight: 300;
+        }
+
+        .font-regular {
+            font-weight: 400;
+        }
+
+        .font-medium {
+            font-weight: 500;
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        /* --- POST SPECIFIC STYLES --- */
+        .content-layer {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px;
+        }
+
+        .content-layer-left {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 80px;
+        }
+
+        .logo-center {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .hero-text {
+            font-size: 5rem;
+            line-height: 0.95;
+            text-align: center;
+        }
+
+        .slide-title {
+            font-size: 4rem;
+            line-height: 1.05;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .slide-body {
+            font-size: 1.8rem;
+            line-height: 1.4;
+            text-align: left;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .corner-label {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            opacity: 0.6;
+            text-transform: uppercase;
+        }
+
+        .corner-logo {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            opacity: 0.8;
+        }
+
+        .swipe-indicator {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            opacity: 0.6;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* --- CAPTION --- */
+        .caption-container {
+            background: #f9f9f9;
+            padding: 8mm;
+            border-radius: 4mm;
+            flex-grow: 1;
+        }
+
+        .caption-label {
+            font-size: 8pt;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--zinc-500);
+            margin-bottom: 4mm;
+            display: block;
+            font-weight: 600;
+        }
+
+        .caption-text {
+            font-size: 10pt;
+            line-height: 1.6;
+            color: var(--zinc-600);
+            white-space: pre-wrap;
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SLIDE 1: Title -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left"><img src="./public/BL-logo.jpg" class="header-logo"><span class="post-number">Slide 01</span></div>
+            <span class="post-title">Carousel Cover</span>
+        </div>
+
+        <div class="insta-visual bg-black">
+            <img src="./public/BL-logo.jpg" class="corner-logo">
+            
+            <div class="content-layer">
+                <h1 class="hero-text font-medium tracking-tighter">
+                    3 Reasons<br>
+                    Why Your Website<br>
+                    <span style="font-family: serif; font-style: italic; opacity: 0.7;">is Slow</span>
+                </h1>
+                <div style="margin-top: 60px; font-size: 1.5rem; font-weight: 300; opacity: 0.8; letter-spacing: 0.05em;">
+                    (And how it's costing you clients)
+                </div>
+            </div>
+
+            <div class="swipe-indicator">Swipe <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+
+        <div class="caption-container"><span class="caption-label">Caption</span>
+            <div class="caption-text">Is your website driving customers away before it even loads? 🐢💨
+
+A slow website doesn't just frustrate users—it kills your SEO rankings and tanks your conversion rates. Here are 3 common culprits slowing down your site and what you can do about them.
+
+Swipe to learn more 👉
+
+#WebPerformance #WebDevelopment #BlackLotusDev #PageSpeed #TechTips #DigitalAgency</div>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: Reason 1 -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left"><img src="./public/BL-logo.jpg" class="header-logo"><span class="post-number">Slide 02</span></div>
+            <span class="post-title">Reason 1</span>
+        </div>
+
+        <div class="insta-visual bg-white">
+            <img src="./public/BL-logo.jpg" class="corner-logo">
+            
+            <div class="content-layer-left">
+                <h2 class="slide-title font-semibold tracking-tight">
+                    Unoptimized<br>
+                    <span style="font-family: serif; font-style: italic; font-weight: 400;">Images & Media</span>
+                </h2>
+                <div class="slide-body">
+                    Massive, uncompressed images are the #1 cause of slow load times. Uploading a 5MB photo straight from your camera forces the browser to download heavy files before displaying anything.
+                    <br><br>
+                    <strong>The Fix:</strong> Compress images before uploading, use modern formats like WebP, and implement lazy loading so images only load when scrolled into view.
+                </div>
+            </div>
+
+            <div class="swipe-indicator">Swipe <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: Reason 2 -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left"><img src="./public/BL-logo.jpg" class="header-logo"><span class="post-number">Slide 03</span></div>
+            <span class="post-title">Reason 2</span>
+        </div>
+
+        <div class="insta-visual bg-off-black">
+            <img src="./public/BL-logo.jpg" class="corner-logo">
+            
+            <div class="content-layer-left">
+                <h2 class="slide-title font-semibold tracking-tight">
+                    Too Many<br>
+                    <span style="font-family: serif; font-style: italic; font-weight: 400;">Plugins & Scripts</span>
+                </h2>
+                <div class="slide-body">
+                    Every plugin, tracking code, and third-party script adds extra HTTP requests. If your site relies on 30+ plugins to function, it's carrying too much dead weight.
+                    <br><br>
+                    <strong>The Fix:</strong> Audit your plugins regularly. Delete what you don't use, combine scripts where possible, and consider custom-coded solutions instead of bloated off-the-shelf plugins.
+                </div>
+            </div>
+
+            <div class="swipe-indicator">Swipe <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: Reason 3 -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left"><img src="./public/BL-logo.jpg" class="header-logo"><span class="post-number">Slide 04</span></div>
+            <span class="post-title">Reason 3</span>
+        </div>
+
+        <div class="insta-visual bg-white">
+            <img src="./public/BL-logo.jpg" class="corner-logo">
+            
+            <div class="content-layer-left">
+                <h2 class="slide-title font-semibold tracking-tight">
+                    Poor Hosting &<br>
+                    <span style="font-family: serif; font-style: italic; font-weight: 400;">No Caching</span>
+                </h2>
+                <div class="slide-body">
+                    Cheap shared hosting means you're fighting for server resources with thousands of other sites. Without caching, your server has to rebuild the page from scratch for every single visitor.
+                    <br><br>
+                    <strong>The Fix:</strong> Invest in premium, dedicated hosting or a modern edge network (like Vercel/Netlify). Implement aggressive caching and use a CDN to serve content from servers closest to your users.
+                </div>
+            </div>
+
+            <div class="swipe-indicator">Swipe <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+    </div>
+
+    <!-- SLIDE 5: CTA -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left"><img src="./public/BL-logo.jpg" class="header-logo"><span class="post-number">Slide 05</span></div>
+            <span class="post-title">Call to Action</span>
+        </div>
+
+        <div class="insta-visual bg-black">
+            <img src="./public/BL-logo.jpg" class="corner-logo">
+            
+            <div class="content-layer">
+                <h2 class="hero-text font-medium tracking-tighter" style="font-size: 4.5rem;">
+                    Stop losing<br>
+                    customers to<br>
+                    <span style="font-family: serif; font-style: italic; opacity: 0.7;">loading screens.</span>
+                </h2>
+                <div style="margin-top: 60px; font-size: 1.8rem; font-weight: 300; opacity: 0.9; text-align: center; max-width: 80%;">
+                    We build lightning-fast, high-performance digital experiences that convert.
+                </div>
+                
+                <div style="margin-top: 60px; padding: 20px 40px; border: 1px solid rgba(255,255,255,0.3); border-radius: 100px; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.1em;">
+                    DM us "SPEED" to upgrade
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- CAROUSEL 2: WHY YOUR WEBSITE DOESN'T CONVERT -->
+    <!-- ========================================== -->
+
+    <!-- SLIDE 1: Title -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left"><img src="./public/BL-logo.jpg" class="header-logo"><span class="post-number">Slide 01</span></div>
+            <span class="post-title">Carousel Cover</span>
+        </div>
+
+        <div class="insta-visual bg-black">
+            <img src="./public/BL-logo.jpg" class="corner-logo">
+            
+            <div class="content-layer">
+                <h1 class="hero-text font-medium tracking-tighter">
+                    Why Your Website<br>
+                    Doesn't Convert<br>
+                    <span style="font-family: serif; font-style: italic; opacity: 0.7;">Customers</span>
+                </h1>
+                <div style="margin-top: 60px; font-size: 1.5rem; font-weight: 300; opacity: 0.8; letter-spacing: 0.05em;">
+                    (And how to fix it)
+                </div>
+            </div>
+
+            <div class="swipe-indicator">Swipe <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+
+        <div class="caption-container"><span class="caption-label">Caption</span>
+            <div class="caption-text">Getting traffic but no sales? Your website might be the problem. 📉
+
+A beautiful website means nothing if it doesn't guide users to take action. Here are 3 reasons your visitors are bouncing instead of buying.
+
+Swipe to learn more 👉
+
+#ConversionRate #WebDesign #BlackLotusDev #UXDesign #DigitalAgency #BusinessGrowth</div>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: Reason 1 -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left"><img src="./public/BL-logo.jpg" class="header-logo"><span class="post-number">Slide 02</span></div>
+            <span class="post-title">Reason 1</span>
+        </div>
+
+        <div class="insta-visual bg-white">
+            <img src="./public/BL-logo.jpg" class="corner-logo">
+            
+            <div class="content-layer-left">
+                <h2 class="slide-title font-semibold tracking-tight">
+                    Confusing<br>
+                    <span style="font-family: serif; font-style: italic; font-weight: 400;">Navigation & UX</span>
+                </h2>
+                <div class="slide-body">
+                    If users can't figure out what you do or where to go within 3 seconds, they leave. A cluttered menu or unclear user journey creates friction that kills sales.
+                    <br><br>
+                    <strong>The Fix:</strong> Simplify your navigation. Guide users naturally from the hero section straight to your core offering with zero guesswork.
+                </div>
+            </div>
+
+            <div class="swipe-indicator">Swipe <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: Reason 2 -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left"><img src="./public/BL-logo.jpg" class="header-logo"><span class="post-number">Slide 03</span></div>
+            <span class="post-title">Reason 2</span>
+        </div>
+
+        <div class="insta-visual bg-off-black">
+            <img src="./public/BL-logo.jpg" class="corner-logo">
+            
+            <div class="content-layer-left">
+                <h2 class="slide-title font-semibold tracking-tight">
+                    Weak<br>
+                    <span style="font-family: serif; font-style: italic; font-weight: 400;">Call-to-Actions</span>
+                </h2>
+                <div class="slide-body">
+                    Generic buttons like "Submit" or "Click Here" don't inspire action. If your CTAs blend into the background or lack clear value, users won't click them.
+                    <br><br>
+                    <strong>The Fix:</strong> Use action-oriented, benefit-driven CTAs. Instead of "Contact Us", try "Get Your Free Audit" or "Start Your Project". Make them visually pop.
+                </div>
+            </div>
+
+            <div class="swipe-indicator">Swipe <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: Reason 3 -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left"><img src="./public/BL-logo.jpg" class="header-logo"><span class="post-number">Slide 04</span></div>
+            <span class="post-title">Reason 3</span>
+        </div>
+
+        <div class="insta-visual bg-white">
+            <img src="./public/BL-logo.jpg" class="corner-logo">
+            
+            <div class="content-layer-left">
+                <h2 class="slide-title font-semibold tracking-tight">
+                    Lack of Trust &<br>
+                    <span style="font-family: serif; font-style: italic; font-weight: 400;">Social Proof</span>
+                </h2>
+                <div class="slide-body">
+                    People buy from brands they trust. If your site is missing testimonials, case studies, client logos, or clear guarantees, visitors will hesitate to hand over their money.
+                    <br><br>
+                    <strong>The Fix:</strong> Showcase real results. Add a dedicated section for client reviews, display logos of companies you've worked with, and highlight your expertise.
+                </div>
+            </div>
+
+            <div class="swipe-indicator">Swipe <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+    </div>
+
+    <!-- SLIDE 5: CTA -->
+    <div class="page">
+        <div class="post-header">
+            <div class="header-left"><img src="./public/BL-logo.jpg" class="header-logo"><span class="post-number">Slide 05</span></div>
+            <span class="post-title">Call to Action</span>
+        </div>
+
+        <div class="insta-visual bg-black">
+            <img src="./public/BL-logo.jpg" class="corner-logo">
+            
+            <div class="content-layer">
+                <h2 class="hero-text font-medium tracking-tighter" style="font-size: 4.5rem;">
+                    Stop losing<br>
+                    leads to bad<br>
+                    <span style="font-family: serif; font-style: italic; opacity: 0.7;">design.</span>
+                </h2>
+                <div style="margin-top: 60px; font-size: 1.8rem; font-weight: 300; opacity: 0.9; text-align: center; max-width: 80%;">
+                    We build high-converting digital experiences that turn visitors into clients.
+                </div>
+                
+                <div style="margin-top: 60px; padding: 20px 40px; border: 1px solid rgba(255,255,255,0.3); border-radius: 100px; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.1em;">
+                    DM us "CONVERT" to upgrade
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
