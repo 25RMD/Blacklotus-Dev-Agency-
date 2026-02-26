@@ -1,17 +1,7 @@
-import {
-  motion,
-  useSpring,
-  useTransform,
-  useMotionValue,
-  animate,
-} from "framer-motion"
-import { useRef, useState, useEffect } from "react"
-
-declare global {
-  interface Window {
-    heroStripProgress: number
-  }
-}
+import { motion, useReducedMotion } from "framer-motion"
+import { useRef, useEffect } from "react"
+import { Link } from "react-router"
+import { Magnetic } from "./ui/Magnetic"
 
 interface HeroSectionProps {
   isLoaded?: boolean
@@ -19,35 +9,8 @@ interface HeroSectionProps {
 
 export function HeroSection({ isLoaded = false }: HeroSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const [isLocked, setIsLocked] = useState(true)
-  const [hasLeftHero, setHasLeftHero] = useState(false)
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
-  const accumulatedScroll = useRef(0)
-  const scrollThreshold = 600
+  const prefersReducedMotion = useReducedMotion()
   const videoRef = useRef<HTMLVideoElement>(null)
-
-  const videos = ["/bg-video/1.mp4", "/bg-video/2.mp4"]
-
-  // Entrance animation - use transform for 60fps GPU animation
-
-  let windowInnerHeight = 0
-  useEffect(() => {
-    windowInnerHeight = window.innerHeight
-  })
-  const entranceOffset = useMotionValue(windowInnerHeight - 500)
-  // Scroll-based animation with spring for smoothness
-  const scrollProgressSpring = useSpring(0, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  })
-
-  // Transform to percentage for GPU-accelerated transform
-  const scrollOffset = useTransform(
-    scrollProgressSpring,
-    [0, 1],
-    ["0%", "-111%"]
-  ) // 50vh / 45vh ≈ 111%
 
   useEffect(() => {
     if (videoRef.current) {
@@ -55,212 +18,124 @@ export function HeroSection({ isLoaded = false }: HeroSectionProps) {
         .play()
         .catch((e) => console.log("Autoplay prevented:", e))
     }
-  }, [currentVideoIndex])
-
-  const handleVideoEnded = () => {
-    setCurrentVideoIndex((prev) => (prev + 1) % videos.length)
-  }
-
-  // Animate entrance when loaded - using Framer Motion's animate for 60fps
-  useEffect(() => {
-    if (isLoaded) {
-      const timeout = setTimeout(() => {
-        animate(entranceOffset, 0, {
-          duration: 1.8,
-          ease: [0.16, 1, 0.3, 1],
-        })
-      }, 400)
-
-      return () => clearTimeout(timeout)
-    }
-  }, [isLoaded, entranceOffset])
-
-  // Reset entrance offset on mount
-  useEffect(() => {
-    entranceOffset.set(-window.innerHeight - 500)
   }, [])
 
-  // Scroll detection
-  useEffect(() => {
-    const handleScroll = () => {
-      const scroll = window.scrollY
-
-      if (!hasLeftHero && scroll > window.innerHeight) {
-        setHasLeftHero(true)
-      }
-
-      if (hasLeftHero && scroll < 10) {
-        scrollProgressSpring.set(0)
-        accumulatedScroll.current = 0
-        window.heroStripProgress = 0
-        setHasLeftHero(false)
-        setTimeout(() => setIsLocked(true), 100)
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [hasLeftHero, scrollProgressSpring])
-
-  // Lenis control
-  useEffect(() => {
-    const lenis = window.lenis
-    if (!lenis) return
-    if (isLocked) lenis.stop()
-    else lenis.start()
-  }, [isLocked])
-
-  // Wheel handler
-  useEffect(() => {
-    if (!isLocked) return
-
-    const handleWheel = (e: WheelEvent) => {
-      if (!isLocked) return
-      e.preventDefault()
-
-      accumulatedScroll.current += e.deltaY
-      accumulatedScroll.current = Math.max(
-        0,
-        Math.min(scrollThreshold, accumulatedScroll.current)
-      )
-
-      const progress = accumulatedScroll.current / scrollThreshold
-      scrollProgressSpring.set(progress)
-      window.heroStripProgress = progress
-
-      if (progress >= 0.9) setIsLocked(false)
-    }
-
-    window.addEventListener("wheel", handleWheel, { passive: false })
-    return () => window.removeEventListener("wheel", handleWheel)
-  }, [isLocked, scrollProgressSpring])
-
   return (
-    <section id='home' ref={sectionRef} className='relative h-screen w-full'>
-      <div className='relative h-screen w-full overflow-hidden'>
-        {/* Video Background */}
-        <div className='absolute inset-0 bg-black'>
-          <motion.video
-            ref={videoRef}
-            autoPlay
-            muted
-            playsInline
-            preload='auto'
-            className='absolute inset-0 h-full w-full object-cover'
-            onEnded={handleVideoEnded}
-            src={videos[currentVideoIndex]}
-            initial={{ opacity: 0, scale: 1.3 }}
+    <section
+      id='home'
+      ref={sectionRef}
+      className='relative h-screen min-h-[700px] w-full overflow-hidden flex items-center justify-center'
+    >
+      {/* Video Background */}
+      <div className='absolute inset-0 z-0 bg-black'>
+        <motion.video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload='auto'
+          className='absolute inset-0 h-full w-full object-cover object-center hero-bg-image'
+          src="/bg-video/bg.mp4"
+          initial={{ opacity: 0, scale: 1.08 }}
+          animate={
+            isLoaded ? { opacity: 0.75, scale: 1 } : { opacity: 0, scale: 1.08 }
+          }
+          transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
+          style={{ willChange: "transform, opacity" }}
+        />
+
+        {/* Gradient overlay */}
+        <motion.div
+          className='absolute inset-0 bg-linear-to-b from-black/30 via-black/20 to-black/50'
+          initial={{ opacity: 0 }}
+          animate={isLoaded ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 2, delay: 0.8 }}
+        />
+
+        <div className='tactile-grain absolute inset-0 z-10 pointer-events-none' />
+      </div>
+
+      {/* Centered Hero Content */}
+      <div className='relative z-20 text-center text-white px-6 max-w-[92rem] mx-auto'>
+        {/* Eyebrow label */}
+        <div className='overflow-hidden mb-4'>
+          <motion.p
+            className='text-[10px] md:text-[11px] font-sans font-medium tracking-[0.2em] uppercase text-white/70'
+            initial={{ y: "100%", opacity: 0 }}
             animate={
-              isLoaded ? { opacity: 0.8, scale: 1 } : { opacity: 0, scale: 1.3 }
+              isLoaded ? { y: 0, opacity: 1 } : { y: "100%", opacity: 0 }
             }
-            transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 1.3 }}
             style={{ willChange: "transform, opacity" }}
-          />
-
-          {/* Gradient */}
-          <motion.div
-            className='absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent'
-            initial={{ opacity: 0 }}
-            animate={isLoaded ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 2, delay: 1 }}
-          />
-
-          {/* Hero Text */}
-          <div className='absolute bottom-8 left-6 md:left-12 max-w-4xl z-20 overflow-hidden'>
-            <div className='overflow-hidden'>
-              <motion.p
-                className='mb-4 text-[12px] font-sans font-medium tracking-widest uppercase text-white/80'
-                initial={{ y: "100%", opacity: 0 }}
-                animate={
-                  isLoaded ? { y: 0, opacity: 1 } : { y: "100%", opacity: 0 }
-                }
-                transition={{
-                  duration: 1.2,
-                  ease: [0.16, 1, 0.3, 1],
-                  delay: 1.5,
-                }}
-                style={{ willChange: "transform, opacity" }}
-              >
-                AFRICA, NIGERIA
-              </motion.p>
-            </div>
-
-            <div className='overflow-hidden'>
-              <motion.h2
-                className='font-serif text-4xl md:text-6xl lg:text-7xl text-white leading-[1.05] tracking-tight'
-                initial={{ y: "120%" }}
-                animate={isLoaded ? { y: 0 } : { y: "120%" }}
-                transition={{
-                  duration: 1.4,
-                  ease: [0.16, 1, 0.3, 1],
-                  delay: 1.7,
-                }}
-                style={{ willChange: "transform" }}
-              >
-                Engineering ideas into
-                <br />
-                <span className='italic text-white/90'>digital reality.</span>
-              </motion.h2>
-            </div>
-          </div>
+          >
+            Digital Creative Agency
+          </motion.p>
         </div>
 
-        {/* White Strip - GPU accelerated with transform */}
-        <motion.div
-          className='absolute top-0 left-0 right-0 z-10'
-          style={{
-            y: entranceOffset,
-            willChange: "transform",
-          }}
-        >
-          <motion.div
-            className='h-[45vh] bg-white/90 backdrop-blur-sm flex items-end justify-center overflow-hidden'
-            style={{
-              y: scrollOffset,
-              willChange: "transform",
-            }}
+        {/* Main heading */}
+        <div className='overflow-hidden mb-7'>
+          <motion.h1
+            className='font-display text-[clamp(3.9rem,12.4vw,12.5rem)] font-semibold tracking-[-0.035em] leading-[0.9] text-white'
+            initial={{ y: "120%" }}
+            animate={isLoaded ? { y: 0 } : { y: "120%" }}
+            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 1.5 }}
+            style={{ willChange: "transform" }}
           >
-            <motion.div
-              className='w-full relative flex items-end justify-center pointer-events-none overflow-hidden h-[40vh]'
-              style={{
-                transform: "translateY(20px)",
-                willChange: "transform, opacity",
-              }}
-              initial={{ scale: 1.5, opacity: 0 }}
-              animate={
-                isLoaded ? { scale: 1, opacity: 1 } : { scale: 1.5, opacity: 0 }
-              }
-              transition={{
-                duration: 1.5,
-                ease: [0.16, 1, 0.3, 1],
-                delay: 1.2,
-              }}
+            Ideas engineered
+            <br />
+            <span className='font-medium text-white'>
+              to perform.
+            </span>
+          </motion.h1>
+        </div>
+
+        {/* CTA Buttons */}
+        <motion.div
+          className='flex flex-col md:flex-row gap-3 justify-center items-center mt-1'
+          initial={{ opacity: 0, y: 20 }}
+          animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 1.9 }}
+          style={{ willChange: "transform, opacity" }}
+        >
+          <Magnetic>
+            <Link
+              to='/#projects'
+              className='tactile-press bg-white text-black px-7 py-3 border border-white text-[10px] font-semibold tracking-[0.2em] uppercase hover:bg-neutral-100 transition-colors'
             >
-              <svg
-                viewBox='0 0 100 20'
-                preserveAspectRatio='none'
-                className='w-full h-full'
-              >
-                <text
-                  x='50%'
-                  y='50%'
-                  textAnchor='middle'
-                  dominantBaseline='central'
-                  textLength='100'
-                  lengthAdjust='spacingAndGlyphs'
-                  fill='rgba(0, 0, 0, 0.1)'
-                  style={{
-                    fontFamily: 'Impact, "Arial Narrow Bold", sans-serif',
-                    fontSize: "20px",
-                  }}
-                >
-                  BLACK LOTUS
-                </text>
-              </svg>
-            </motion.div>
-          </motion.div>
+              View Our Work
+            </Link>
+          </Magnetic>
+          <Magnetic>
+            <Link
+              to='/#contact'
+              className='tactile-press text-white border border-white/60 px-7 py-3 text-[10px] font-semibold tracking-[0.2em] uppercase hover:border-white hover:bg-white/10 transition-colors'
+            >
+              Start a Project
+            </Link>
+          </Magnetic>
         </motion.div>
       </div>
+
+      {/* Bottom bar — location left, scroll right */}
+      <motion.div
+        className='absolute bottom-8 left-0 w-full flex justify-between px-6 md:px-12 text-white text-[10px] tracking-[0.2em] uppercase z-20 font-medium'
+        initial={{ opacity: 0 }}
+        animate={isLoaded ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 2.1 }}
+      >
+        <span>Africa, Nigeria</span>
+        <motion.span
+          animate={prefersReducedMotion ? undefined : { y: [0, 6, 0] }}
+          transition={
+            prefersReducedMotion
+              ? undefined
+              : { duration: 1.6, repeat: Infinity, ease: "easeInOut" }
+          }
+        >
+          Scroll
+        </motion.span>
+      </motion.div>
     </section>
   )
 }

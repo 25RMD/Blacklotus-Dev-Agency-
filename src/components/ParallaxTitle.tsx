@@ -19,7 +19,7 @@ export function ParallaxTitle() {
       </div>
       
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6">
-        <h2 className="text-[12vw] leading-[0.8] font-display font-bold text-center tracking-tighter text-black mix-blend-exclusion">
+        <h2 className="text-[12vw] leading-[0.8] font-serif font-bold text-center tracking-tighter text-black mix-blend-exclusion">
           CREATIVE<br />GIANTS
         </h2>
         

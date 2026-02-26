@@ -28,7 +28,7 @@ ${details}
     }
 
     return (
-        <section id="contact" className="w-full bg-[#fdfdfc] py-24 md:py-32">
+        <section id="contact" className="w-full bg-black py-24 md:py-32">
             <div className="max-w-[90rem] mx-auto px-6 md:px-12 lg:px-16">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-32">
 
@@ -38,7 +38,7 @@ ${details}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="text-xs font-mono uppercase tracking-widest text-black mb-2"
+                            className="text-[10px] font-sans font-medium uppercase tracking-[0.2em] text-white/75 mb-2"
                         >
                             GET IN TOUCH
                         </motion.span>
@@ -48,7 +48,7 @@ ${details}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.1 }}
-                            className="text-7xl md:text-8xl lg:text-9xl font-normal tracking-tighter text-black leading-[0.9] -ml-1"
+                            className="text-[clamp(3.4rem,9.4vw,8.5rem)] font-display font-semibold tracking-[-0.03em] text-white leading-[0.9] -ml-1"
                         >
                             Speak to us.
                         </motion.h2>
@@ -58,7 +58,7 @@ ${details}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.2 }}
-                            className="text-base text-zinc-500 max-w-xs leading-relaxed mt-4"
+                            className="text-sm text-zinc-400 max-w-sm leading-relaxed mt-3"
                         >
                             If you want to start a project, share an idea or simply say hi, we want to hear from you.
                         </motion.p>
@@ -76,12 +76,12 @@ ${details}
                                     transition={{ delay: 0.3 }}
                                     className="group relative"
                                 >
-                                    <label className="block text-xs text-zinc-400 mb-2">First name</label>
+                                    <label className="block text-[10px] uppercase tracking-[0.16em] text-zinc-500 mb-2">First name</label>
                                     <input
                                         name="firstName"
                                         type="text"
                                         placeholder="Emma"
-                                        className="w-full text-2xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black"
+                                        className="w-full text-2xl md:text-4xl pb-4 border-b border-zinc-800 bg-transparent outline-none focus:border-white transition-colors placeholder:text-white/90 font-medium tracking-[-0.02em] text-white"
                                     />
                                 </motion.div>
                                 <motion.div 
@@ -91,12 +91,12 @@ ${details}
                                     transition={{ delay: 0.4 }}
                                     className="group relative"
                                 >
-                                    <label className="block text-xs text-zinc-400 mb-2">Last name</label>
+                                    <label className="block text-[10px] uppercase tracking-[0.16em] text-zinc-500 mb-2">Last name</label>
                                     <input
                                         name="lastName"
                                         type="text"
                                         placeholder="Lewis"
-                                        className="w-full text-2xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black"
+                                        className="w-full text-2xl md:text-4xl pb-4 border-b border-zinc-800 bg-transparent outline-none focus:border-white transition-colors placeholder:text-white/90 font-medium tracking-[-0.02em] text-white"
                                     />
                                 </motion.div>
                             </div>
@@ -110,12 +110,12 @@ ${details}
                                     transition={{ delay: 0.5 }}
                                     className="group relative"
                                 >
-                                    <label className="block text-xs text-zinc-400 mb-2">Email Address</label>
+                                    <label className="block text-[10px] uppercase tracking-[0.16em] text-zinc-500 mb-2">Email Address</label>
                                     <input
                                         name="email"
                                         type="email"
                                         placeholder="emma@email.com"
-                                        className="w-full text-2xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black"
+                                        className="w-full text-2xl md:text-4xl pb-4 border-b border-zinc-800 bg-transparent outline-none focus:border-white transition-colors placeholder:text-white/90 font-medium tracking-[-0.02em] text-white"
                                     />
                                 </motion.div>
                                 <motion.div 
@@ -125,12 +125,12 @@ ${details}
                                     transition={{ delay: 0.6 }}
                                     className="group relative"
                                 >
-                                    <label className="block text-xs text-zinc-400 mb-2">Phone number</label>
+                                    <label className="block text-[10px] uppercase tracking-[0.16em] text-zinc-500 mb-2">Phone number</label>
                                     <input
                                         name="phone"
                                         type="tel"
                                         placeholder="+234"
-                                        className="w-full text-2xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black"
+                                        className="w-full text-2xl md:text-4xl pb-4 border-b border-zinc-800 bg-transparent outline-none focus:border-white transition-colors placeholder:text-white/90 font-medium tracking-[-0.02em] text-white"
                                     />
                                 </motion.div>
                             </div>
@@ -143,12 +143,12 @@ ${details}
                                 transition={{ delay: 0.7 }}
                                 className="group relative"
                             >
-                                <label className="block text-xs text-zinc-400 mb-2">Project details</label>
+                                <label className="block text-[10px] uppercase tracking-[0.16em] text-zinc-500 mb-2">Project details</label>
                                 <textarea
                                     name="details"
                                     placeholder="Tell us about your project..."
                                     rows={1}
-                                    className="w-full text-2xl md:text-5xl pb-4 border-b border-zinc-200 bg-transparent outline-none focus:border-black transition-colors placeholder:text-black font-light tracking-tight text-black resize-none"
+                                    className="w-full text-2xl md:text-4xl pb-4 border-b border-zinc-800 bg-transparent outline-none focus:border-white transition-colors placeholder:text-white/90 font-medium tracking-[-0.02em] text-white resize-none"
                                     onInput={(e) => {
                                         e.currentTarget.style.height = 'auto';
                                         e.currentTarget.style.height = e.currentTarget.scrollHeight + 'px';
@@ -166,10 +166,10 @@ ${details}
                             >
                                 <button
                                     type="submit"
-                                    className="bg-black text-white pl-8 pr-2 py-2 rounded-full flex items-center gap-6 text-xs font-bold tracking-widest hover:bg-zinc-800 transition-colors group h-14"
+                                    className="bg-white text-black pl-8 pr-2 py-2 rounded-none border border-white flex items-center gap-6 text-[10px] font-semibold tracking-[0.2em] uppercase hover:bg-zinc-200 transition-colors group h-14"
                                 >
                                     SEND ENQUIRY
-                                    <span className="bg-white text-black rounded-full w-10 h-10 flex items-center justify-center group-hover:rotate-45 transition-transform duration-300">
+                                    <span className="bg-black text-white rounded-full w-10 h-10 flex items-center justify-center group-hover:rotate-45 transition-transform duration-300">
                                         <ArrowUpRight className="w-4 h-4" />
                                     </span>
                                 </button>

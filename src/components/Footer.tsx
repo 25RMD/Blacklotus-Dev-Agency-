@@ -1,74 +1,46 @@
 import { useRef } from "react"
 import gsap from "gsap"
-import { ArrowUpRight, Instagram, Facebook } from "lucide-react"
+import { ArrowUpRight, Instagram, Facebook, ArrowRight } from "lucide-react"
 import { useHandleNavigation, menuItems } from "./OverlayMenu"
+import { BallpitBackground } from "./BallpitBackground"
+
+// ── Animated nav link with color sweep ──
 const FooterNavItem = ({
   label,
   href,
   onClick,
-  index,
-  total,
-  color,
 }: {
   label: string
   href: string
   onClick: (e: React.MouseEvent) => void
-  index: number
-  total: number
-  color: string
 }) => {
-  const bgRef = useRef<HTMLDivElement>(null)
-  const textRef = useRef<HTMLSpanElement>(null)
+  const lineRef = useRef<HTMLDivElement>(null)
   const iconRef = useRef<SVGSVGElement>(null)
 
   const handleMouseEnter = () => {
-    gsap.to(bgRef.current, { y: "0%", duration: 0.6, ease: "power4.out" })
-    gsap.to(textRef.current, { color: "black", duration: 0.3 })
-    gsap.to(iconRef.current, { color: "black", x: 4, y: -4, duration: 0.3 })
+    gsap.to(lineRef.current, { scaleX: 1, duration: 0.4, ease: "power3.out" })
+    gsap.to(iconRef.current, { x: 4, duration: 0.3, ease: "power3.out" })
   }
 
   const handleMouseLeave = () => {
-    gsap.to(bgRef.current, { y: "100%", duration: 0.6, ease: "power4.in" })
-    gsap.to(textRef.current, { color: "white", duration: 0.3 })
-    gsap.to(iconRef.current, { color: "#71717a", x: 0, y: 0, duration: 0.3 })
+    gsap.to(lineRef.current, { scaleX: 0, duration: 0.4, ease: "power3.in" })
+    gsap.to(iconRef.current, { x: 0, duration: 0.3, ease: "power3.in" })
   }
-
-  const borderOpacity = 0.5 * (1 - index / (total - 1))
 
   return (
     <a
       href={href}
       onClick={onClick}
-      className='relative flex items-center justify-between px-6 md:px-10 py-6 overflow-hidden block'
+      className="group relative flex items-center gap-2 text-[13px] tracking-[-0.01em] text-white/65 hover:text-white transition-colors duration-300"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Color Sweep Background */}
+      <ArrowUpRight ref={iconRef} className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+      <span>{label}</span>
       <div
-        ref={bgRef}
-        className='absolute inset-0 w-full h-full z-0'
-        style={{ backgroundColor: color, transform: "translateY(100%)" }}
-      />
-
-      {/* Fading border effect */}
-      {borderOpacity > 0 && (
-        <div
-          className='absolute bottom-0 left-0 right-0 h-px z-10'
-          style={{
-            background: `linear-gradient(to right, rgba(255, 255, 255, ${borderOpacity}) 0%, rgba(255, 255, 255, ${borderOpacity}) 20%, rgba(255, 255, 255, 0) 100%)`,
-          }}
-        />
-      )}
-
-      <span
-        ref={textRef}
-        className='text-sm md:text-base font-medium tracking-wide relative z-10 text-white uppercase'
-      >
-        {label}
-      </span>
-      <ArrowUpRight
-        ref={iconRef}
-        className='w-4 h-4 text-zinc-500 relative z-10'
+        ref={lineRef}
+        className="absolute -bottom-0.5 left-5 right-0 h-px bg-white origin-left"
+        style={{ transform: "scaleX(0)" }}
       />
     </a>
   )
@@ -80,135 +52,162 @@ export function Footer({
   onOpenPrivacy?: () => void
 }) {
   const handleNavigation = useHandleNavigation()
+  const ctaRef = useRef<HTMLAnchorElement>(null)
+
   return (
-    <footer className='w-full bg-black text-white relative overflow-hidden border-t border-white/20'>
-      {/* Top Section - Compact Grid */}
-      <div className='w-full grid grid-cols-1 lg:grid-cols-3'>
-        {/* COLUMN 1: Brand & Info */}
-        <div className='relative flex flex-col justify-between p-6 md:p-10'>
-          <div className='hidden lg:block absolute right-0 top-0 h-full w-px bg-gradient-to-b from-white/20 to-transparent' />
-          <div className='space-y-6'>
-            <div className='flex items-start gap-4'>
-              <img
-                src='/BL-logo.jpg'
-                alt='Black Lotus'
-                className='w-8 h-8 rounded-full object-contain'
-              />
-              <div className='text-xs font-bold uppercase leading-tight tracking-wide mt-1'>
-                WEB & SOFTWARE SOLUTIONS <br />
-                <span className='text-zinc-500'>DIGITAL TRANSFORMATION</span>
+    <footer className="relative w-full text-white overflow-hidden bg-black">
+      {/* ── Ballpit fills the ENTIRE footer as background ── */}
+      <div className="absolute inset-0 z-0">
+        <BallpitBackground
+          count={80}
+          colors={["#ffffff", "#3B82F6", "#a78bfa", "#94A3B8", "#e2e8f0"]}
+          gravity={0.4}
+          friction={0.998}
+          followCursor={true}
+          minSize={0.4}
+          maxSize={0.9}
+          lightIntensity={180}
+        />
+      </div>
+
+      {/* Dark overlay so text stays legible over balls */}
+      <div className="absolute inset-0 z-10 bg-black/50 pointer-events-none" />
+
+      {/* All content layers above the ballpit */}
+      <div className="relative z-20">
+
+        {/* ── Info Grid ── */}
+        <div className="border-t border-white/10">
+          <div className="max-w-7xl mx-auto px-6 md:px-12 py-14 md:py-20">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8">
+              {/* Brand */}
+              <div className="space-y-5">
+                <div className="flex items-center gap-3">
+                  <img
+                    src="/BL-logo.jpg"
+                    alt="Black Lotus"
+                    className="w-7 h-7 rounded-full object-contain"
+                  />
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.16em]">
+                    Black Lotus
+                  </span>
+                </div>
+                <p className="text-white/50 text-[13px] leading-relaxed max-w-[280px]">
+                  Premium web & software development agency. Engineering ideas
+                  into digital reality.
+                </p>
+                <div className="flex gap-3 pt-1">
+                  <a
+                    href="https://www.instagram.com/blacklotusdev"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-full border border-white/20 hover:border-white/50 hover:bg-white/10 transition-all"
+                  >
+                    <Instagram className="w-3.5 h-3.5 text-white/60" />
+                  </a>
+                  <a
+                    href="https://www.facebook.com/share/1BooF4RPbd/?mibextid=wwXIfr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-full border border-white/20 hover:border-white/50 hover:bg-white/10 transition-all"
+                  >
+                    <Facebook className="w-3.5 h-3.5 text-white/60" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Navigation */}
+              <div className="space-y-4">
+                <h4 className="text-[10px] uppercase tracking-[0.18em] text-white/35 font-medium mb-5">
+                  Navigation
+                </h4>
+                <nav className="flex flex-col gap-3">
+                  {menuItems.map((item, i) => (
+                    <FooterNavItem
+                      key={i}
+                      label={item.label}
+                      href={item.id}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        handleNavigation(item.id)
+                      }}
+                    />
+                  ))}
+                </nav>
+              </div>
+
+              {/* Contact */}
+              <div className="space-y-4">
+                <h4 className="text-[10px] uppercase tracking-[0.18em] text-white/35 font-medium mb-5">
+                  Contact
+                </h4>
+                <div className="flex flex-col gap-3 text-[13px] text-white/55">
+                  <span>Africa, Nigeria</span>
+                  <a
+                    href="mailto:blacklotusenquiry@gmail.com"
+                    className="text-white/70 hover:text-white transition-colors break-all"
+                  >
+                    blacklotusenquiry@gmail.com
+                  </a>
+                </div>
+              </div>
+
+              {/* Services */}
+              <div className="space-y-4">
+                <h4 className="text-[10px] uppercase tracking-[0.18em] text-white/35 font-medium mb-5">
+                  Services
+                </h4>
+                <div className="flex flex-col gap-3 text-[13px] text-white/45">
+                  <span>Web Development</span>
+                  <span>Software Engineering</span>
+                  <span>UI/UX Design</span>
+                  <span>Cloud & DevOps</span>
+                </div>
               </div>
             </div>
-
-            <p className='text-zinc-400 text-xs leading-relaxed max-w-xs pt-2'>
-              We are a premium web and software development agency dedicated to
-              engineering ideas into digital reality. We build high-performance,
-              scalable solutions for modern businesses.
-            </p>
           </div>
 
-          <div className='mt-12 space-y-4'>
-            <div className='text-zinc-400 text-xs space-y-1'>
-              <p>AFRICA, NIGERIA</p>
-              <a
-                href='mailto:blacklotusenquiry@gmail.com'
-                className='text-white hover:underline transition-all'
-              >
-                blacklotusenquiry@gmail.com
-              </a>
-            </div>
-            <div className='flex gap-4'>
-              <a
-                href='https://www.instagram.com/blacklotusdev'
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                <Instagram className='w-4 h-4 text-zinc-500 hover:text-white transition-colors cursor-pointer' />
-              </a>
-              <a
-                href='https://www.facebook.com/share/1BooF4RPbd/?mibextid=wwXIfr'
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                <Facebook className='w-4 h-4 text-zinc-500 hover:text-white transition-colors cursor-pointer' />
-              </a>
+          {/* ── Bottom Bar ── */}
+          <div className="border-t border-white/10">
+            <div className="max-w-7xl mx-auto px-6 md:px-12 py-5 flex flex-col md:flex-row justify-between items-center gap-4">
+              <span className="text-[10px] font-sans font-medium uppercase tracking-[0.16em] text-white/35">
+                © {new Date().getFullYear()} Black Lotus Development Agency Ltd
+              </span>
+              <span className="text-[10px] font-sans font-medium uppercase tracking-[0.16em] text-white/35">
+                Designed & Built by Us
+              </span>
             </div>
           </div>
         </div>
 
-        {/* COLUMN 2: Navigation */}
-        <div className='relative flex flex-col'>
-          <div className='hidden lg:block absolute right-0 top-0 h-full w-px bg-gradient-to-b from-white/20 to-transparent' />
-          {menuItems.map((item, i, arr) => (
-            <FooterNavItem
-              key={i}
-              label={item.label}
-              href={item.id}
-              onClick={(e) => {
-                e.preventDefault()
-                handleNavigation(item.id)
-              }}
-              index={i}
-              total={arr.length}
-              color={
-                [
-                  "#FF00FF",
-
-                  "#FFAA00",
-                  "#00FFFF",
-
-                  "#FFFF00",
-                  "#ca3c25",
-
-                  "#00FF00",
-                  "#ea526f",
-                ][i]
-              }
-            />
-          ))}
-        </div>
-
-        {/* COLUMN 3: CTA & Copyright */}
-        <div className='flex flex-col justify-between p-6 md:p-10'>
-          <div className='max-w-md'>
-            <h3 className='text-2xl md:text-3xl font-light leading-[1.1] mb-4 tracking-tight'>
-              Ready to kick start a discovery session?
-            </h3>
-            <p className='text-zinc-400 text-xs leading-relaxed'>
-              Share your ideas with us, and we'll begin turning your vision into
-              reality today.
-            </p>
-          </div>
-
-          <div className='flex justify-between items-end mt-12 text-[10px] font-mono uppercase tracking-widest text-zinc-500'>
-            <span>BLACK LOTUS DEVELOPMENT AGENCY LTD 2025 ©</span>
-            <span>WEBSITE BY US</span>
-          </div>
-        </div>
-      </div>
-      {/* Massive Bottom Text - scaled to exactly fill its container */}
-      <div className='w-full relative flex items-end justify-center pointer-events-none overflow-hidden -mt-2 h-[40vh]'>
-        <svg
-          viewBox='0 0 100 20'
-          preserveAspectRatio='none'
-          className='w-full h-full'
-        >
-          <text
-            x='50%'
-            y='50%'
-            textAnchor='middle'
-            dominantBaseline='central'
-            textLength='100'
-            lengthAdjust='spacingAndGlyphs'
-            fill='white'
-            style={{
-              fontFamily: 'Impact, "Arial Narrow Bold", sans-serif',
-              fontSize: "20px",
-            }}
+        {/* ── Massive Bottom Text ── */}
+        <div className="w-full pointer-events-none overflow-hidden h-[30vh] md:h-[35vh]">
+          <svg
+            viewBox="0 0 100 20"
+            preserveAspectRatio="none"
+            className="w-full h-full"
           >
-            BLACK LOTUS
-          </text>
-        </svg>
+            <text
+              x="50%"
+              y="50%"
+              textAnchor="middle"
+              dominantBaseline="central"
+              textLength="100"
+              lengthAdjust="spacingAndGlyphs"
+              fill="white"
+              fillOpacity="1"
+              style={{
+                fontFamily: '"Poppins", "Area Normal", sans-serif',
+                fontWeight: 600,
+                fontSize: "20px",
+                letterSpacing: "-0.04em",
+              }}
+            >
+              BLACK LOTUS
+            </text>
+          </svg>
+        </div>
+
       </div>
     </footer>
   )

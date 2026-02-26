@@ -103,7 +103,7 @@ export function OverlayMenu({
                     },
                     opacity: { duration: 0.5 },
                   }}
-                  className='group flex items-center gap-4 text-5xl md:text-7xl 2xl:text-8xl font-sans font-normal tracking-tight cursor-pointer'
+                  className='group flex items-center gap-4 text-5xl md:text-7xl 2xl:text-8xl font-serif font-normal tracking-tight cursor-pointer'
                   onMouseEnter={() => setHoveredItem(item.label)}
                   onClick={(e) => {
                     e.preventDefault()

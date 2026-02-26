@@ -49,22 +49,22 @@ export function Testimonials() {
   }
 
   return (
-    <section id="testimonials" className="w-full bg-white min-h-screen py-8 flex flex-col overflow-hidden">
+    <section id="testimonials" className="w-full bg-black min-h-screen py-8 flex flex-col overflow-hidden">
       {/* Header with consistent padding */}
       <div className="flex justify-between items-center px-6 md:px-12 lg:px-16 mb-6 relative z-10">
-        <span className="text-xs font-mono uppercase tracking-widest text-black">
+        <span className="text-xs font-mono uppercase tracking-widest text-white">
           Testimonials
         </span>
         <div className="flex gap-2">
           <button
             onClick={() => scrollTo('prev')}
-            className="w-10 h-10 rounded-full border border-black/20 flex items-center justify-center hover:bg-black hover:text-white transition-colors"
+            className="w-10 h-10 rounded-full border border-white/20 text-white flex items-center justify-center hover:bg-white hover:text-black transition-colors"
           >
             ←
           </button>
           <button
             onClick={() => scrollTo('next')}
-            className="w-10 h-10 rounded-full border border-black/20 flex items-center justify-center hover:bg-black hover:text-white transition-colors"
+            className="w-10 h-10 rounded-full border border-white/20 text-white flex items-center justify-center hover:bg-white hover:text-black transition-colors"
           >
             →
           </button>

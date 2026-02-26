@@ -32,7 +32,7 @@ export function VideoHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
         >
-          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl text-white leading-tight">
+          <h1 className="font-display text-4xl md:text-6xl lg:text-7xl text-white leading-tight">
             Production, design, <br />
             and the art of the possible.
           </h1>

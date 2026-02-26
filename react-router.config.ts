@@ -1,5 +1,6 @@
 import type { Config } from "@react-router/dev/config"
 import fs from "node:fs"
+import { projects } from "./src/lib/projects"
 
 export default {
   ssr: false,
@@ -11,6 +12,12 @@ export default {
       .readdirSync("./src/content/posts")
       .filter((file) => file.endsWith(".md"))
     // Tell React Router to generate a static HTML page for each post
-    return ["/", "/blog", ...posts.map((p) => `/blog/${p.replace(".md", "")}`)]
+    return [
+      "/",
+      "/projects",
+      "/blog",
+      ...posts.map((p) => `/blog/${p.replace(".md", "")}`),
+      ...projects.map((p) => `/projects/${p.id}`)
+    ]
   },
 } satisfies Config

@@ -53,10 +53,10 @@ export function Navbar({ isMenuOpen, onToggleMenu }: NavbarProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="flex flex-col text-[9px] md:text-[11px] leading-tight font-medium uppercase tracking-wide text-black"
+              className="flex flex-col text-[9px] md:text-[10px] leading-tight font-medium uppercase tracking-[0.16em] text-white"
             >
               <span>Web & Software Solutions</span>
-              <span className="text-black/70">Digital Transformation</span>
+              <span className="text-white/70">Digital Transformation</span>
             </motion.div>
           )}
         </AnimatePresence>
@@ -65,9 +65,9 @@ export function Navbar({ isMenuOpen, onToggleMenu }: NavbarProps) {
       {/* Menu Button */}
       <button
         onClick={onToggleMenu}
-        className={`pointer-events-auto relative overflow-hidden rounded-full px-8 py-3 text-sm font-medium transition-all duration-500 w-[110px] ${isMenuOpen
-            ? 'bg-white text-black'
-            : 'bg-black text-white border border-white/10 hover:bg-zinc-900'
+        className={`pointer-events-auto relative overflow-hidden rounded-none px-7 py-3 text-[11px] font-medium tracking-[0.16em] uppercase transition-all duration-500 w-[116px] border ${isMenuOpen
+            ? 'bg-black text-white'
+          : 'bg-white text-black border-black/15 hover:bg-zinc-100'
           }`}
       >
         <div className="relative h-5 w-full">

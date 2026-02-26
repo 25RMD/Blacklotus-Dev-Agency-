@@ -4,11 +4,11 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Switzer", "Inter", "system-ui", "sans-serif"],
-        serif: ["Switzer", "Inter", "system-ui", "sans-serif"],
-        display: ["Switzer", "Inter", "system-ui", "sans-serif"],
-        impact: ["Switzer", "Inter", "system-ui", "sans-serif"],
-        mono: ["Switzer", "Inter", "system-ui", "sans-serif"],
+        sans: ["Area Normal", "Inter", "system-ui", "sans-serif"],
+        serif: ["Bodoni Moda", "serif"],
+        display: ["Poppins", "sans-serif"],
+        impact: ["Bodoni Moda", "serif"],
+        mono: ["JetBrains Mono", "monospace"],
       },
       colors: {
         "off-black": "#111111",

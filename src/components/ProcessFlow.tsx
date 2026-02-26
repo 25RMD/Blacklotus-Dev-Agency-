@@ -15,7 +15,7 @@ export function ProcessFlow() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-semibold tracking-tight mb-16 text-center text-white"
+          className="text-4xl md:text-5xl font-serif font-semibold tracking-tight mb-16 text-center text-white"
         >
           How It Works
         </motion.h2>

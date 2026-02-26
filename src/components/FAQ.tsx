@@ -27,7 +27,7 @@ export function FAQ() {
   return (
     <section className="w-full py-24 px-6 bg-black/80 backdrop-blur-sm">
       <div className="max-w-3xl mx-auto">
-      <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mb-12 text-center text-white">Frequently Asked Questions</h2>
+      <h2 className="text-4xl md:text-5xl font-serif font-semibold tracking-tight mb-12 text-center text-white">Frequently Asked Questions</h2>
       
       <div className="space-y-4">
         {faqs.map((faq, i) => (

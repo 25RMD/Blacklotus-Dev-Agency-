@@ -1,53 +1,20 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
-/* Switzer Font - from Creative Giants */
-@font-face {
-  font-family: "Switzer";
-  src: url("https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb977efde095c9ce551dd_Switzer-Regular.woff2")
-    format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+@keyframes slowDrift {
+  0% { transform: scale(1) translate(0, 0); }
+  50% { transform: scale(1.05) translate(-1%, -1%); }
+  100% { transform: scale(1) translate(0, 0); }
 }
 
-@font-face {
-  font-family: "Switzer";
-  src: url("https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abbacd113fcc08efe66918_Switzer-Light.woff")
-    format("woff");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Switzer";
-  src: url("https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb977e5f5d00647df12b7_Switzer-Medium.woff2")
-    format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Switzer";
-  src: url("https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb9770a14b6e6d06a8ddb_Switzer-Semibold.woff2")
-    format("woff2");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Switzer";
-  src: url("https://cdn.prod.website-files.com/678fc13a6195245eefbb1f34/67abb9778041c4a0e5ae1faf_Switzer-Bold.woff2")
-    format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
+.hero-bg-image {
+  animation: slowDrift 20s ease-in-out infinite;
+  /* Add a dark overlay to ensure text readability */
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.6); 
 }
 
 /* Video Text Mask Styles */
@@ -93,6 +60,55 @@
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+@keyframes tactile-grain-shift {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-2%, 2%);
+  }
+  50% {
+    transform: translate(1.5%, -1.5%);
+  }
+  75% {
+    transform: translate(2.5%, 1%);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.tactile-grain {
+  opacity: 0.09;
+  mix-blend-mode: soft-light;
+}
+
+.tactile-grain::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background-image: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.85) 0.7px, transparent 0.8px),
+    radial-gradient(circle at 75% 30%, rgba(255, 255, 255, 0.7) 0.7px, transparent 0.8px),
+    radial-gradient(circle at 40% 70%, rgba(255, 255, 255, 0.8) 0.7px, transparent 0.8px);
+  background-size: 3px 3px, 4px 4px, 5px 5px;
+  animation: tactile-grain-shift 9s steps(7) infinite;
+}
+
+.tactile-press {
+  transform: translateZ(0);
+  transition: transform 140ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tactile-press:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tactile-grain::before {
+    animation: none;
+  }
 }
 
 :root {
@@ -167,9 +183,10 @@
 }
 
 @theme inline {
-  --font-sans: "Switzer", "Inter", system-ui, sans-serif;
-  --font-serif: "Switzer", "Inter", system-ui, sans-serif;
-  --font-mono: "Switzer", "Inter", system-ui, sans-serif;
+  --font-sans: "Area Normal", "Inter", system-ui, sans-serif;
+  --font-serif: "Bodoni Moda", serif;
+  --font-display: "Poppins", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -214,7 +231,7 @@
   }
   body {
     @apply bg-white text-[#111111] antialiased;
-    font-family: "Switzer", "Inter", system-ui, sans-serif;
+    font-family: "Area Normal", "Inter", system-ui, sans-serif;
   }
   h1,
   h2,
@@ -223,6 +240,6 @@
   h5,
   h6 {
     @apply tracking-tight;
-    font-family: "Switzer", "Inter", system-ui, sans-serif;
+    font-family: "Bodoni Moda", serif;
   }
 }

@@ -1,4 +1,5 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router"
+import { AudioPlayer } from "./components/AudioPlayer"
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -42,6 +43,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
+        <AudioPlayer />
         <ScrollRestoration />
         <Scripts />
       </body>

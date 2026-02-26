@@ -68,7 +68,7 @@ export function TerminalHero() {
           <p className="font-mono text-sm tracking-widest text-cyan-300/90 mb-6 uppercase font-medium">
             Web Development Agency
           </p>
-          <h1 className="text-5xl md:text-7xl font-medium tracking-tighter text-balance text-white">
+          <h1 className="text-5xl md:text-7xl font-display font-medium tracking-tighter text-balance text-white">
             We build websites and apps that help your business grow.
           </h1>
           <p className="text-xl text-zinc-400 mt-8 max-w-2xl leading-relaxed">

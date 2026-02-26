@@ -4,9 +4,9 @@ import { Navbar } from "../components/Navbar"
 import { OverlayMenu } from "../components/OverlayMenu"
 import { HeroSection } from "../components/HeroSection"
 import { WhatWeDo } from "../components/WhatWeDo"
+import { HowWeDo } from "../components/HowWeDo"
 import { ProjectSlider } from "../components/ProjectSlider"
 import { CurtainReveal } from "../components/CurtainReveal"
-import { Testimonials } from "../components/Testimonials"
 import { GetInTouch } from "../components/GetInTouch"
 import { Footer } from "../components/Footer"
 import { SmoothScroll } from "../components/SmoothScroll"
@@ -21,9 +21,9 @@ function App() {
       <Layout>
         <HeroSection isLoaded={!isLoading} />
         <WhatWeDo />
+        <HowWeDo />
         <ProjectSlider />
         <CurtainReveal />
-        <Testimonials />
         <GetInTouch />
       </Layout>
       {/* Loading screen - slides up to reveal content */}

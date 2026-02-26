@@ -42,7 +42,7 @@ export function TechStack() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="text-4xl md:text-5xl font-semibold tracking-tight text-white"
+          className="text-4xl md:text-5xl font-serif font-semibold tracking-tight text-white"
         >
           Built with the best technology.
         </motion.h2>

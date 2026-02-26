@@ -1,137 +1,211 @@
-import { useRef, useState } from 'react'
-import { motion, useScroll, useTransform, useMotionValueEvent, MotionValue, useSpring } from 'framer-motion'
+import { useRef, useEffect, useCallback, useState } from 'react'
+import { Link } from 'react-router'
+import { projects } from '../lib/projects'
 
-const projects = [
-  {
-    id: "01",
-    title: "EE Wellness Hub",
-    client: "EE Wellness Hub",
-    year: "2024",
-    role: "Full-Stack Website & App",
-    description: "A complete digital ecosystem including a website and mobile app for EE Wellness Hub. (eewellnesshub.com)",
-    img: "/projects/wellness.jpeg"
-  },
-  {
-    id: "02",
-    title: "MAGA Foundation",
-    client: "Making Africa Great Again",
-    year: "2024",
-    role: "Full-Stack Website",
-    description: "A fullstack website for an NGO focused on empowering African communities. (makingafricagreatagain.org)",
-    img: "/projects/ng.jpeg"
-  },
-  {
-    id: "03",
-    title: "King Royal Events",
-    client: "King Royal Events",
-    year: "2024",
-    role: "Full-Stack Website",
-    description: "A fullstack website for an event center located in Maiduguri. (kingroyal-events.com)",
-    img: "/projects/event.jpeg"
-  }
-]
+const CARD_W = 220
+const CARD_H = 300
+const CARD_SPACING = 240
 
 export function ProjectSlider() {
-  const targetRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const scrollValRef = useRef({ current: 0 })
+  const rafRef = useRef<number>(0)
+  const [cardTransforms, setCardTransforms] = useState<
+    { x: number; z: number; rotateY: number; opacity: number; visible: boolean; index: number }[]
+  >([])
   const [currentIndex, setCurrentIndex] = useState(1)
 
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-  })
+  const totalWidth = projects.length * CARD_SPACING
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const isHoveredRef = useRef(false)
 
-  // Add delay: first 10% and last 10% are dead zones
-  const xRaw = useTransform(scrollYProgress, [0.1, 0.9], [0, -(projects.length - 1) * 100])
-  const xSpring = useSpring(xRaw, { stiffness: 100, damping: 30, restDelta: 0.001 })
-  const x = useTransform(xSpring, (value) => `${value}vw`)
+  // Track continuous scroll velocity multiplier
+  const velocityMultiplier = useRef(1)
 
-  const progressScale = useTransform(scrollYProgress, [0.1, 0.9], [0, 1])
-  const yFooter = useTransform(scrollYProgress, [0, 1], [0, -20])
+  useEffect(() => {
+    isHoveredRef.current = hoveredIndex !== null
+  }, [hoveredIndex])
 
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    const adjustedProgress = Math.max(0, Math.min(1, (latest - 0.1) / 0.8))
-    const rawIndex = Math.ceil(adjustedProgress * projects.length)
-    const index = Math.min(Math.max(rawIndex, 1), projects.length)
-    if (index !== currentIndex) setCurrentIndex(index)
-  })
+  // Increase speed when wheel scrolling
+  useEffect(() => {
+    const handleWheel = (e: WheelEvent) => {
+      // Scale scroll delta into a velocity multiplier (absolute value)
+      const additionalVelocity = Math.abs(e.deltaY) * 0.05
+      // Cap maximum velocity to prevent chaotic spins
+      velocityMultiplier.current = Math.min(velocityMultiplier.current + additionalVelocity, 12)
+    }
+
+    window.addEventListener('wheel', handleWheel, { passive: true })
+    return () => window.removeEventListener('wheel', handleWheel)
+  }, [])
+
+  const computeTransforms = useCallback((scrollPos: number) => {
+    const vw = typeof window !== 'undefined' ? window.innerWidth : 1200
+
+    return projects.map((_, i) => {
+      let vx = i * CARD_SPACING - scrollPos
+      // Infinite wrap
+      while (vx < -totalWidth / 2) vx += totalWidth
+      while (vx > totalWidth / 2) vx -= totalWidth
+
+      const visible = Math.abs(vx) < vw
+      const progress = vx / (vw / 1.5)
+      const clamped = Math.max(-1, Math.min(1, progress))
+      const z = -Math.pow(Math.abs(clamped), 2) * 500
+      const rotateY = clamped * 45
+      const opacity = Math.max(0, 1 - Math.pow(Math.abs(clamped), 2.5))
+
+      return { x: vx, z, rotateY, opacity, visible, index: i }
+    })
+  }, [totalWidth])
+
+  const animate = useCallback(() => {
+    const section = sectionRef.current
+    if (!section) {
+      rafRef.current = requestAnimationFrame(animate)
+      return
+    }
+
+    const sv = scrollValRef.current
+
+    // Decay the multiplier smoothly back to 1
+    if (velocityMultiplier.current > 1) {
+      velocityMultiplier.current += (1 - velocityMultiplier.current) * 0.05 // Ease factor
+    }
+
+    // Automatically advance unless hovered (hover respects the velocity to gracefully slow)
+    if (!isHoveredRef.current) {
+      sv.current += 1.5 * velocityMultiplier.current
+    }
+
+    const transforms = computeTransforms(sv.current)
+    setCardTransforms(transforms)
+
+    // Current focused index: find the tile closest to center (x = 0)
+    let bestDist = Infinity
+    let bestIdx = 0
+    transforms.forEach((t) => {
+      if (Math.abs(t.x) < bestDist) {
+        bestDist = Math.abs(t.x)
+        bestIdx = t.index
+      }
+    })
+    setCurrentIndex(bestIdx + 1)
+
+    rafRef.current = requestAnimationFrame(animate)
+  }, [computeTransforms])
+
+  useEffect(() => {
+    rafRef.current = requestAnimationFrame(animate)
+    return () => cancelAnimationFrame(rafRef.current)
+  }, [animate])
 
   return (
-    <section id="projects" ref={targetRef} className="relative h-[400vh] bg-black">
-      {/* Sticky container */}
-      <div className="sticky top-0 flex h-screen items-center overflow-x-clip overflow-y-visible">
-        {/* Horizontal sliding container */}
-        <motion.div style={{ x }} className="flex">
-          {projects.map((project, i) => (
-            <ProjectCard key={i} project={project} scrollYProgress={scrollYProgress} />
-          ))}
-        </motion.div>
-
-        {/* Bottom Footer Bar - constrained width */}
-        <motion.div
-          style={{ y: yFooter }}
-          className="absolute bottom-4 md:bottom-18 left-0 w-full z-50 px-6 md:px-16 pb-4 md:pb-8 flex justify-center"
-        >
-          <div className="w-full max-w-7xl">
-            {/* Progress bar acts as top divider */}
-            <div className="w-full h-px bg-white/20 mb-6">
-              <motion.div
-                style={{ scaleX: progressScale }}
-                className="h-full bg-white origin-left"
-              />
-            </div>
-
-            {/* Footer content */}
-            <div className="flex justify-between items-center text-white">
-              <div className="font-mono text-sm tracking-widest">
-                [{currentIndex}/{projects.length}]
-              </div>
-              <a href="#" className="flex items-center gap-2 group cursor-pointer uppercase font-medium tracking-widest text-sm hover:opacity-70 transition-opacity">
-                View All Projects
-                <span className="text-base group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform">↗</span>
-              </a>
-            </div>
+    <section id="projects" ref={sectionRef} className="relative bg-black select-none h-screen min-h-[700px] flex flex-col justify-center overflow-hidden w-full">
+      <div className="w-full flex flex-col justify-center overflow-hidden">
+        {/* Section header */}
+        <div className="px-6 md:px-16 mb-8 md:mb-12 max-w-7xl mx-auto w-full flex justify-between items-end">
+          <div>
+            <span className="block text-[10px] font-medium text-zinc-500 uppercase tracking-[0.2em] mb-2">
+              Selected Work
+            </span>
+            <h2 className="text-[clamp(2.4rem,6.8vw,6rem)] font-display font-semibold text-white tracking-[-0.03em] leading-[0.92]">
+              Projects
+            </h2>
           </div>
-        </motion.div>
+          <Link
+            to="/projects"
+            className="flex items-center gap-2 group cursor-pointer uppercase font-medium tracking-[0.16em] text-[11px] text-white hover:opacity-70 transition-opacity"
+          >
+            View All
+            <span className="text-base group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform">
+              ↗
+            </span>
+          </Link>
+        </div>
+
+        {/* 3D Gallery Viewport */}
+        <div
+          style={{ perspective: 1200 }}
+          className="relative w-full h-[50vh] md:h-[55vh] overflow-hidden flex items-center justify-center"
+        >
+          <div
+            className="relative w-full h-full"
+            style={{ transformStyle: 'preserve-3d' }}
+          >
+            {cardTransforms.map((ct) => {
+              if (!ct.visible) return null
+              const project = projects[ct.index]
+              const isHovered = hoveredIndex === ct.index
+              return (
+                <Link
+                  key={ct.index}
+                  to={`/projects/${project.id}`}
+                  onDragStart={(e) => e.preventDefault()}
+                  onMouseEnter={() => setHoveredIndex(ct.index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  className="absolute block cursor-pointer"
+                  style={{
+                    top: '50%',
+                    left: '50%',
+                    width: CARD_W,
+                    height: CARD_H,
+                    marginLeft: -CARD_W / 2,
+                    marginTop: -CARD_H / 2,
+                    transform: `translateX(${ct.x}px) translateZ(${ct.z}px) rotateY(${ct.rotateY}deg)`,
+                    opacity: ct.opacity,
+                    zIndex: Math.round((1 - Math.abs(ct.rotateY) / 45) * 100),
+                    willChange: 'transform, opacity',
+                    transition: isHovered ? 'box-shadow 0.3s ease' : 'none',
+                    pointerEvents: ct.visible ? 'auto' : 'none',
+                    boxShadow: isHovered
+                      ? '0 20px 60px rgba(0,0,0,0.5)'
+                      : '0 10px 40px rgba(0,0,0,0.2)',
+                  }}
+                >
+                  <img
+                    src={project.img}
+                    alt={project.title}
+                    className="w-full h-full object-cover rounded-sm"
+                    draggable={false}
+                  />
+                  {/* Overlay info on hover */}
+                  <div
+                    className="absolute inset-0 flex flex-col justify-end p-4 rounded-sm transition-opacity duration-300"
+                    style={{
+                      background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 60%)',
+                      opacity: isHovered ? 1 : 0,
+                    }}
+                  >
+                    <h3 className="text-white text-sm font-semibold tracking-wide">
+                      {project.title}
+                    </h3>
+                    <p className="text-zinc-400 text-[10px] uppercase tracking-[0.16em] mt-1">
+                      {project.tags.join(' · ')}
+                    </p>
+                  </div>
+                </Link>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* Bottom info bar */}
+        <div className="px-6 md:px-16 mt-8 max-w-7xl mx-auto w-full">
+          <div className="flex justify-between items-center text-white">
+            <span className="font-medium text-[11px] uppercase tracking-[0.16em] text-zinc-500">
+              [{currentIndex}/{projects.length}]
+            </span>
+            <Link
+              to="/projects"
+              className="flex items-center gap-2 group cursor-pointer uppercase font-medium tracking-[0.16em] text-[11px] hover:opacity-70 transition-opacity"
+            >
+              View All Projects
+              <span className="text-base group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform">↗</span>
+            </Link>
+          </div>
+        </div>
       </div>
     </section>
-  )
-}
-
-function ProjectCard({ project, scrollYProgress: _scrollYProgress }: { project: typeof projects[0], scrollYProgress: MotionValue<number> }) {
-  return (
-    <div className="relative h-screen w-screen flex-shrink-0 bg-black text-white flex items-start md:items-center justify-center pt-20 md:pt-0 p-6 pb-24 md:p-16 box-border">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-zinc-900/0 via-zinc-900/0 to-black/80 z-10 pointer-events-none" />
-
-      <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-center relative z-20">
-
-        {/* LEFT: Title - high z-index to appear above image */}
-        <div className="md:col-span-4 md:col-start-2 order-2 md:order-1 relative z-50 overflow-visible">
-          <span className="block text-xs font-mono text-zinc-400 mb-2 md:mb-4 uppercase tracking-widest">
-            project {project.id}
-          </span>
-          <h2 className="text-3xl md:text-6xl lg:text-7xl font-display font-bold leading-[0.9] tracking-tighter mb-3 md:mb-6 mix-blend-difference">
-            {project.title}
-          </h2>
-          <div className="h-px w-12 bg-white/30 my-3 md:my-6" />
-          <p className="text-zinc-400 text-sm md:text-base max-w-xs leading-relaxed">
-            {project.description}
-          </p>
-          <div className="mt-4 md:mt-8 flex gap-4">
-            <span className="px-3 py-1 border border-white/20 rounded-full text-xs uppercase tracking-wider">
-              {project.role}
-            </span>
-          </div>
-        </div>
-
-        {/* RIGHT: Image */}
-        <div className="md:col-span-6 order-1 md:order-2 relative h-[30vh] md:h-[70vh] w-full overflow-hidden rounded-sm">
-          <motion.img
-            src={project.img}
-            alt={project.title}
-            className="absolute inset-0 w-full h-full object-contain opacity-80 hover:opacity-100 transition-all duration-700"
-          />
-        </div>
-      </div>
-    </div>
   )
 }

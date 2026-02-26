@@ -27,13 +27,13 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
     <BlogLayout>
       <div className='grid grid-cols-1 relative'>
         <div className='mx-auto'>
-          <article className='px-2 prose prose-lg max-w-screen prose-pre:bg-background  lg:max-w-3xl lg:px-6 py-20 prose-headings:font-bold prose-headings:tracking-tighter prose-img:rounded-xl prose-a:text-blue-600 dark:prose-invert'>
-            <span className='text-sm font-bold uppercase tracking-widest text-zinc-500'>
+          <article className='px-2 prose prose-lg max-w-screen prose-pre:bg-background lg:max-w-3xl lg:px-6 py-20 prose-headings:font-display prose-headings:font-semibold prose-headings:tracking-[-0.03em] prose-headings:leading-tight prose-p:text-zinc-700 prose-p:leading-relaxed prose-img:rounded-xl prose-a:text-blue-600 dark:prose-invert'>
+            <span className='text-[10px] font-medium uppercase tracking-[0.18em] text-zinc-500'>
               {metadata.category}
             </span>
 
             <h1>{metadata.title}</h1>
-            <div className='flex items-center gap-4 text-sm text-zinc-400'>
+            <div className='flex items-center gap-4 text-[11px] uppercase tracking-[0.16em] text-zinc-400'>
               <p>
                 {new Date(metadata.date).toLocaleDateString("en-GB", {
                   day: "numeric",
@@ -82,13 +82,13 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
               )}
             </div>
             <div>
-              <h4 className='text-xs font-bold uppercase tracking-widest text-zinc-500'>
+              <h4 className='text-[10px] font-medium uppercase tracking-[0.18em] text-zinc-500'>
                 Written by
               </h4>
-              <h3 className='text-xl font-bold text-black mt-1'>
+              <h3 className='text-2xl font-display font-semibold tracking-[-0.02em] text-black mt-1'>
                 {metadata.author || "Black Lotus Team"}
               </h3>
-              <p className='text-zinc-600 mt-2 max-w-md'>
+              <p className='text-[15px] leading-relaxed text-zinc-600 mt-2 max-w-md'>
                 {metadata.authorBio ||
                   "Engineering at Black Lotus. Building high-performance digital experiences across Africa."}
               </p>
@@ -99,7 +99,7 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
         {/* RIGHT: STICKY SHARING SIDEBAR */}
         <aside className='hidden lg:block lg:col-span-1 lg:col-start-11'>
           <div className='sticky top-32 flex flex-col gap-8 items-center py-4'>
-            <span className='text-[10px] font-bold uppercase tracking-widest text-zinc-400 '>
+            <span className='text-[10px] font-medium uppercase tracking-[0.16em] text-zinc-400 '>
               Share
             </span>
             <a

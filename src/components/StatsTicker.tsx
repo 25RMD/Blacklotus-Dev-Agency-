@@ -20,7 +20,7 @@ export function StatsTicker() {
             transition={{ delay: i * 0.1 }}
             className="flex flex-col items-center text-center gap-2"
           >
-            <span className="text-4xl md:text-5xl font-semibold tracking-tighter text-white">{stat.value}</span>
+            <span className="text-4xl md:text-5xl font-serif font-semibold tracking-tighter text-white">{stat.value}</span>
             <span className="text-xs uppercase tracking-widest text-zinc-500 font-medium font-mono">{stat.label}</span>
           </motion.div>
         ))}

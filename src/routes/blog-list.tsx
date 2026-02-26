@@ -34,7 +34,7 @@ export default function BlogList() {
   return (
     <BlogLayout>
       <div className='max-w-7xl mx-auto px-6 py-12 font-sans'>
-        <h1 className='text-5xl font-bold mb-4 mt-8 tracking-tighter'>
+        <h1 className='text-[clamp(2.8rem,8vw,6.5rem)] font-display font-semibold mb-4 mt-8 tracking-[-0.03em] leading-[0.92]'>
           Engineering Blog
         </h1>
         <hr className='border-gray-200 mb-16' />
@@ -49,13 +49,13 @@ export default function BlogList() {
                   alt={post.title}
                 />
               </div>
-              <span className='text-xs font-light capitalize tracking-widest text-gray-500'>
+              <span className='text-[10px] font-medium uppercase tracking-[0.18em] text-gray-500'>
                 {post.category}
               </span>
-              <h3 className='text-xl font-bold mt-3 group-hover:underline underline-offset-2'>
+              <h3 className='text-2xl font-display font-semibold mt-3 tracking-[-0.02em] leading-tight group-hover:underline underline-offset-2'>
                 {post.title}
               </h3>
-              <p className='mt-4 text-sm text-gray-400'>
+              <p className='mt-4 text-[11px] uppercase tracking-[0.16em] text-gray-400'>
                 {new Date(post.date).toLocaleDateString()}
               </p>
             </Link>

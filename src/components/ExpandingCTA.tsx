@@ -202,7 +202,7 @@ Details: ${formData.get('details')}
                 {!isSuccess ? (
                   <>
                     <div className="mb-8">
-                      <h2 className="text-3xl font-bold text-white mb-2">Let's Talk</h2>
+                      <h2 className="text-3xl font-serif font-bold text-white mb-2">Let's Talk</h2>
                       <p className="text-zinc-400">Tell us about your vision. We'll help you build it.</p>
                     </div>
 
@@ -285,7 +285,7 @@ Details: ${formData.get('details')}
                     <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mb-6">
                       <Sparkles className="w-8 h-8 text-green-500" />
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
+                    <h3 className="text-2xl font-serif font-bold text-white mb-2">Message Sent!</h3>
                     <p className="text-zinc-400 max-w-xs mx-auto">
                       Thank you for reaching out. We'll get back to you within 24 hours.
                     </p>

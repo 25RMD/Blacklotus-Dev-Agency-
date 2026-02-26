@@ -46,7 +46,7 @@ export function ServicesGrid() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight mb-6 text-white">What We Do</h2>
+          <h2 className="text-4xl md:text-5xl font-serif font-semibold tracking-tight mb-6 text-white">What We Do</h2>
           <p className="text-lg text-zinc-400 max-w-md leading-relaxed">We build digital products that help businesses succeed online.</p>
         </motion.div>
         <motion.button 
