@@ -13,7 +13,6 @@ export function ProjectSlider() {
   const [cardTransforms, setCardTransforms] = useState<
     { x: number; z: number; rotateY: number; opacity: number; visible: boolean; index: number }[]
   >([])
-  const [currentIndex, setCurrentIndex] = useState(1)
 
   const totalWidth = projects.length * CARD_SPACING
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
@@ -81,17 +80,7 @@ export function ProjectSlider() {
     const transforms = computeTransforms(sv.current)
     setCardTransforms(transforms)
 
-    // Current focused index: find the tile closest to center (x = 0)
-    let bestDist = Infinity
-    let bestIdx = 0
-    transforms.forEach((t) => {
-      if (Math.abs(t.x) < bestDist) {
-        bestDist = Math.abs(t.x)
-        bestIdx = t.index
-      }
-    })
-    setCurrentIndex(bestIdx + 1)
-
+    // Focus calculation removed since counter was removed
     rafRef.current = requestAnimationFrame(animate)
   }, [computeTransforms])
 
@@ -107,21 +96,12 @@ export function ProjectSlider() {
         <div className="px-6 md:px-16 mb-8 md:mb-12 max-w-7xl mx-auto w-full flex justify-between items-end">
           <div>
             <span className="block text-[10px] font-medium text-zinc-500 uppercase tracking-[0.2em] mb-2">
-              Selected Work
+              Projects
             </span>
             <h2 className="text-[clamp(2.4rem,6.8vw,6rem)] font-display font-semibold text-white tracking-[-0.03em] leading-[0.92]">
-              Projects
+              Selected Work
             </h2>
           </div>
-          <Link
-            to="/projects"
-            className="flex items-center gap-2 group cursor-pointer uppercase font-medium tracking-[0.16em] text-[11px] text-white hover:opacity-70 transition-opacity"
-          >
-            View All
-            <span className="text-base group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform">
-              ↗
-            </span>
-          </Link>
         </div>
 
         {/* 3D Gallery Viewport */}
@@ -190,20 +170,14 @@ export function ProjectSlider() {
           </div>
         </div>
 
-        {/* Bottom info bar */}
-        <div className="px-6 md:px-16 mt-8 max-w-7xl mx-auto w-full">
-          <div className="flex justify-between items-center text-white">
-            <span className="font-medium text-[11px] uppercase tracking-[0.16em] text-zinc-500">
-              [{currentIndex}/{projects.length}]
-            </span>
-            <Link
-              to="/projects"
-              className="flex items-center gap-2 group cursor-pointer uppercase font-medium tracking-[0.16em] text-[11px] hover:opacity-70 transition-opacity"
-            >
-              View All Projects
-              <span className="text-base group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform">↗</span>
-            </Link>
-          </div>
+        {/* Bottom View All Button */}
+        <div className="px-6 md:px-16 mt-8 max-w-7xl mx-auto w-full flex justify-center">
+          <Link
+            to="/projects"
+            className="bg-transparent text-white border border-white/60 px-7 py-3 text-[10px] font-semibold tracking-[0.2em] uppercase hover:border-white hover:bg-white/10 transition-colors"
+          >
+            View All
+          </Link>
         </div>
       </div>
     </section>

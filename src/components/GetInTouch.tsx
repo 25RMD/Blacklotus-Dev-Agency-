@@ -7,7 +7,7 @@ export function GetInTouch() {
         e.preventDefault()
         const form = e.target as HTMLFormElement
         const formData = new FormData(form)
-        
+
         const firstName = formData.get('firstName')
         const lastName = formData.get('lastName')
         const email = formData.get('email')
@@ -23,7 +23,7 @@ Phone: ${phone}
 Project Details:
 ${details}
         `
-        
+
         window.location.href = `mailto:blacklotusenquiry@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
     }
 
@@ -69,7 +69,7 @@ ${details}
                         <form className="flex flex-col gap-16" onSubmit={handleSubmit}>
                             {/* Row 1 */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-                                <motion.div 
+                                <motion.div
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
@@ -80,11 +80,11 @@ ${details}
                                     <input
                                         name="firstName"
                                         type="text"
-                                        placeholder="Emma"
+                                        placeholder="Black"
                                         className="w-full text-2xl md:text-4xl pb-4 border-b border-zinc-800 bg-transparent outline-none focus:border-white transition-colors placeholder:text-white/90 font-medium tracking-[-0.02em] text-white"
                                     />
                                 </motion.div>
-                                <motion.div 
+                                <motion.div
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
@@ -95,7 +95,7 @@ ${details}
                                     <input
                                         name="lastName"
                                         type="text"
-                                        placeholder="Lewis"
+                                        placeholder="Lotus"
                                         className="w-full text-2xl md:text-4xl pb-4 border-b border-zinc-800 bg-transparent outline-none focus:border-white transition-colors placeholder:text-white/90 font-medium tracking-[-0.02em] text-white"
                                     />
                                 </motion.div>
@@ -103,7 +103,7 @@ ${details}
 
                             {/* Row 2 */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-                                <motion.div 
+                                <motion.div
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
@@ -114,11 +114,11 @@ ${details}
                                     <input
                                         name="email"
                                         type="email"
-                                        placeholder="emma@email.com"
+                                        placeholder="blacklotusenquiry@gmail.com"
                                         className="w-full text-2xl md:text-4xl pb-4 border-b border-zinc-800 bg-transparent outline-none focus:border-white transition-colors placeholder:text-white/90 font-medium tracking-[-0.02em] text-white"
                                     />
                                 </motion.div>
-                                <motion.div 
+                                <motion.div
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
@@ -136,7 +136,7 @@ ${details}
                             </div>
 
                             {/* Row 3 */}
-                            <motion.div 
+                            <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
@@ -157,7 +157,7 @@ ${details}
                             </motion.div>
 
                             {/* Submit Button */}
-                            <motion.div 
+                            <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}

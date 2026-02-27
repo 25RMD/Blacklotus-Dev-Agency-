@@ -36,10 +36,10 @@ export function Navbar({ isMenuOpen, onToggleMenu }: NavbarProps) {
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-[101] flex items-center justify-between px-6 py-6 md:px-10 pointer-events-none"
+      className="fixed top-0 left-0 right-0 z-101 flex items-center justify-between px-6 py-6 md:px-10 pointer-events-none"
     >
       {/* Logo & Tagline */}
-      <div className="flex items-center gap-4 pointer-events-auto">
+      <div className="flex items-center gap-4 pointer-events-auto mix-blend-difference">
         <img
           src="/BL-logo.jpg"
           alt="Black Lotus"
@@ -65,9 +65,9 @@ export function Navbar({ isMenuOpen, onToggleMenu }: NavbarProps) {
       {/* Menu Button */}
       <button
         onClick={onToggleMenu}
-        className={`pointer-events-auto relative overflow-hidden rounded-none px-7 py-3 text-[11px] font-medium tracking-[0.16em] uppercase transition-all duration-500 w-[116px] border ${isMenuOpen
-            ? 'bg-black text-white'
-          : 'bg-white text-black border-black/15 hover:bg-zinc-100'
+        className={`pointer-events-auto relative overflow-hidden rounded-none px-5 py-2 text-[10px] font-medium tracking-[0.16em] uppercase transition-all duration-500 w-[86px] ${isMenuOpen
+          ? 'bg-black text-white'
+          : 'bg-white text-black hover:bg-zinc-100'
           }`}
       >
         <div className="relative h-5 w-full">

@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from "framer-motion"
+import { motion } from "framer-motion"
 import { useRef, useEffect } from "react"
 import { Link } from "react-router"
 import { Magnetic } from "./ui/Magnetic"
@@ -9,7 +9,6 @@ interface HeroSectionProps {
 
 export function HeroSection({ isLoaded = false }: HeroSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const prefersReducedMotion = useReducedMotion()
   const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
@@ -57,7 +56,7 @@ export function HeroSection({ isLoaded = false }: HeroSectionProps) {
       </div>
 
       {/* Centered Hero Content */}
-      <div className='relative z-20 text-center text-white px-6 max-w-[92rem] mx-auto'>
+      <div className='relative z-20 text-center text-white px-6 max-w-368 mx-auto'>
         {/* Eyebrow label */}
         <div className='overflow-hidden mb-4'>
           <motion.p
@@ -69,7 +68,7 @@ export function HeroSection({ isLoaded = false }: HeroSectionProps) {
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 1.3 }}
             style={{ willChange: "transform, opacity" }}
           >
-            Digital Creative Agency
+            Software Development Agency
           </motion.p>
         </div>
 
@@ -117,7 +116,7 @@ export function HeroSection({ isLoaded = false }: HeroSectionProps) {
         </motion.div>
       </div>
 
-      {/* Bottom bar — location left, scroll right */}
+      {/* Bottom bar — location */}
       <motion.div
         className='absolute bottom-8 left-0 w-full flex justify-between px-6 md:px-12 text-white text-[10px] tracking-[0.2em] uppercase z-20 font-medium'
         initial={{ opacity: 0 }}
@@ -125,16 +124,6 @@ export function HeroSection({ isLoaded = false }: HeroSectionProps) {
         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 2.1 }}
       >
         <span>Africa, Nigeria</span>
-        <motion.span
-          animate={prefersReducedMotion ? undefined : { y: [0, 6, 0] }}
-          transition={
-            prefersReducedMotion
-              ? undefined
-              : { duration: 1.6, repeat: Infinity, ease: "easeInOut" }
-          }
-        >
-          Scroll
-        </motion.span>
       </motion.div>
     </section>
   )

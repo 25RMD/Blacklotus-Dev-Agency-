@@ -2,7 +2,7 @@ import { useRef } from "react"
 import gsap from "gsap"
 import { ArrowUpRight, Instagram, Facebook, ArrowRight } from "lucide-react"
 import { useHandleNavigation, menuItems } from "./OverlayMenu"
-import { BallpitBackground } from "./BallpitBackground"
+import { LightRays } from "./ui/LightRays"
 
 // ── Animated nav link with color sweep ──
 const FooterNavItem = ({
@@ -56,17 +56,18 @@ export function Footer({
 
   return (
     <footer className="relative w-full text-white overflow-hidden bg-black">
-      {/* ── Ballpit fills the ENTIRE footer as background ── */}
+      {/* ── LightRays fills the ENTIRE footer as background ── */}
       <div className="absolute inset-0 z-0">
-        <BallpitBackground
-          count={80}
-          colors={["#ffffff", "#3B82F6", "#a78bfa", "#94A3B8", "#e2e8f0"]}
-          gravity={0.4}
-          friction={0.998}
-          followCursor={true}
-          minSize={0.4}
-          maxSize={0.9}
-          lightIntensity={180}
+        <LightRays
+          raysOrigin="bottom-center"
+          raysColor="#ffffff"
+          raysSpeed={1.5}
+          lightSpread={1.2}
+          rayLength={2.5}
+          followMouse={true}
+          mouseInfluence={0.3}
+          noiseAmount={0.03}
+          distortion={0.08}
         />
       </div>
 
@@ -170,10 +171,13 @@ export function Footer({
           {/* ── Bottom Bar ── */}
           <div className="border-t border-white/10">
             <div className="max-w-7xl mx-auto px-6 md:px-12 py-5 flex flex-col md:flex-row justify-between items-center gap-4">
-              <span className="text-[10px] font-sans font-medium uppercase tracking-[0.16em] text-white/35">
+              <span className="text-[10px] font-sans font-medium uppercase tracking-[0.16em] text-white/35 text-center md:text-left">
                 © {new Date().getFullYear()} Black Lotus Development Agency Ltd
               </span>
-              <span className="text-[10px] font-sans font-medium uppercase tracking-[0.16em] text-white/35">
+              <span className="text-[10px] font-sans font-medium uppercase tracking-[0.16em] text-white/35 text-center">
+                Music 'Horizons' by Scott Buckley
+              </span>
+              <span className="text-[10px] font-sans font-medium uppercase tracking-[0.16em] text-white/35 text-center md:text-right">
                 Designed & Built by Us
               </span>
             </div>

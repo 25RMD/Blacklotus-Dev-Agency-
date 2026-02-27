@@ -9,7 +9,7 @@ export function LoadingScreen({ onLoadingComplete }: LoadingScreenProps) {
   const [isHovered, setIsHovered] = useState(false)
 
   const handleEnter = () => {
-    window.dispatchEvent(new CustomEvent('start-audio'))
+    window.dispatchEvent(new CustomEvent('toggle-audio'))
     onLoadingComplete()
   }
 
@@ -28,17 +28,19 @@ export function LoadingScreen({ onLoadingComplete }: LoadingScreenProps) {
     >
       <div className="relative flex flex-col items-center">
         {/* Main Text */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
           className="relative flex items-center"
         >
-          <h1 
+          <h1
             className="text-white font-serif font-bold tracking-tighter text-5xl md:text-7xl lg:text-8xl"
             style={{
               fontSize: 'clamp(3rem, 12vw, 8rem)',
               letterSpacing: '-0.02em',
+              WebkitFontSmoothing: 'antialiased',
+              MozOsxFontSmoothing: 'grayscale',
             }}
           >
             BLACK.LOTUS

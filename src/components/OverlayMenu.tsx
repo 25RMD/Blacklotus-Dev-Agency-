@@ -73,10 +73,10 @@ export function OverlayMenu({
           animate={{ y: 0 }}
           exit={{ y: "-100%" }}
           transition={{ duration: 1.2, ease: [0.19, 1, 0.22, 1] }}
-          className='fixed inset-0 z-[100] bg-black text-white flex flex-col'
+          className='fixed inset-0 z-100 bg-black text-white flex flex-col'
         >
           {/* Spacer for fixed Navbar */}
-          <div className='w-full h-32 flex-shrink-0' />
+          <div className='w-full h-32 shrink-0' />
 
           {/* --- MAIN CONTENT (LINKS) --- */}
           <div className='flex-1 flex flex-col items-center justify-center min-h-0'>
@@ -103,7 +103,7 @@ export function OverlayMenu({
                     },
                     opacity: { duration: 0.5 },
                   }}
-                  className='group flex items-center gap-4 text-5xl md:text-7xl 2xl:text-8xl font-serif font-normal tracking-tight cursor-pointer'
+                  className='group flex items-center gap-4 text-4xl md:text-6xl 2xl:text-7xl font-display font-medium tracking-[-0.02em] cursor-pointer antialiased [text-rendering:optimizeLegibility]'
                   onMouseEnter={() => setHoveredItem(item.label)}
                   onClick={(e) => {
                     e.preventDefault()
@@ -132,7 +132,7 @@ export function OverlayMenu({
           </div>
 
           {/* --- FOOTER --- */}
-          <div className='w-full grid grid-cols-1 md:grid-cols-3 items-end gap-8 px-6 py-8 md:px-10 pb-10 flex-shrink-0'>
+          <div className='w-full grid grid-cols-1 md:grid-cols-3 items-end gap-8 px-6 py-8 md:px-10 pb-10 shrink-0'>
             {/* Left: Copyright */}
             <div className='flex flex-col gap-1 text-xs md:text-sm text-zinc-400 font-sans'>
               <p>©2025</p>
@@ -179,7 +179,7 @@ export function OverlayMenu({
                 {/* Play Icon Overlay */}
                 <div className='absolute inset-0 flex items-center justify-center'>
                   <div className='w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform'>
-                    <div className='w-0 h-0 border-t-[6px] border-t-transparent border-l-[10px] border-l-white border-b-[6px] border-b-transparent ml-1' />
+                    <div className='w-0 h-0 border-t-[6px] border-t-transparent border-l-10 border-l-white border-b-[6px] border-b-transparent ml-1' />
                   </div>
                 </div>
                 <span className='absolute bottom-2 left-2 text-[10px] font-mono text-white'>
