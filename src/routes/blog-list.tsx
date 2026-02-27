@@ -4,7 +4,7 @@ import { Link, useLoaderData } from "react-router"
 import { motion, AnimatePresence } from "framer-motion"
 import { Layout } from "./index"
 import { useEffect, useState } from "react"
-import { useLocation, useNavigate } from "react-router"
+import { useLocation } from "react-router"
 export async function loader() {
   const folder = "./src/content/posts"
   const files = fs.readdirSync(folder)

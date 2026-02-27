@@ -1,0 +1,38 @@
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  border-left: 0.25em solid;
+}
+
+.markdown-alert-title {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.octicon {
+  display: inline-block;
+  vertical-align: text-bottom;
+  fill: currentColor;
+  /* This is the magic part that makes the SVG show up */
+  width: 16px;
+  height: 16px;
+  background-color: currentColor;
+  mask-repeat: no-repeat;
+  mask-size: 100%;
+  -webkit-mask-image: var(--oct-icon);
+  mask-image: var(--oct-icon);
+  margin-right: 8px;
+}
+
+/* Color variations */
+.markdown-alert-warning {
+  border-color: #d29922;
+  color: #d29922;
+}
+.markdown-alert-note {
+  border-color: #1f6feb;
+  color: #1f6feb;
+}
+/* Add more for tip, important, caution... */

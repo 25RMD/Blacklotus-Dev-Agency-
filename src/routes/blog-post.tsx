@@ -6,9 +6,9 @@ import SyntaxHighlighter from "react-syntax-highlighter/dist/esm/prism"
 import { vs } from "react-syntax-highlighter/dist/esm/styles/prism"
 import { Twitter, Linkedin, Link as LinkIcon, User } from "lucide-react"
 import { BlogLayout } from "./blog-list"
-import { useLocation } from "react-router"
 import { useEffect, useState } from "react"
-
+import remarkGithubAlerts from "remark-gh-alerts"
+import "./blog-post.css"
 export async function loader({ params }: Route.LoaderArgs) {
   // Read the Obsidian file based on the URL slug
   const file = fs.readFileSync(`./src/content/posts/${params.slug}.md`, "utf-8")
@@ -22,7 +22,6 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
   useEffect(() => {
     setBlogUrl(window?.location.toString())
   }, [])
-  const location = useLocation()
   return (
     <BlogLayout>
       <div className='grid grid-cols-1 relative'>
@@ -45,6 +44,7 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
               <p>5 min read</p>
             </div>
             <ReactMarkdown
+              remarkPlugins={[remarkGithubAlerts]}
               components={{
                 code({ node, inline, className, children, ...props }: any) {
                   const match = /language-(\w+)/.exec(className || "")
