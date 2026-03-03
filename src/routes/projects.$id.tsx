@@ -37,7 +37,7 @@ export default function ProjectDetail() {
                     style={{ backgroundColor: bgColor, color: textColor }}
                 >
                     {/* Top small nav */}
-                    <div className="flex items-center gap-4 mb-16 md:mb-24 relative z-10 w-full max-w-[100rem] mx-auto">
+                    <div className="flex items-center gap-4 mb-16 md:mb-24 relative z-10 w-full max-w-400 mx-auto">
                         <Link
                             to="/projects"
                             className="inline-flex items-center text-[10px] md:text-[11px] font-medium uppercase tracking-[0.16em] opacity-70 hover:opacity-100 transition-opacity gap-2"
@@ -53,7 +53,7 @@ export default function ProjectDetail() {
                     </div>
 
                     {/* Giant Title */}
-                    <div className="flex-1 flex flex-col items-center justify-center text-center w-full max-w-[100rem] mx-auto pb-8">
+                    <div className="flex-1 flex flex-col items-center justify-center text-center w-full max-w-400 mx-auto pb-8">
                         <motion.h1
                             initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -66,20 +66,23 @@ export default function ProjectDetail() {
                 </section>
 
                 {/* Main Content Area */}
-                <div className="w-full max-w-[100rem] mx-auto px-6 md:px-12 mt-12 md:mt-16">
+                <div className="w-full max-w-400 mx-auto px-6 md:px-12 mt-12 md:mt-16">
 
                     {/* Giant Image */}
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 0.2 }}
-                        className="w-full aspect-[16/10] md:aspect-[21/9] bg-zinc-200 overflow-hidden mb-16 md:mb-24 shadow-2xl"
+                        className="w-full aspect-16/10 md:aspect-21/9 bg-zinc-200 overflow-hidden mb-16 md:mb-24 shadow-2xl"
                     >
-                        <img
-                            src={project.img}
-                            alt={project.title}
-                            className="w-full h-full object-cover object-center"
-                        />
+                        <picture>
+                            <source srcSet={project.imgWebp} type="image/webp" />
+                            <img
+                                src={project.imgFallback}
+                                alt={project.title}
+                                className="w-full h-full object-cover object-center"
+                            />
+                        </picture>
                     </motion.div>
 
                     {/* 2-Column Info Section */}
@@ -121,14 +124,14 @@ export default function ProjectDetail() {
                             <div className="flex flex-col border-t border-zinc-200">
                                 {/* Detail rows mapping to the mockup's line-separated items */}
                                 <div className="flex flex-col py-6 border-b border-zinc-200">
-                                    <span className="text-[10px] font-medium uppercase tracking-[0.1em] text-zinc-500 mb-1">Client</span>
+                                    <span className="text-[10px] font-medium uppercase tracking-widest text-zinc-500 mb-1">Client</span>
                                     <span className="text-base text-[#111] font-medium">{project.client}</span>
                                 </div>
                                 <div className="flex flex-col py-6 border-b border-zinc-200">
-                                    <span className="text-[10px] font-medium uppercase tracking-[0.1em] text-zinc-500 mb-1">Services</span>
+                                    <span className="text-[10px] font-medium uppercase tracking-widest text-zinc-500 mb-1">Services</span>
                                     <div className="flex flex-wrap gap-2 mt-2">
                                         {project.tags.map((tag) => (
-                                            <span key={tag} className="px-3 py-1.5 border border-zinc-300 rounded-full text-[10px] uppercase tracking-[0.1em] font-medium text-zinc-600 bg-white shadow-sm">
+                                            <span key={tag} className="px-3 py-1.5 border border-zinc-300 rounded-full text-[10px] uppercase tracking-widest font-medium text-zinc-600 bg-white shadow-sm">
                                                 {tag}
                                             </span>
                                         ))}

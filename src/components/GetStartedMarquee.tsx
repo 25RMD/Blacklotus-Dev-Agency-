@@ -9,15 +9,15 @@ if (typeof window !== "undefined") {
 
 // Assets to mix inside the marquee cards
 const marqueeCards = [
-    { src: "/curtainReveal/1.jpg", type: "image", title: "Strategy" },
-    { src: "/curtainReveal/2.jpg", type: "image", title: "Design" },
-    { src: "/curtainReveal/3.jpg", type: "image", title: "Development" },
-    { src: "/curtainReveal/4.jpg", type: "image", title: "Motion" },
-    { src: "/curtainReveal/5.jpg", type: "image", title: "Scale" },
-    { src: "/curtainReveal/6.jpg", type: "image", title: "Refine" },
-    { src: "/curtainReveal/7.jpg", type: "image", title: "Brand" },
-    { src: "/curtainReveal/8.jpg", type: "image", title: "Story" },
-    { src: "/curtainReveal/9.jpg", type: "image", title: "Future" }
+    { webp: "/curtainReveal/1.webp", fallback: "/curtainReveal/1.jpg", type: "image", title: "Strategy" },
+    { webp: "/curtainReveal/2.webp", fallback: "/curtainReveal/2.jpg", type: "image", title: "Design" },
+    { webp: "/curtainReveal/3.webp", fallback: "/curtainReveal/3.jpg", type: "image", title: "Development" },
+    { webp: "/curtainReveal/4.webp", fallback: "/curtainReveal/4.jpg", type: "image", title: "Motion" },
+    { webp: "/curtainReveal/5.webp", fallback: "/curtainReveal/5.jpg", type: "image", title: "Scale" },
+    { webp: "/curtainReveal/6.webp", fallback: "/curtainReveal/6.jpg", type: "image", title: "Refine" },
+    { webp: "/curtainReveal/7.webp", fallback: "/curtainReveal/7.jpg", type: "image", title: "Brand" },
+    { webp: "/curtainReveal/8.webp", fallback: "/curtainReveal/8.jpg", type: "image", title: "Story" },
+    { webp: "/curtainReveal/9.webp", fallback: "/curtainReveal/9.jpg", type: "image", title: "Future" }
 ]
 
 export function GetStartedMarquee() {
@@ -130,7 +130,7 @@ export function GetStartedMarquee() {
             <div className="marquee-bg sticky top-0 h-screen w-full overflow-hidden flex items-center bg-black text-white">
 
                 {/* Layer 1: Background Text */}
-                <div className="absolute inset-0 z-[1] flex items-center justify-center pointer-events-none">
+                <div className="absolute inset-0 z-1 flex items-center justify-center pointer-events-none">
                     <h1
                         ref={text1Ref}
                         className="absolute text-[clamp(4rem,9vw,9rem)] font-sans tracking-tight text-white"
@@ -150,20 +150,25 @@ export function GetStartedMarquee() {
                 {/* Layer 2: Horizontal Card Track */}
                 <div
                     ref={trackRef}
-                    className="absolute z-[2] flex items-center gap-[4vw] px-[10vw] will-change-transform"
+                    className="absolute z-2 flex items-center gap-[4vw] px-[10vw] will-change-transform"
                 >
                     {marqueeCards.map((card, i) => {
                         return (
                             <div
                                 key={i}
-                                className="marquee-card flex-shrink-0 w-[300px] md:w-[400px] aspect-square rounded-[24px] overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.1)] bg-white relative flex items-center justify-center will-change-transform"
+                                className="marquee-card shrink-0 w-[300px] md:w-[400px] aspect-square rounded-[24px] overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.1)] bg-white relative flex items-center justify-center will-change-transform"
                             >
-                                <img
-                                    src={card.src}
-                                    alt={card.title || "Work showcase"}
-                                    className="w-full h-full object-cover"
-                                    draggable={false}
-                                />
+                                <picture>
+                                    <source srcSet={card.webp} type="image/webp" />
+                                    <img
+                                        src={card.fallback}
+                                        alt={card.title || "Work showcase"}
+                                        className="w-full h-full object-cover"
+                                        draggable={false}
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                </picture>
                             </div>
                         )
                     })}

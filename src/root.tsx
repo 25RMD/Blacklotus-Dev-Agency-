@@ -7,11 +7,30 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet='UTF-8' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <meta name='robots' content='index,follow' />
         <title>Black Lotus - Development Agency</title>
         <meta
           name='description'
           content='Black Lotus - Premium web development services. React, Next.js, Vite, Tailwind experts.'
         />
+        <link rel='canonical' href='https://blacklotusdev.org/' />
+        <meta property='og:type' content='website' />
+        <meta property='og:title' content='Black Lotus - Development Agency' />
+        <meta
+          property='og:description'
+          content='Premium web and software development agency specializing in performant, scalable products.'
+        />
+        <meta property='og:url' content='https://blacklotusdev.org/' />
+        <meta property='og:image' content='https://blacklotusdev.org/projects/blacklotus.jpg' />
+        <meta name='twitter:card' content='summary_large_image' />
+        <meta name='twitter:title' content='Black Lotus - Development Agency' />
+        <meta
+          name='twitter:description'
+          content='Premium web and software development agency specializing in performant, scalable products.'
+        />
+        <meta name='twitter:image' content='https://blacklotusdev.org/projects/blacklotus.jpg' />
+        <meta name='theme-color' content='#000000' />
+        <link rel='preload' as='image' href='/projects/blacklotus.webp' />
         {/* Preload Switzer font files */}
         <link
           rel='preload'

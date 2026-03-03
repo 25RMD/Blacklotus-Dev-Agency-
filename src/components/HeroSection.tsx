@@ -34,6 +34,7 @@ export function HeroSection({ isLoaded = false }: HeroSectionProps) {
           muted
           playsInline
           preload='auto'
+          poster='/projects/blacklotus.webp'
           className='absolute inset-0 h-full w-full object-cover object-center hero-bg-image'
           src="/bg-video/bg.mp4"
           initial={{ opacity: 0, scale: 1.08 }}

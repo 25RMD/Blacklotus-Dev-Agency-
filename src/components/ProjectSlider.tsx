@@ -143,12 +143,17 @@ export function ProjectSlider() {
                       : '0 10px 40px rgba(0,0,0,0.2)',
                   }}
                 >
-                  <img
-                    src={project.img}
-                    alt={project.title}
-                    className="w-full h-full object-cover rounded-sm"
-                    draggable={false}
-                  />
+                  <picture>
+                    <source srcSet={project.imgWebp} type="image/webp" />
+                    <img
+                      src={project.imgFallback}
+                      alt={project.title}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-contain rounded-sm"
+                      draggable={false}
+                    />
+                  </picture>
                   {/* Overlay info on hover */}
                   <div
                     className="absolute inset-0 flex flex-col justify-end p-4 rounded-sm transition-opacity duration-300"

@@ -25,22 +25,22 @@ export function HowWeDo() {
   const pillars = [
     {
       title: "Integrity",
-      image: "/art/integrity.jpg",
+      image: "/art/integrity.webp",
       description: "An unwavering commitment to honesty and strong ethical principles in every line of code we write and relationship we build.",
     },
     {
       title: "Hunger",
-      image: "/art/hunger.jpg",
+      image: "/art/hunger.webp",
       description: "An insatiable drive to continuously push boundaries, innovate relentlessly, and devour new challenges.",
     },
     {
       title: "Depth",
-      image: "/art/depth2.jpg",
+      image: "/art/depth2.webp",
       description: "We are multi-sensorial beings. We tell the stories of organizations in a way people can see, hear, and feel at every turn.",
     },
     {
       title: "Care",
-      image: "/art/care.jpg",
+      image: "/art/care.webp",
       description: "It takes a little optimistic defiance to push against the current and design the remarkable future.",
     },
   ]

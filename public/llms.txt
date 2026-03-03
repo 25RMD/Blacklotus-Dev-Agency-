@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+
+# Purpose: allow LLM crawlers to index public site content.
+# If you want to restrict, change Allow to Disallow and list paths.
+
+# Primary site maps
+Sitemap: https://blacklotusdev.org/sitemap.xml
+
+# Explicitly allow common public sections
+Allow: /projects
+Allow: /projects/
+Allow: /projects/01
+Allow: /projects/02
+Allow: /projects/03
+Allow: /projects/04
+Allow: /projects/05
+Allow: /projects/06
+Allow: /projects/07
+Allow: /projects/08
+Allow: /projects/09
+Allow: /projects/10
+Allow: /blog
+Allow: /blog/
+Allow: /blog/*

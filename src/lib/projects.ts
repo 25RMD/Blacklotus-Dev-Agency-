@@ -7,7 +7,8 @@ export const projects = [
     role: "Frontend Developer",
     description: "Black Lotus is a premier web and software development agency delivering high-quality digital solutions. Built the corporate identity and client-facing platform.",
     url: "https://blacklotusdev.org",
-    img: "/projects/blacklotus.jpg",
+    imgWebp: "/projects/blacklotus.webp",
+    imgFallback: "/projects/blacklotus.jpg",
     tags: ["Company", "Website", "Dev Agency"],
     brandColor: "#000000",
     textColor: "#ffffff"
@@ -20,7 +21,8 @@ export const projects = [
     role: "Frontend Developer",
     description: "EE Wellness is a wellness center in Lagos dedicated to holistic health. Developed a responsive website and mobile app for seamless client booking.",
     url: "https://eewellnesshub.com",
-    img: "/projects/eewellness.jpg",
+    imgWebp: "/projects/eewellness.webp",
+    imgFallback: "/projects/eewellness.jpg",
     tags: ["Company", "Website", "Mobile App"],
     brandColor: "#1B4332", // Deep green
     textColor: "#ffffff"
@@ -33,7 +35,8 @@ export const projects = [
     role: "Full Stack Developer",
     description: "A platform for tokenizing land into fractional tokens tradeable over the Ethereum blockchain, democratizing real estate investment via smart contracts.",
     url: "https://platz-landtokenization.vercel.app",
-    img: "/projects/platz.jpg",
+    imgWebp: "/projects/platz.webp",
+    imgFallback: "/projects/platz.jpg",
     tags: ["Web3", "Website", "Ethereum"],
     brandColor: "#4285F4", // Ethereum-ish Blue/Tech
     textColor: "#ffffff"
@@ -46,7 +49,8 @@ export const projects = [
     role: "Frontend Developer",
     description: "An NGO with impactful actions across West Africa. Built the frontend platform to showcase initiatives, display impact, and facilitate donor engagement.",
     url: "https://tdf-front.pages.dev/",
-    img: "/projects/tomsu.jpg",
+    imgWebp: "/projects/tomsu.webp",
+    imgFallback: "/projects/tomsu.jpg",
     tags: ["Company", "Website", "NGO"],
     brandColor: "#E63946", // NGO-ish Red
     textColor: "#ffffff"
@@ -59,7 +63,8 @@ export const projects = [
     role: "Frontend Developer",
     description: "An EdTech tool for school managements to ensure quality of lessons taught, featuring AI-aided learning for students — web dashboard and mobile app.",
     url: "https://tracklearn.org",
-    img: "/projects/tracklearn.jpg",
+    imgWebp: "/projects/tracklearn.webp",
+    imgFallback: "/projects/tracklearn.jpg",
     tags: ["EdTech", "Website", "Mobile App"],
     brandColor: "#F4A261", // EdTech Orange
     textColor: "#111111"
@@ -72,7 +77,8 @@ export const projects = [
     role: "Full Stack Developer",
     description: "An advanced scam detection system for Solana memecoins that analyzes on-chain data to identify risks, helping traders make safer investment decisions.",
     url: "https://precog.trade",
-    img: "/projects/precog.jpg",
+    imgWebp: "/projects/precog.webp",
+    imgFallback: "/projects/precog.jpg",
     tags: ["Crypto", "Website", "Solana"],
     brandColor: "#14F195", // Solana Green
     textColor: "#000000"
@@ -85,7 +91,8 @@ export const projects = [
     role: "Full-Stack Website",
     description: "A fullstack website for an NGO focused on empowering African communities across the continent.",
     url: "https://makingafricagreatagain.org",
-    img: "/projects/ng.jpeg",
+    imgWebp: "/projects/maga.svg",
+    imgFallback: "/projects/maga.svg",
     tags: ["NGO", "Website", "Africa"],
     brandColor: "#0D3B66", // Deep Blue
     textColor: "#ffffff"
@@ -98,7 +105,8 @@ export const projects = [
     role: "Full-Stack Website",
     description: "A fullstack website for an event center located in Maiduguri, featuring booking, gallery, and event management.",
     url: "https://kingroyal-events.com",
-    img: "/projects/event.jpeg",
+    imgWebp: "/projects/kingroyal.svg",
+    imgFallback: "/kingroyal.png",
     tags: ["Events", "Website", "Booking"],
     brandColor: "#D4AF37", // Gold
     textColor: "#111111"
@@ -111,7 +119,8 @@ export const projects = [
     role: "Website",
     description: "Access the world's largest collection of African language data, ethically sourced and ready for AI training. Each dataset represents the voice and culture of millions.",
     url: "https://tabularasa.vercel.app/",
-    img: "/projects/tabularasa.svg",
+    imgWebp: "/projects/tabularasa.svg", // already lightweight
+    imgFallback: "/projects/tabularasa.svg",
     tags: ["AI", "Data", "Africa"],
     brandColor: "#8338EC", // AI Purple
     textColor: "#ffffff"
@@ -124,7 +133,8 @@ export const projects = [
     role: "Website",
     description: "A cutting-edge AR simulator that brings anatomy to life with interactive 3D models.",
     url: "https://medicalsimulator.vercel.app/",
-    img: "/projects/medivision.png",
+    imgWebp: "/projects/medivision.webp",
+    imgFallback: "/projects/medivision.png",
     tags: ["AR", "Medical", "3D"],
     brandColor: "#06D6A0", // Medical Teal
     textColor: "#111111"
