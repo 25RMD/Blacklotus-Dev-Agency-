@@ -158,15 +158,16 @@ export function GetStartedMarquee() {
                                 key={i}
                                 className="marquee-card shrink-0 w-[300px] md:w-[400px] aspect-square rounded-[24px] overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.1)] bg-white relative flex items-center justify-center will-change-transform"
                             >
-                                <picture>
+                                <picture className="w-full h-full block">
                                     <source srcSet={card.webp} type="image/webp" />
                                     <img
                                         src={card.fallback}
                                         alt={card.title || "Work showcase"}
-                                        className="w-full h-full object-cover"
+                                        className="w-full h-full object-cover object-center"
                                         draggable={false}
-                                        loading="lazy"
-                                        decoding="async"
+                                        loading="eager"
+                                        decoding="sync"
+                                        fetchPriority="high"
                                     />
                                 </picture>
                             </div>

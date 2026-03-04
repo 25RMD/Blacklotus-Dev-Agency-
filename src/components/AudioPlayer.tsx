@@ -32,6 +32,18 @@ export function AudioPlayer() {
     return () => window.removeEventListener('toggle-audio', handleToggleAudio)
   }, [isPlaying])
 
+  useEffect(() => {
+    if (location.pathname.startsWith('/blog')) {
+      setIsPlaying((prevIsPlaying) => {
+        if (prevIsPlaying && audioRef.current) {
+          audioRef.current.pause()
+          return false
+        }
+        return prevIsPlaying
+      })
+    }
+  }, [location.pathname])
+
   const togglePlay = () => {
     if (audioRef.current) {
       if (isPlaying) {
