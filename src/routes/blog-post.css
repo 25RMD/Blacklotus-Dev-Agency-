@@ -31,6 +31,9 @@
   border-color: #d29922;
   color: #d29922;
 }
+blockquote {
+  quotes: none;
+}
 .markdown-alert-note {
   border-color: #1f6feb;
   color: #1f6feb;
