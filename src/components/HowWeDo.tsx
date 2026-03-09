@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motio
 
 export function HowWeDo() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
@@ -78,7 +79,52 @@ export function HowWeDo() {
         </p>
       </div>
 
-      <div className='relative z-20 grid grid-cols-1 md:grid-cols-2 h-[136vh] md:h-[84vh] min-h-[920px] md:min-h-[640px]'>
+      {/* Mobile stacked layout */}
+      <div className='relative z-20 flex flex-col gap-4 px-5 pb-10 pt-6 md:hidden'>
+        {pillars.map((pillar, index) => {
+          const isActive = activeIndex === index
+          return (
+            <motion.button
+              key={pillar.title}
+              type='button'
+              onClick={() => setActiveIndex(isActive ? null : index)}
+              className='relative w-full min-h-[260px] overflow-hidden rounded-2xl border border-white/10 bg-black text-left'
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              onViewportEnter={() => setActiveIndex(index)}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: index * 0.08 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <div
+                className='absolute inset-0 bg-cover bg-center opacity-70'
+                style={{ backgroundImage: `url(${pillar.image})` }}
+              />
+              <div className='absolute inset-0 bg-black/55' />
+              <div className='relative z-10 flex flex-col gap-4 p-6'>
+                <div className='flex items-center justify-between'>
+                  <h3 className='font-display text-3xl font-semibold tracking-[-0.03em] text-white'>
+                    {pillar.title}
+                  </h3>
+                  <span className='text-[10px] font-medium uppercase tracking-[0.2em] text-white/70'>
+                    {isActive ? 'Close' : 'Open'}
+                  </span>
+                </div>
+                <div
+                  className={`text-sm leading-relaxed text-white/80 transition-all duration-300 ${
+                    isActive ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
+                  }`}
+                >
+                  {pillar.description}
+                </div>
+              </div>
+            </motion.button>
+          )
+        })}
+      </div>
+
+      {/* Desktop hover grid */}
+      <div className='relative z-20 hidden md:grid grid-cols-2 h-[84vh] min-h-[640px]'>
         {/* Grid Items */}
         {pillars.map((pillar, index) => (
           <div

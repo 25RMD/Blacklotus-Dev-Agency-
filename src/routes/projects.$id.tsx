@@ -33,11 +33,11 @@ export default function ProjectDetail() {
 
                 {/* massive color header section */}
                 <section
-                    className="w-full pt-16 pb-12 md:pt-24 md:pb-16 px-6 md:px-12 relative flex flex-col"
+                    className="w-full pt-32 pb-12 md:pt-40 md:pb-16 px-6 md:px-12 relative flex flex-col"
                     style={{ backgroundColor: bgColor, color: textColor }}
                 >
                     {/* Top small nav */}
-                    <div className="flex items-center gap-4 mb-16 md:mb-24 relative z-10 w-full max-w-400 mx-auto">
+                    <div className="flex items-center gap-4 mb-16 md:mb-24 relative z-10 w-full max-w-7xl mx-auto">
                         <Link
                             to="/projects"
                             className="inline-flex items-center text-[10px] md:text-[11px] font-medium uppercase tracking-[0.16em] opacity-70 hover:opacity-100 transition-opacity gap-2"
@@ -53,7 +53,7 @@ export default function ProjectDetail() {
                     </div>
 
                     {/* Giant Title */}
-                    <div className="flex-1 flex flex-col items-center justify-center text-center w-full max-w-400 mx-auto pb-8">
+                    <div className="flex-1 flex flex-col items-center justify-center text-center w-full max-w-7xl mx-auto pb-8">
                         <motion.h1
                             initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -66,7 +66,7 @@ export default function ProjectDetail() {
                 </section>
 
                 {/* Main Content Area */}
-                <div className="w-full max-w-400 mx-auto px-6 md:px-12 mt-12 md:mt-16">
+                <div className="w-full max-w-7xl mx-auto px-6 md:px-12 mt-12 md:mt-16">
 
                     {/* Giant Image */}
                     <motion.div

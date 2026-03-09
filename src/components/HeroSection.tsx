@@ -12,7 +12,20 @@ export function HeroSection({ isLoaded = false }: HeroSectionProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
+    // Preload video as soon as possible
+    const existing = document.querySelector('link[rel="preload"][href="/bg-video/bg.mp4"]') as HTMLLinkElement | null
+    if (!existing) {
+      const link = document.createElement('link')
+      link.rel = 'preload'
+      link.as = 'video'
+      link.href = '/bg-video/bg.mp4'
+      link.type = 'video/mp4'
+      document.head.appendChild(link)
+    }
+
     if (videoRef.current) {
+      // Hint browser to start fetching now
+      videoRef.current.load()
       videoRef.current
         .play()
         .catch((e) => console.log("Autoplay prevented:", e))
@@ -101,7 +114,7 @@ export function HeroSection({ isLoaded = false }: HeroSectionProps) {
           <Magnetic>
             <Link
               to='/#projects'
-              className='tactile-press bg-white text-black px-7 py-3 border border-white text-[10px] font-semibold tracking-[0.2em] uppercase hover:bg-neutral-100 transition-colors'
+              className='tactile-press flex items-center justify-center w-[220px] bg-white text-black py-3.5 border border-white text-[10px] font-semibold tracking-[0.2em] uppercase hover:bg-neutral-100 transition-colors'
             >
               View Our Work
             </Link>
@@ -109,7 +122,7 @@ export function HeroSection({ isLoaded = false }: HeroSectionProps) {
           <Magnetic>
             <Link
               to='/#contact'
-              className='tactile-press text-white border border-white/60 px-7 py-3 text-[10px] font-semibold tracking-[0.2em] uppercase hover:border-white hover:bg-white/10 transition-colors'
+              className='tactile-press flex items-center justify-center w-[220px] text-white border border-white/60 py-3.5 text-[10px] font-semibold tracking-[0.2em] uppercase hover:border-white hover:bg-white/10 transition-colors'
             >
               Start a Project
             </Link>

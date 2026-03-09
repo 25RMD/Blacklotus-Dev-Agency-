@@ -7,8 +7,8 @@ import { projects, type Project } from '../lib/projects'
 const TILE_COLS = 4
 const TILE_ROWS = 3
 const TILE_COUNT = TILE_COLS * TILE_ROWS
-const CARD_W = 400
-const CARD_H = 400
+const CARD_W = 320
+const CARD_H = 320
 const GAP = 2
 
 const CELL_W = CARD_W + GAP
@@ -224,7 +224,7 @@ export function ProjectsGallery() {
 
   if (windowSize.width === 0) {
     return (
-      <div className="relative w-screen h-screen overflow-hidden bg-black text-white flex items-center justify-center">
+      <div className="relative w-full h-[100dvh] overflow-hidden bg-black text-white flex items-center justify-center">
         <span className="text-sm text-gray-500 animate-pulse">Loading projects...</span>
       </div>
     )
@@ -233,7 +233,7 @@ export function ProjectsGallery() {
   return (
     <div
       ref={viewportRef}
-      className="relative w-screen h-screen overflow-hidden bg-black text-white font-sans selection:bg-white selection:text-black cursor-grab active:cursor-grabbing"
+      className="relative w-full h-[100dvh] overflow-hidden bg-black text-white font-sans selection:bg-white selection:text-black cursor-grab active:cursor-grabbing"
       style={{ touchAction: 'none' }}
       onPointerDown={onPointerDown}
       onPointerLeave={resetTilt}
@@ -260,11 +260,11 @@ export function ProjectsGallery() {
               }}
             >
               {tileProjects.map((project) => (
-                  <Card
-                    key={project.tileIdx}
-                    project={project}
-                  />
-                ))}
+                <Card
+                  key={project.tileIdx}
+                  project={project}
+                />
+              ))}
             </div>
           ))}
         </div>
@@ -409,18 +409,18 @@ const Card = memo(({ project }: {
           <span>{project.year}</span>
         </div>
         <div className="absolute inset-0 pointer-events-none z-10 flex items-center justify-center">
-          <div className="relative w-[210px] h-[210px] md:w-[240px] md:h-[240px] lg:w-[260px] lg:h-[260px]">
-          <picture>
-            <source srcSet={project.imgWebp} type={project.imgWebp.endsWith('.svg') ? 'image/svg+xml' : 'image/webp'} />
-            <img
-              src={project.imgFallback}
-              alt={project.title}
-              loading="lazy"
-              decoding="async"
-              className="absolute inset-0 w-full h-full object-contain object-center opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 ease-out drop-shadow-2xl"
-            />
-          </picture>
-        </div>
+          <div className="relative w-[170px] h-[170px] md:w-[190px] md:h-[190px] lg:w-[210px] lg:h-[210px]">
+            <picture>
+              <source srcSet={project.imgWebp} type={project.imgWebp.endsWith('.svg') ? 'image/svg+xml' : 'image/webp'} />
+              <img
+                src={project.imgFallback}
+                alt={project.title}
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 w-full h-full object-contain object-center opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 ease-out drop-shadow-2xl"
+              />
+            </picture>
+          </div>
         </div>
         <div className="relative z-20 flex justify-between items-end text-[9px] font-medium tracking-[0.16em] uppercase text-gray-500 group-hover:text-white transition-colors duration-500">
           <span>{project.tags.join(' · ')}</span>
