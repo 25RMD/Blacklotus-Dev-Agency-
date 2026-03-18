@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, useState } from "react"
 import { Link } from "react-router"
 import { Magnetic } from "./ui/Magnetic"
 
@@ -10,27 +10,43 @@ interface HeroSectionProps {
 export function HeroSection({ isLoaded = false }: HeroSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false)
 
   useEffect(() => {
-    // Preload video as soon as possible
-    const existing = document.querySelector('link[rel="preload"][href="/bg-video/bg.mp4"]') as HTMLLinkElement | null
-    if (!existing) {
-      const link = document.createElement('link')
-      link.rel = 'preload'
-      link.as = 'video'
-      link.href = '/bg-video/bg.mp4'
-      link.type = 'video/mp4'
-      document.head.appendChild(link)
+    if (!sectionRef.current || shouldLoadVideo) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return
+        setShouldLoadVideo(true)
+        observer.disconnect()
+      },
+      { rootMargin: "300px 0px" }
+    )
+
+    observer.observe(sectionRef.current)
+    return () => observer.disconnect()
+  }, [shouldLoadVideo])
+
+  useEffect(() => {
+    if (!videoRef.current || !shouldLoadVideo) return
+
+    const video = videoRef.current
+    video.load()
+    video.play().catch(() => null)
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        video.pause()
+      } else {
+        video.play().catch(() => null)
+      }
     }
 
-    if (videoRef.current) {
-      // Hint browser to start fetching now
-      videoRef.current.load()
-      videoRef.current
-        .play()
-        .catch((e) => console.log("Autoplay prevented:", e))
-    }
-  }, [])
+    document.addEventListener("visibilitychange", handleVisibilityChange)
+    return () =>
+      document.removeEventListener("visibilitychange", handleVisibilityChange)
+  }, [shouldLoadVideo])
 
   return (
     <section
@@ -46,17 +62,18 @@ export function HeroSection({ isLoaded = false }: HeroSectionProps) {
           loop
           muted
           playsInline
-          preload='auto'
-          poster='/projects/blacklotus.webp'
-          className='absolute inset-0 h-full w-full object-cover object-center hero-bg-image'
-          src="/bg-video/bg.mp4"
+          preload='none'
+          className='absolute inset-0 h-full w-full object-cover object-center hero-bg-image bg-black'
+          aria-hidden='true'
           initial={{ opacity: 0, scale: 1.08 }}
           animate={
             isLoaded ? { opacity: 0.75, scale: 1 } : { opacity: 0, scale: 1.08 }
           }
           transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
           style={{ willChange: "transform, opacity" }}
-        />
+        >
+          {shouldLoadVideo ? <source src='/bg-video/bg.mp4' type='video/mp4' /> : null}
+        </motion.video>
 
         {/* Gradient overlay */}
         <motion.div
@@ -114,7 +131,7 @@ export function HeroSection({ isLoaded = false }: HeroSectionProps) {
           <Magnetic>
             <Link
               to='/#projects'
-              className='tactile-press flex items-center justify-center w-[220px] bg-white text-black py-3.5 border border-white text-[10px] font-semibold tracking-[0.2em] uppercase hover:bg-neutral-100 transition-colors'
+              className='tactile-press bg-white text-black px-7 py-3 border border-white text-[10px] font-semibold tracking-[0.2em] uppercase hover:bg-neutral-100 transition-colors'
             >
               View Our Work
             </Link>
@@ -122,7 +139,7 @@ export function HeroSection({ isLoaded = false }: HeroSectionProps) {
           <Magnetic>
             <Link
               to='/#contact'
-              className='tactile-press flex items-center justify-center w-[220px] text-white border border-white/60 py-3.5 text-[10px] font-semibold tracking-[0.2em] uppercase hover:border-white hover:bg-white/10 transition-colors'
+              className='tactile-press text-white border border-white/60 px-7 py-3 text-[10px] font-semibold tracking-[0.2em] uppercase hover:border-white hover:bg-white/10 transition-colors'
             >
               Start a Project
             </Link>
