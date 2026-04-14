@@ -10,6 +10,7 @@ export function ProjectSlider() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const scrollValRef = useRef({ current: 0 })
   const rafRef = useRef<number>(0)
+  const [isInView, setIsInView] = useState(false)
   const [cardTransforms, setCardTransforms] = useState<
     { x: number; z: number; rotateY: number; opacity: number; visible: boolean; index: number }[]
   >([])
@@ -25,8 +26,23 @@ export function ProjectSlider() {
     isHoveredRef.current = hoveredIndex !== null
   }, [hoveredIndex])
 
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { rootMargin: '300px 0px' }
+    )
+
+    observer.observe(section)
+    return () => observer.disconnect()
+  }, [])
+
   // Increase speed when wheel scrolling
   useEffect(() => {
+    if (!isInView) return
+
     const handleWheel = (e: WheelEvent) => {
       // Scale scroll delta into a velocity multiplier (absolute value)
       const additionalVelocity = Math.abs(e.deltaY) * 0.05
@@ -36,7 +52,7 @@ export function ProjectSlider() {
 
     window.addEventListener('wheel', handleWheel, { passive: true })
     return () => window.removeEventListener('wheel', handleWheel)
-  }, [])
+  }, [isInView])
 
   const computeTransforms = useCallback((scrollPos: number) => {
     const vw = typeof window !== 'undefined' ? window.innerWidth : 1200
@@ -58,7 +74,16 @@ export function ProjectSlider() {
     })
   }, [totalWidth])
 
+  useEffect(() => {
+    setCardTransforms(computeTransforms(scrollValRef.current.current))
+  }, [computeTransforms])
+
   const animate = useCallback(() => {
+    if (!isInView) {
+      rafRef.current = 0
+      return
+    }
+
     const section = sectionRef.current
     if (!section) {
       rafRef.current = requestAnimationFrame(animate)
@@ -82,15 +107,17 @@ export function ProjectSlider() {
 
     // Focus calculation removed since counter was removed
     rafRef.current = requestAnimationFrame(animate)
-  }, [computeTransforms])
+  }, [computeTransforms, isInView])
 
   useEffect(() => {
+    if (!isInView) return
+
     rafRef.current = requestAnimationFrame(animate)
     return () => cancelAnimationFrame(rafRef.current)
-  }, [animate])
+  }, [animate, isInView])
 
   return (
-    <section id="projects" ref={sectionRef} className="relative bg-black select-none h-screen min-h-[700px] flex flex-col justify-center overflow-hidden w-full">
+    <section id="projects" ref={sectionRef} className="relative z-10 bg-black select-none h-screen min-h-[700px] flex flex-col justify-center overflow-hidden w-full -mb-px">
       <div className="w-full flex flex-col justify-center overflow-hidden">
         {/* Section header */}
         <div className="px-6 md:px-16 mb-8 md:mb-12 max-w-7xl mx-auto w-full flex justify-between items-end">
@@ -98,7 +125,7 @@ export function ProjectSlider() {
             <span className="block text-[10px] font-medium text-zinc-500 uppercase tracking-[0.2em] mb-2">
               Projects
             </span>
-            <h2 className="text-[clamp(2.4rem,6.8vw,6rem)] font-display font-semibold text-white tracking-[-0.03em] leading-[0.92]">
+            <h2 className="text-[clamp(2.4rem,6.8vw,6rem)] font-sans font-light text-white tracking-tight leading-[0.92]">
               Selected Work
             </h2>
           </div>

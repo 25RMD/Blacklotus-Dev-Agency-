@@ -11,10 +11,9 @@ interface OverlayMenuProps {
 
 export const menuItems = [
   { label: "Home", id: "/#home" },
-  { label: "What We Do", id: "/#what-we-do" },
+  { label: "What We Do", id: "/#how-we-do" },
+  { label: "Services", id: "/#services" },
   { label: "Projects", id: "/#projects" },
-  { label: "Process", id: "/#process" },
-  { label: "Testimonials", id: "/#testimonials" },
   { label: "Contact", id: "/#contact" },
   { label: "Blog", id: "/blog" },
 ]
@@ -25,7 +24,7 @@ export const useHandleNavigation = () => {
   // Check if target is just a hash on the current page
   return (targetPath: string) => {
     const isHomePage = location.pathname === "/"
-    const [path, hash] = targetPath.split("#")
+    const [, hash] = targetPath.split("#")
 
     if (isHomePage && hash) {
       // We are already home, just scroll
@@ -103,7 +102,7 @@ export function OverlayMenu({
                     },
                     opacity: { duration: 0.5 },
                   }}
-                  className='group flex items-center gap-4 text-4xl md:text-6xl 2xl:text-7xl font-display font-medium tracking-[-0.02em] cursor-pointer antialiased [text-rendering:optimizeLegibility]'
+                  className='group flex items-center gap-4 text-4xl md:text-6xl 2xl:text-7xl font-sans font-light tracking-tight cursor-pointer antialiased [text-rendering:optimizeLegibility]'
                   onMouseEnter={() => setHoveredItem(item.label)}
                   onClick={(e) => {
                     e.preventDefault()

@@ -11,12 +11,12 @@ const clients = [
 
 export function ClientLogos() {
   return (
-    <section className="w-full py-12 border-b border-white/5 bg-black/90 backdrop-blur-sm">
+    <section className="w-full py-12 bg-black/90 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-6 flex flex-col items-center gap-8">
         <p className="text-xs font-mono text-zinc-500 tracking-widest uppercase">Trusted by engineering teams at</p>
         <div className="flex flex-wrap justify-center items-center gap-12 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
           {clients.map((client) => (
-            <motion.div 
+            <motion.div
               key={client.name}
               whileHover={{ scale: 1.1, opacity: 1 }}
               className="h-8 md:h-10 w-auto flex items-center justify-center"

@@ -63,7 +63,7 @@ export function AudioPlayer() {
         ref={audioRef}
         src="/ambient.mp3" // Place your ambient music file in the public folder as ambient.mp3
         loop
-        preload="auto"
+        preload="none"
       />
       {location.pathname !== '/projects' && (
         <motion.button

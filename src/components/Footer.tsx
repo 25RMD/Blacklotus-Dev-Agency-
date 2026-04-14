@@ -78,9 +78,9 @@ export function Footer({
       <div className="relative z-20">
 
         {/* ── Info Grid ── */}
-        <div className="border-t border-white/10">
+        <div>
           <div className="max-w-7xl mx-auto px-6 md:px-12 py-14 md:py-20">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
               {/* Brand */}
               <div className="space-y-5">
                 <div className="flex items-center gap-3">
@@ -143,7 +143,7 @@ export function Footer({
                   Contact
                 </h4>
                 <div className="flex flex-col gap-3 text-[13px] text-white/55">
-                  <span>Africa, Nigeria</span>
+                  <span>Abuja, Nigeria</span>
                   <a
                     href="mailto:blacklotusenquiry@gmail.com"
                     className="text-white/70 hover:text-white transition-colors break-all"
@@ -153,18 +153,6 @@ export function Footer({
                 </div>
               </div>
 
-              {/* Services */}
-              <div className="space-y-4">
-                <h4 className="text-[10px] uppercase tracking-[0.18em] text-white/35 font-medium mb-5">
-                  Services
-                </h4>
-                <div className="flex flex-col gap-3 text-[13px] text-white/45">
-                  <span>Web Development</span>
-                  <span>Software Engineering</span>
-                  <span>UI/UX Design</span>
-                  <span>Cloud & DevOps</span>
-                </div>
-              </div>
             </div>
           </div>
 

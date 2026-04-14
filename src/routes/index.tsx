@@ -1,33 +1,88 @@
-import { useEffect, useMemo, useState, lazy, Suspense } from "react"
+import { lazy, Suspense, useEffect, useState, startTransition } from "react"
 import { useLocation } from "react-router"
 import { AnimatePresence } from "framer-motion"
+import type { Route } from "./+types/index"
 import { Navbar } from "../components/Navbar"
 import { OverlayMenu } from "../components/OverlayMenu"
 import { HeroSection } from "../components/HeroSection"
 import { WhatWeDo } from "../components/WhatWeDo"
-import { GetInTouch } from "../components/GetInTouch"
 import { Footer } from "../components/Footer"
 import { SmoothScroll } from "../components/SmoothScroll"
 import { PrivacyPolicy } from "../components/PrivacyPolicy"
 import { LoadingScreen } from "../components/LoadingScreen"
+import { buildMeta, seo } from "../lib/seo"
 
-const HowWeDo = lazy(() => import("../components/HowWeDo").then((m) => ({ default: m.HowWeDo })))
+const HowWeDo = lazy(() =>
+  import("../components/HowWeDo").then((module) => ({ default: module.HowWeDo }))
+)
 const ProjectSlider = lazy(() =>
-  import("../components/ProjectSlider").then((m) => ({ default: m.ProjectSlider }))
+  import("../components/ProjectSlider").then((module) => ({ default: module.ProjectSlider }))
 )
 const GetStartedMarquee = lazy(() =>
-  import("../components/GetStartedMarquee").then((m) => ({ default: m.GetStartedMarquee }))
+  import("../components/GetStartedMarquee").then((module) => ({ default: module.GetStartedMarquee }))
+)
+const ServicesSection = lazy(() =>
+  import("../components/ServicesSection").then((module) => ({ default: module.ServicesSection }))
 )
 const InsightsSlider = lazy(() =>
-  import("../components/InsightsSlider").then((m) => ({ default: m.InsightsSlider }))
+  import("../components/InsightsSlider").then((module) => ({ default: module.InsightsSlider }))
 )
+const GetInTouch = lazy(() =>
+  import("../components/GetInTouch").then((module) => ({ default: module.GetInTouch }))
+)
+
+function LazySection({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  const [shouldRender, setShouldRender] = useState(false)
+  const [container, setContainer] = useState<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    if (!container || shouldRender) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return
+        startTransition(() => setShouldRender(true))
+        observer.disconnect()
+      },
+      { rootMargin: "400px 0px" }
+    )
+
+    observer.observe(container)
+    return () => observer.disconnect()
+  }, [container, shouldRender])
+
+  return (
+    <div ref={setContainer}>
+      <Suspense fallback={null}>
+        {shouldRender ? children : null}
+      </Suspense>
+    </div>
+  )
+}
+
+export const meta: Route.MetaFunction = () =>
+  buildMeta({
+    title: "Software Development Agency in Nigeria | Black Lotus",
+    description:
+      "Black Lotus helps startups and established businesses in Nigeria build custom websites, mobile apps, and scalable software products with modern engineering and sharp product design.",
+    path: "/",
+    keywords: [
+      "software development agency in nigeria",
+      "custom software development Abuja",
+      "web app development nigeria",
+      "mobile app development agency nigeria",
+      "product design and development nigeria",
+    ],
+  })
 
 function App() {
   const location = useLocation()
-  const skipSplash = useMemo(() => {
-    const state = location.state as { skipSplash?: boolean } | null
-    return Boolean(state?.skipSplash)
-  }, [location.state])
+  const state = location.state as { skipSplash?: boolean } | null
+  const skipSplash = Boolean(state?.skipSplash)
   const [isLoading, setIsLoading] = useState(!skipSplash)
 
   useEffect(() => {
@@ -36,22 +91,49 @@ function App() {
 
   return (
     <>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            name: "Black Lotus Home",
+            url: seo.siteUrl,
+            description:
+              "Nigeria-based software development agency for custom websites, mobile apps, and scalable digital products.",
+            about: {
+              "@type": "ProfessionalService",
+              name: seo.siteName,
+            },
+            mainEntity: {
+              "@type": "ProfessionalService",
+              name: seo.siteName,
+              areaServed: ["Nigeria", "Africa"],
+            },
+          }),
+        }}
+      />
       <Layout>
         <HeroSection isLoaded={!isLoading} />
         <WhatWeDo />
-        <Suspense fallback={null}>
+        <LazySection>
           <HowWeDo />
-        </Suspense>
-        <Suspense fallback={null}>
+        </LazySection>
+        <LazySection>
           <ProjectSlider />
-        </Suspense>
-        <Suspense fallback={null}>
+        </LazySection>
+        <LazySection>
           <GetStartedMarquee />
-        </Suspense>
-        <Suspense fallback={null}>
+        </LazySection>
+        <LazySection>
+          <ServicesSection />
+        </LazySection>
+        <LazySection>
           <InsightsSlider />
-        </Suspense>
-        <GetInTouch />
+        </LazySection>
+        <LazySection>
+          <GetInTouch />
+        </LazySection>
       </Layout>
       {/* Loading screen - slides up to reveal content */}
       <AnimatePresence>

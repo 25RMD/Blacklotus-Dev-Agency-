@@ -1,6 +1,6 @@
 ---
 title: Backing Up MariaDB With WAL-G To S3
-date: 15 February 2026
+date: 15 February 2025
 image: /bigstock-Database-Copies.jpg
 category: Backend,Databases
 author: Omanjie Dominic

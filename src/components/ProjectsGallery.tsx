@@ -7,8 +7,8 @@ import { projects, type Project } from '../lib/projects'
 const TILE_COLS = 4
 const TILE_ROWS = 3
 const TILE_COUNT = TILE_COLS * TILE_ROWS
-const CARD_W = 320
-const CARD_H = 320
+const CARD_W = 400
+const CARD_H = 400
 const GAP = 2
 
 const CELL_W = CARD_W + GAP
@@ -224,7 +224,7 @@ export function ProjectsGallery() {
 
   if (windowSize.width === 0) {
     return (
-      <div className="relative w-full h-[100dvh] overflow-hidden bg-black text-white flex items-center justify-center">
+      <div className="relative w-screen h-screen overflow-hidden bg-black text-white flex items-center justify-center">
         <span className="text-sm text-gray-500 animate-pulse">Loading projects...</span>
       </div>
     )
@@ -233,7 +233,7 @@ export function ProjectsGallery() {
   return (
     <div
       ref={viewportRef}
-      className="relative w-full h-[100dvh] overflow-hidden bg-black text-white font-sans selection:bg-white selection:text-black cursor-grab active:cursor-grabbing"
+      className="relative w-screen h-screen overflow-hidden bg-black text-white font-sans selection:bg-white selection:text-black cursor-grab active:cursor-grabbing"
       style={{ touchAction: 'none' }}
       onPointerDown={onPointerDown}
       onPointerLeave={resetTilt}
@@ -260,11 +260,11 @@ export function ProjectsGallery() {
               }}
             >
               {tileProjects.map((project) => (
-                <Card
-                  key={project.tileIdx}
-                  project={project}
-                />
-              ))}
+                  <Card
+                    key={project.tileIdx}
+                    project={project}
+                  />
+                ))}
             </div>
           ))}
         </div>
@@ -388,7 +388,6 @@ const Card = memo(({ project }: {
         draggable={false}
         to={`/projects/${project.id}`}
         viewTransition
-        className="relative block w-full h-full p-5 md:p-6 flex flex-col justify-between"
         onPointerDown={(e) => {
           dragTracker.current = { x: e.clientX, y: e.clientY }
         }}
@@ -399,28 +398,34 @@ const Card = memo(({ project }: {
             e.preventDefault()
           }
         }}
+        onDragStart={(e) => e.preventDefault()}
+        className="absolute inset-0 p-6 flex flex-col justify-between z-10 cursor-pointer pointer-events-auto"
       >
-        <div className="absolute inset-0 pointer-events-none backdrop-blur-[1.5px] bg-white/6 opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
-        <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(125deg,rgba(255,255,255,0.22)_0%,rgba(255,255,255,0.06)_32%,rgba(255,255,255,0.0)_55%,rgba(255,255,255,0.12)_100%)] opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
-        <div className="absolute -inset-[35%] pointer-events-none bg-[radial-gradient(circle_at_20%_10%,rgba(255,255,255,0.45)_0%,rgba(255,255,255,0)_48%)] opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+        {/* Hover glass reflection */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0">
+          <img
+            src={project.img}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover scale-110 blur-xl opacity-25 mix-blend-screen"
+          />
+          <div className="absolute inset-0 backdrop-blur-[1.5px] bg-white/6" />
+          <div className="absolute inset-0 bg-[linear-gradient(125deg,rgba(255,255,255,0.22)_0%,rgba(255,255,255,0.06)_32%,rgba(255,255,255,0.0)_55%,rgba(255,255,255,0.12)_100%)]" />
+          <div className="absolute -inset-[35%] bg-[radial-gradient(circle_at_20%_10%,rgba(255,255,255,0.45)_0%,rgba(255,255,255,0)_48%)]" />
+        </div>
 
         <div className="relative z-20 flex justify-between items-start text-[10px] font-medium tracking-[0.16em] uppercase text-gray-400 group-hover:text-white transition-colors duration-500">
           <span>{project.client}</span>
           <span>{project.year}</span>
         </div>
-        <div className="absolute inset-0 pointer-events-none z-10 flex items-center justify-center">
-          <div className="relative w-[170px] h-[170px] md:w-[190px] md:h-[190px] lg:w-[210px] lg:h-[210px]">
-            <picture>
-              <source srcSet={project.imgWebp} type={project.imgWebp.endsWith('.svg') ? 'image/svg+xml' : 'image/webp'} />
-              <img
-                src={project.imgFallback}
-                alt={project.title}
-                loading="lazy"
-                decoding="async"
-                className="absolute inset-0 w-full h-full object-contain object-center opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 ease-out drop-shadow-2xl"
-              />
-            </picture>
-          </div>
+        <div className="absolute inset-0 pointer-events-none z-10 flex items-center justify-center p-12">
+          <img
+            src={project.img}
+            alt={project.title}
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-contain opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 ease-out drop-shadow-2xl"
+          />
         </div>
         <div className="relative z-20 flex justify-between items-end text-[9px] font-medium tracking-[0.16em] uppercase text-gray-500 group-hover:text-white transition-colors duration-500">
           <span>{project.tags.join(' · ')}</span>

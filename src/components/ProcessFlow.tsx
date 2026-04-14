@@ -9,9 +9,9 @@ export function ProcessFlow() {
   ]
 
   return (
-    <section id="process" className="w-full bg-black/85 backdrop-blur-sm border-y border-white/5 py-24 md:py-32">
+    <section id="process" className="w-full bg-black/85 backdrop-blur-sm py-24 md:py-32">
       <div className="max-w-7xl mx-auto px-6">
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -19,20 +19,20 @@ export function ProcessFlow() {
         >
           How It Works
         </motion.h2>
-        
+
         <div className="grid md:grid-cols-4 gap-8 relative">
           {/* Connecting Line (Desktop) */}
-          <motion.div 
+          <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="hidden md:block absolute top-6 left-0 w-full h-px bg-linear-to-r from-transparent via-white/20 to-transparent origin-left" 
+            className="hidden md:block absolute top-6 left-0 w-full h-px bg-linear-to-r from-transparent via-white/20 to-transparent origin-left"
           />
 
           {steps.map((step, i) => (
-            <motion.div 
-              key={i} 
+            <motion.div
+              key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

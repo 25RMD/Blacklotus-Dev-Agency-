@@ -48,7 +48,7 @@ ${details}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.1 }}
-                            className="text-[clamp(3.4rem,9.4vw,8.5rem)] font-display font-semibold tracking-[-0.03em] text-white leading-[0.9] -ml-1"
+                            className="text-[clamp(3.4rem,9.4vw,8.5rem)] font-sans font-light tracking-tight text-white leading-[0.9] -ml-1"
                         >
                             Speak to us.
                         </motion.h2>
@@ -60,7 +60,7 @@ ${details}
                             transition={{ delay: 0.2 }}
                             className="text-sm text-zinc-400 max-w-sm leading-relaxed mt-3"
                         >
-                            If you want to start a project, share an idea or simply say hi, we want to hear from you.
+                            If you need a software development partner in Abuja or anywhere in Nigeria, share your idea and we will help shape the right web, mobile, or cloud solution.
                         </motion.p>
                     </div>
 

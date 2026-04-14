@@ -50,7 +50,7 @@ export function InsightsSlider() {
     return (
         <section className="w-full bg-[#f7f7f5] py-24 md:py-32 overflow-hidden">
             <div className="max-w-360 mx-auto px-6 md:px-12 lg:px-16 mb-12 flex items-baseline justify-between gap-6">
-                <h2 className="text-[clamp(2.5rem,5vw,3.5rem)] font-display text-[#222] font-semibold tracking-[-0.02em] leading-none">
+                <h2 className="text-[clamp(2.5rem,5vw,3.5rem)] font-sans text-[#222] font-light tracking-tight leading-none">
                     Related Insights
                 </h2>
                 <Link
@@ -83,7 +83,7 @@ export function InsightsSlider() {
                             </div>
 
                             <div className="flex flex-col gap-4 px-1">
-                                <h3 className="font-display text-[22px] md:text-[26px] leading-[1.2] text-[#222] font-medium tracking-tight">
+                                <h3 className="font-sans text-[22px] md:text-[26px] leading-[1.2] text-[#222] font-light tracking-tight">
                                     {item.title}
                                 </h3>
                                 <p className="text-sm text-[#555] line-clamp-2">

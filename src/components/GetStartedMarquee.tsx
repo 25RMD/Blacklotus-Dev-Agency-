@@ -124,7 +124,7 @@ export function GetStartedMarquee() {
         <section
             id="get-started"
             ref={containerRef}
-            className="relative w-full h-[400vh] bg-black"
+            className="relative w-full h-[400vh] bg-black -mb-px z-10"
         >
             {/* The sticky viewport that locks to the screen */}
             <div className="marquee-bg sticky top-0 h-screen w-full overflow-hidden flex items-center bg-black text-white">

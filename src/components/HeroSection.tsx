@@ -52,7 +52,7 @@ export function HeroSection({ isLoaded = false }: HeroSectionProps) {
     <section
       id='home'
       ref={sectionRef}
-      className='relative h-screen min-h-[700px] w-full overflow-hidden flex items-center justify-center'
+      className='relative h-screen min-h-[700px] w-full overflow-hidden flex items-center justify-center -mb-px'
     >
       {/* Video Background */}
       <div className='absolute inset-0 z-0 bg-black'>
@@ -99,14 +99,14 @@ export function HeroSection({ isLoaded = false }: HeroSectionProps) {
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 1.3 }}
             style={{ willChange: "transform, opacity" }}
           >
-            Software Development Agency
+            Software Development Agency in Nigeria
           </motion.p>
         </div>
 
         {/* Main heading */}
         <div className='overflow-hidden mb-7'>
           <motion.h1
-            className='font-display text-[clamp(3.9rem,12.4vw,12.5rem)] font-semibold tracking-[-0.035em] leading-[0.9] text-white'
+            className='font-sans text-[clamp(3.9rem,12.4vw,12.5rem)] font-light tracking-tight leading-[0.9] text-white'
             initial={{ y: "120%" }}
             animate={isLoaded ? { y: 0 } : { y: "120%" }}
             transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 1.5 }}
@@ -114,7 +114,7 @@ export function HeroSection({ isLoaded = false }: HeroSectionProps) {
           >
             Ideas engineered
             <br />
-            <span className='font-medium text-white'>
+            <span className='font-light text-white'>
               to perform.
             </span>
           </motion.h1>
@@ -131,7 +131,7 @@ export function HeroSection({ isLoaded = false }: HeroSectionProps) {
           <Magnetic>
             <Link
               to='/#projects'
-              className='tactile-press bg-white text-black px-7 py-3 border border-white text-[10px] font-semibold tracking-[0.2em] uppercase hover:bg-neutral-100 transition-colors'
+              className='tactile-press bg-white text-black px-7 py-3 border border-white text-[10px] font-semibold tracking-[0.2em] uppercase hover:bg-neutral-100 transition-colors w-[220px] flex justify-center text-center'
             >
               View Our Work
             </Link>
@@ -139,12 +139,21 @@ export function HeroSection({ isLoaded = false }: HeroSectionProps) {
           <Magnetic>
             <Link
               to='/#contact'
-              className='tactile-press text-white border border-white/60 px-7 py-3 text-[10px] font-semibold tracking-[0.2em] uppercase hover:border-white hover:bg-white/10 transition-colors'
+              className='tactile-press text-white border border-white/60 px-7 py-3 text-[10px] font-semibold tracking-[0.2em] uppercase hover:border-white hover:bg-white/10 transition-colors w-[220px] flex justify-center text-center'
             >
               Start a Project
             </Link>
           </Magnetic>
         </motion.div>
+
+        <motion.p
+          className='mt-6 max-w-2xl mx-auto text-sm md:text-base text-white/72 leading-relaxed'
+          initial={{ opacity: 0, y: 20 }}
+          animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 2 }}
+        >
+          We design and build custom websites, web apps, mobile apps, and product systems for startups and businesses across Nigeria.
+        </motion.p>
       </div>
 
       {/* Bottom bar — location */}
@@ -154,7 +163,7 @@ export function HeroSection({ isLoaded = false }: HeroSectionProps) {
         animate={isLoaded ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 2.1 }}
       >
-        <span>Africa, Nigeria</span>
+        <span>Abuja, Nigeria</span>
       </motion.div>
     </section>
   )
