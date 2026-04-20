@@ -378,6 +378,7 @@ const Card = memo(({ project }: {
   project: Project & { tileIdx: number }
 }) => {
   const dragTracker = useRef({ x: 0, y: 0 })
+  const imageSrc = project.imgWebp || project.imgFallback
 
   return (
     <div
@@ -404,7 +405,7 @@ const Card = memo(({ project }: {
         {/* Hover glass reflection */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0">
           <img
-            src={project.img}
+            src={imageSrc}
             alt=""
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover scale-110 blur-xl opacity-25 mix-blend-screen"
@@ -420,7 +421,7 @@ const Card = memo(({ project }: {
         </div>
         <div className="absolute inset-0 pointer-events-none z-10 flex items-center justify-center p-12">
           <img
-            src={project.img}
+            src={imageSrc}
             alt={project.title}
             loading="lazy"
             decoding="async"
