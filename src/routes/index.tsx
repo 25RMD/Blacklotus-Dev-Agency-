@@ -11,31 +11,40 @@ import { SmoothScroll } from "../components/SmoothScroll"
 import { PrivacyPolicy } from "../components/PrivacyPolicy"
 import { LoadingScreen } from "../components/LoadingScreen"
 import { buildMeta, seo } from "../lib/seo"
-
+import { getPosts } from "@/lib/post-meta"
+import { useLoaderData } from "react-router"
 const HowWeDo = lazy(() =>
-  import("../components/HowWeDo").then((module) => ({ default: module.HowWeDo }))
+  import("../components/HowWeDo").then((module) => ({
+    default: module.HowWeDo,
+  }))
 )
 const ProjectSlider = lazy(() =>
-  import("../components/ProjectSlider").then((module) => ({ default: module.ProjectSlider }))
+  import("../components/ProjectSlider").then((module) => ({
+    default: module.ProjectSlider,
+  }))
 )
 const GetStartedMarquee = lazy(() =>
-  import("../components/GetStartedMarquee").then((module) => ({ default: module.GetStartedMarquee }))
+  import("../components/GetStartedMarquee").then((module) => ({
+    default: module.GetStartedMarquee,
+  }))
 )
 const ServicesSection = lazy(() =>
-  import("../components/ServicesSection").then((module) => ({ default: module.ServicesSection }))
+  import("../components/ServicesSection").then((module) => ({
+    default: module.ServicesSection,
+  }))
 )
 const InsightsSlider = lazy(() =>
-  import("../components/InsightsSlider").then((module) => ({ default: module.InsightsSlider }))
+  import("../components/InsightsSlider").then((module) => ({
+    default: module.InsightsSlider,
+  }))
 )
 const GetInTouch = lazy(() =>
-  import("../components/GetInTouch").then((module) => ({ default: module.GetInTouch }))
+  import("../components/GetInTouch").then((module) => ({
+    default: module.GetInTouch,
+  }))
 )
 
-function LazySection({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+function LazySection({ children }: { children: React.ReactNode }) {
   const [shouldRender, setShouldRender] = useState(false)
   const [container, setContainer] = useState<HTMLDivElement | null>(null)
 
@@ -57,9 +66,7 @@ function LazySection({
 
   return (
     <div ref={setContainer}>
-      <Suspense fallback={null}>
-        {shouldRender ? children : null}
-      </Suspense>
+      <Suspense fallback={null}>{shouldRender ? children : null}</Suspense>
     </div>
   )
 }
@@ -79,6 +86,9 @@ export const meta: Route.MetaFunction = () =>
     ],
   })
 
+export async function loader() {
+  return getPosts()
+}
 function App() {
   const location = useLocation()
   const state = location.state as { skipSplash?: boolean } | null
@@ -88,6 +98,7 @@ function App() {
   useEffect(() => {
     if (skipSplash) setIsLoading(false)
   }, [skipSplash])
+  const posts = useLoaderData<typeof loader>() ?? []
 
   return (
     <>
@@ -129,7 +140,7 @@ function App() {
           <ServicesSection />
         </LazySection>
         <LazySection>
-          <InsightsSlider />
+          <InsightsSlider posts={posts} />
         </LazySection>
         <LazySection>
           <GetInTouch />
