@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
+
 interface NavbarProps {
   isMenuOpen: boolean
   onToggleMenu: () => void
@@ -41,7 +42,8 @@ export function Navbar({ isMenuOpen, onToggleMenu }: NavbarProps) {
       {/* Logo & Tagline */}
       <div className="flex items-center gap-4 pointer-events-auto mix-blend-difference">
         <img
-          src="/BL-logo.jpg"
+          fetchPriority='high'
+          src="BL-logo48x48.jpg"
           alt="Black Lotus"
           className="h-12 w-12 rounded-full object-contain"
         />

@@ -9,15 +9,15 @@ if (typeof window !== "undefined") {
 
 // Assets to mix inside the marquee cards
 const marqueeCards = [
-    { webp: "/curtainReveal/1.webp", fallback: "/curtainReveal/1.jpg", type: "image", title: "Strategy" },
-    { webp: "/curtainReveal/2.webp", fallback: "/curtainReveal/2.jpg", type: "image", title: "Design" },
-    { webp: "/curtainReveal/3.webp", fallback: "/curtainReveal/3.jpg", type: "image", title: "Development" },
-    { webp: "/curtainReveal/4.webp", fallback: "/curtainReveal/4.jpg", type: "image", title: "Motion" },
-    { webp: "/curtainReveal/5.webp", fallback: "/curtainReveal/5.jpg", type: "image", title: "Scale" },
-    { webp: "/curtainReveal/6.webp", fallback: "/curtainReveal/6.jpg", type: "image", title: "Refine" },
-    { webp: "/curtainReveal/7.webp", fallback: "/curtainReveal/7.jpg", type: "image", title: "Brand" },
-    { webp: "/curtainReveal/8.webp", fallback: "/curtainReveal/8.jpg", type: "image", title: "Story" },
-    { webp: "/curtainReveal/9.webp", fallback: "/curtainReveal/9.jpg", type: "image", title: "Future" }
+    { webp: "/curtainReveal/1-300x300.webp 300w,  /curtainReveal/1-400x400.webp 400w", fallback: "/curtainReveal/1.webp", type: "image", title: "Strategy" },
+    { webp: "/curtainReveal/2-300x300.webp 300w,  /curtainReveal/2-400x400.webp 400w", fallback: "/curtainReveal/2.webp", type: "image", title: "Design" },
+    { webp: "/curtainReveal/3-300x300.webp 300w,  /curtainReveal/3-400x400.webp 400w", fallback: "/curtainReveal/3.webp", type: "image", title: "Development" },
+    { webp: "/curtainReveal/4-300x300.webp 300w,  /curtainReveal/4-400x400.webp 400w", fallback: "/curtainReveal/4.webp", type: "image", title: "Motion" },
+    { webp: "/curtainReveal/5-300x300.webp 300w,  /curtainReveal/5-400x400.webp 400w", fallback: "/curtainReveal/5.webp", type: "image", title: "Scale" },
+    { webp: "/curtainReveal/6-300x300.webp 300w,  /curtainReveal/6-400x400.webp 400w", fallback: "/curtainReveal/6.webp", type: "image", title: "Refine" },
+    { webp: "/curtainReveal/7-300x300.webp 300w,  /curtainReveal/7-400x400.webp 400w", fallback: "/curtainReveal/7.webp", type: "image", title: "Brand" },
+    { webp: "/curtainReveal/8-300x300.webp 300w,  /curtainReveal/8-400x400.webp 400w", fallback: "/curtainReveal/8.webp", type: "image", title: "Story" },
+    { webp: "/curtainReveal/9-300x300.webp 300w,  /curtainReveal/9-400x400.webp 400w", fallback: "/curtainReveal/9.webp", type: "image", title: "Future" }
 ]
 
 export function GetStartedMarquee() {

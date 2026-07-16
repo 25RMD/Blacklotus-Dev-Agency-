@@ -85,7 +85,7 @@ export function Footer({
               <div className="space-y-5">
                 <div className="flex items-center gap-3">
                   <img
-                    src="/BL-logo.jpg"
+                    src="/BL-logo48x48.jpg"
                     alt="Black Lotus"
                     className="w-7 h-7 rounded-full object-contain"
                   />
