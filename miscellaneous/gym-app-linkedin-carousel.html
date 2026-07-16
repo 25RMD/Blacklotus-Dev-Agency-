@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gym App Carousel</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter:wght@100..900&family=Poppins:wght@400;500;600;700;800&display=swap");
+
+      :root {
+        --off-black: #111111;
+        --pure-black: #000000;
+        --pure-white: #ffffff;
+        --cream: #f5f5f0;
+        --zinc-400: #a1a1aa;
+        --zinc-500: #71717a;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #333;
+        font-family: "Inter", sans-serif;
+      }
+
+      .gap-label {
+        text-align: center;
+        color: #ccc;
+        font-family: "Inter", sans-serif;
+        font-size: 13px;
+        padding: 14px 0;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .slide {
+        width: 1080px;
+        height: 1350px;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+        background: var(--off-black);
+        color: var(--pure-white);
+      }
+
+      .slide.light {
+        background: var(--cream);
+        color: var(--off-black);
+      }
+
+      .grid-overlay {
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0.045) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.045) 1px,
+            transparent 1px
+          );
+        background-size: 54px 54px;
+        pointer-events: none;
+      }
+
+      .slide.light .grid-overlay {
+        background:
+          linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+        background-size: 54px 54px;
+      }
+
+      /* ---------- COVER ---------- */
+      .cover-inner {
+        position: relative;
+        z-index: 1;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 80px;
+      }
+
+      .brand-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .brand-mark {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--pure-white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Inter", sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+        color: var(--off-black);
+      }
+
+      .brand-text .line1 {
+        font-size: 18px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--zinc-400);
+      }
+      .brand-text .line2 {
+        font-size: 18px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--zinc-400);
+      }
+
+      .cover-eyebrow {
+        font-family: "Poppins", sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--zinc-400);
+        margin-bottom: 28px;
+      }
+
+      .cover-title {
+        font-family: "Inter", sans-serif;
+        font-size: 92px;
+        font-weight: 700;
+        line-height: 0.98;
+        letter-spacing: -0.02em;
+        max-width: 880px;
+      }
+
+      .cover-title em {
+        font-style: italic;
+        font-weight: 500;
+        color: var(--zinc-400);
+      }
+
+      .cover-sub {
+        margin-top: 36px;
+        font-size: 26px;
+        font-weight: 300;
+        color: var(--zinc-400);
+        max-width: 640px;
+        line-height: 1.5;
+      }
+
+      .cover-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        font-size: 18px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--zinc-500);
+      }
+
+      /* ---------- REASON SLIDE ---------- */
+      .reason-inner {
+        position: relative;
+        z-index: 1;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 80px;
+      }
+
+      .reason-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+
+      .reason-number {
+        font-family: "Inter", sans-serif;
+        font-size: 220px;
+        font-weight: 700;
+        line-height: 1;
+        color: var(--zinc-500);
+        opacity: 0.35;
+      }
+
+      .reason-tag {
+        font-family: "Poppins", sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--zinc-400);
+        text-align: right;
+        margin-top: 20px;
+      }
+
+      .reason-body {
+        margin-top: -40px;
+      }
+
+      .reason-headline {
+        font-family: "Inter", sans-serif;
+        font-size: 58px;
+        font-weight: 600;
+        line-height: 1.08;
+        letter-spacing: -0.01em;
+        max-width: 820px;
+        margin-bottom: 28px;
+      }
+
+      .reason-desc {
+        font-size: 28px;
+        font-weight: 300;
+        line-height: 1.5;
+        max-width: 760px;
+        color: var(--zinc-400);
+      }
+
+      .slide.light .reason-desc {
+        color: #52525b;
+      }
+
+      .accent-bar {
+        width: 90px;
+        height: 6px;
+        background: var(--pure-white);
+        margin-bottom: 32px;
+      }
+
+      .slide.light .accent-bar {
+        background: var(--off-black);
+      }
+
+      .reason-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 18px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--zinc-500);
+      }
+
+      .progress-dots {
+        display: flex;
+        gap: 8px;
+      }
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--zinc-500);
+      }
+
+      .dot.active {
+        background: var(--pure-white);
+      }
+
+      .slide.light .dot.active {
+        background: var(--off-black);
+      }
+
+      /* ---------- CTA SLIDE ---------- */
+      .cta-inner {
+        position: relative;
+        z-index: 1;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 80px;
+      }
+
+      .cta-tag {
+        font-family: "Poppins", sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--zinc-400);
+        margin-bottom: 30px;
+      }
+
+      .cta-title {
+        font-family: "Inter", sans-serif;
+        font-size: 68px;
+        font-weight: 600;
+        line-height: 1.08;
+        max-width: 800px;
+        margin-bottom: 40px;
+      }
+
+      .cta-line {
+        font-size: 28px;
+        font-weight: 300;
+        color: var(--zinc-400);
+        max-width: 640px;
+        line-height: 1.55;
+        margin-bottom: 56px;
+      }
+
+      .cta-contact {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-size: 26px;
+      }
+
+      .cta-contact .label {
+        font-size: 18px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--zinc-500);
+        margin-bottom: 2px;
+      }
+
+      .cta-tagline-box {
+        position: absolute;
+        bottom: 80px;
+        left: 80px;
+        right: 80px;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        padding-top: 28px;
+        font-family: "Inter", sans-serif;
+        font-style: italic;
+        font-size: 26px;
+        color: var(--zinc-400);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="gap-label">SLIDE 1 — COVER</div>
+    <div class="slide">
+      <div class="grid-overlay"></div>
+      <div class="cover-inner">
+        <div class="brand-row">
+          <img class="brand-mark" src="../public/BL-logo.jpg" alt="" />
+          <div class="brand-text">
+            <div class="line1">Black Lotus</div>
+            <div class="line2">Web &amp; Software Solutions</div>
+          </div>
+        </div>
+        <div>
+          <div class="cover-eyebrow">Gym App Development</div>
+          <h1 class="cover-title">
+            10 Reasons Every Gym Needs a <em>Mobile App</em> in 2026
+          </h1>
+          <p class="cover-sub">
+            The gyms winning in 2026 aren't just the ones with the best
+            equipment. They're the ones members never have to think twice about
+            staying with.
+          </p>
+        </div>
+        <div class="cover-footer">
+          <span>blacklotusdev.org</span>
+          <span>Swipe &rarr;</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-label">SLIDE 2 — REASON 01</div>
+    <div class="slide">
+      <div class="grid-overlay"></div>
+      <div class="reason-inner">
+        <div class="reason-top">
+          <div class="reason-number">01</div>
+          <div class="reason-tag">Revenue</div>
+        </div>
+        <div class="reason-body">
+          <div class="accent-bar"></div>
+          <h2 class="reason-headline">
+            Auto-renewing card billing kills the monthly chase
+          </h2>
+          <p class="reason-desc">
+            No more calls, reminder texts, or waiting on a bank transfer that
+            "will land any moment." Members save a card once, and the app renews
+            it automatically every month.
+          </p>
+        </div>
+        <div class="reason-footer">
+          <span>Black Lotus</span>
+          <div class="progress-dots">
+            <span class="dot active"></span><span class="dot"></span
+            ><span class="dot"></span><span class="dot"></span
+            ><span class="dot"></span> <span class="dot"></span
+            ><span class="dot"></span><span class="dot"></span
+            ><span class="dot"></span><span class="dot"></span>
+          </div>
+          <span>01 / 10</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-label">SLIDE 3 — REASON 02</div>
+    <div class="slide light">
+      <div class="grid-overlay"></div>
+      <div class="reason-inner">
+        <div class="reason-top">
+          <div class="reason-number">02</div>
+          <div class="reason-tag">New Revenue</div>
+        </div>
+        <div class="reason-body">
+          <div class="accent-bar"></div>
+          <h2 class="reason-headline">
+            Turn the app into a second revenue stream
+          </h2>
+          <p class="reason-desc">
+            Add an in-app store for gear, supplements and gym wear. Members
+            already open the app every week, checkout takes a few taps, same
+            card already on file.
+          </p>
+        </div>
+        <div class="reason-footer">
+          <span>Black Lotus</span>
+          <div class="progress-dots">
+            <span class="dot"></span><span class="dot active"></span
+            ><span class="dot"></span><span class="dot"></span
+            ><span class="dot"></span> <span class="dot"></span
+            ><span class="dot"></span><span class="dot"></span
+            ><span class="dot"></span><span class="dot"></span>
+          </div>
+          <span>02 / 10</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-label">SLIDE 4 — REASON 03</div>
+    <div class="slide">
+      <div class="grid-overlay"></div>
+      <div class="reason-inner">
+        <div class="reason-top">
+          <div class="reason-number">03</div>
+          <div class="reason-tag">Retention</div>
+        </div>
+        <div class="reason-body">
+          <div class="accent-bar"></div>
+          <h2 class="reason-headline">
+            Give members a reason to stay, not just a card to swipe
+          </h2>
+          <p class="reason-desc">
+            Progress tracking, class booking and reminders keep the gym on a
+            member's mind between visits, so it never becomes something they
+            quietly forget about.
+          </p>
+        </div>
+        <div class="reason-footer">
+          <span>Black Lotus</span>
+          <div class="progress-dots">
+            <span class="dot"></span><span class="dot"></span
+            ><span class="dot active"></span><span class="dot"></span
+            ><span class="dot"></span> <span class="dot"></span
+            ><span class="dot"></span><span class="dot"></span
+            ><span class="dot"></span><span class="dot"></span>
+          </div>
+          <span>03 / 10</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-label">SLIDE 5 — REASON 04</div>
+    <div class="slide light">
+      <div class="grid-overlay"></div>
+      <div class="reason-inner">
+        <div class="reason-top">
+          <div class="reason-number">04</div>
+          <div class="reason-tag">Differentiation</div>
+        </div>
+        <div class="reason-body">
+          <div class="accent-bar"></div>
+          <h2 class="reason-headline">
+            An AI trainer and training plan for every single member
+          </h2>
+          <p class="reason-desc">
+            Personalized plans built around each member's goals and progress,
+            adjusting automatically as they improve. Feels like a personal
+            trainer, without the personal trainer bill.
+          </p>
+        </div>
+        <div class="reason-footer">
+          <span>Black Lotus</span>
+          <div class="progress-dots">
+            <span class="dot"></span><span class="dot"></span
+            ><span class="dot"></span><span class="dot active"></span
+            ><span class="dot"></span> <span class="dot"></span
+            ><span class="dot"></span><span class="dot"></span
+            ><span class="dot"></span><span class="dot"></span>
+          </div>
+          <span>04 / 10</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-label">SLIDE 6 — REASON 05</div>
+    <div class="slide">
+      <div class="grid-overlay"></div>
+      <div class="reason-inner">
+        <div class="reason-top">
+          <div class="reason-number">05</div>
+          <div class="reason-tag">Operations</div>
+        </div>
+        <div class="reason-body">
+          <div class="accent-bar"></div>
+          <h2 class="reason-headline">
+            No more queues for the squat rack at 6pm
+          </h2>
+          <p class="reason-desc">
+            Show real time occupancy or let members book a time slot. Especially
+            useful for smaller gyms, where a crowded peak hour can quietly push
+            members away for good.
+          </p>
+        </div>
+        <div class="reason-footer">
+          <span>Black Lotus</span>
+          <div class="progress-dots">
+            <span class="dot"></span><span class="dot"></span
+            ><span class="dot"></span><span class="dot"></span
+            ><span class="dot active"></span> <span class="dot"></span
+            ><span class="dot"></span><span class="dot"></span
+            ><span class="dot"></span><span class="dot"></span>
+          </div>
+          <span>05 / 10</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-label">SLIDE 7 — REASON 06</div>
+    <div class="slide light">
+      <div class="grid-overlay"></div>
+      <div class="reason-inner">
+        <div class="reason-top">
+          <div class="reason-number">06</div>
+          <div class="reason-tag">Efficiency</div>
+        </div>
+        <div class="reason-body">
+          <div class="accent-bar"></div>
+          <h2 class="reason-headline">Fewer empty slots. Fewer no-shows.</h2>
+          <p class="reason-desc">
+            In-app class booking with reminders lets members cancel early enough
+            for someone else to take the spot. Trainers walk in already knowing
+            who to expect.
+          </p>
+        </div>
+        <div class="reason-footer">
+          <span>Black Lotus</span>
+          <div class="progress-dots">
+            <span class="dot"></span><span class="dot"></span
+            ><span class="dot"></span><span class="dot"></span
+            ><span class="dot"></span> <span class="dot active"></span
+            ><span class="dot"></span><span class="dot"></span
+            ><span class="dot"></span><span class="dot"></span>
+          </div>
+          <span>06 / 10</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-label">SLIDE 8 — REASON 07</div>
+    <div class="slide">
+      <div class="grid-overlay"></div>
+      <div class="reason-inner">
+        <div class="reason-top">
+          <div class="reason-number">07</div>
+          <div class="reason-tag">Retention</div>
+        </div>
+        <div class="reason-body">
+          <div class="accent-bar"></div>
+          <h2 class="reason-headline">Bring members back before they quit</h2>
+          <p class="reason-desc">
+            A simple "we miss you" push notification can bring a member back
+            before they've fully checked out mentally, one of the cheapest
+            retention tools available.
+          </p>
+        </div>
+        <div class="reason-footer">
+          <span>Black Lotus</span>
+          <div class="progress-dots">
+            <span class="dot"></span><span class="dot"></span
+            ><span class="dot"></span><span class="dot"></span
+            ><span class="dot"></span> <span class="dot"></span
+            ><span class="dot active"></span><span class="dot"></span
+            ><span class="dot"></span><span class="dot"></span>
+          </div>
+          <span>07 / 10</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-label">SLIDE 9 — REASON 08</div>
+    <div class="slide light">
+      <div class="grid-overlay"></div>
+      <div class="reason-inner">
+        <div class="reason-top">
+          <div class="reason-number">08</div>
+          <div class="reason-tag">Business Insight</div>
+        </div>
+        <div class="reason-body">
+          <div class="accent-bar"></div>
+          <h2 class="reason-headline">
+            Know who's about to leave, before they do
+          </h2>
+          <p class="reason-desc">
+            Every check-in, booking and payment becomes real data. See which
+            members are at risk of churning and which classes actually need more
+            slots.
+          </p>
+        </div>
+        <div class="reason-footer">
+          <span>Black Lotus</span>
+          <div class="progress-dots">
+            <span class="dot"></span><span class="dot"></span
+            ><span class="dot"></span><span class="dot"></span
+            ><span class="dot"></span> <span class="dot"></span
+            ><span class="dot"></span><span class="dot active"></span
+            ><span class="dot"></span><span class="dot"></span>
+          </div>
+          <span>08 / 10</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-label">SLIDE 10 — REASON 09</div>
+    <div class="slide">
+      <div class="grid-overlay"></div>
+      <div class="reason-inner">
+        <div class="reason-top">
+          <div class="reason-number">09</div>
+          <div class="reason-tag">Brand</div>
+        </div>
+        <div class="reason-body">
+          <div class="accent-bar"></div>
+          <h2 class="reason-headline">
+            Compete with the big chains, without their budget
+          </h2>
+          <p class="reason-desc">
+            Same booking convenience, same digital polish. Members stop treating
+            you like "the small gym down the street" and start treating you like
+            a real competitor.
+          </p>
+        </div>
+        <div class="reason-footer">
+          <span>Black Lotus</span>
+          <div class="progress-dots">
+            <span class="dot"></span><span class="dot"></span
+            ><span class="dot"></span><span class="dot"></span
+            ><span class="dot"></span> <span class="dot"></span
+            ><span class="dot"></span><span class="dot"></span
+            ><span class="dot active"></span><span class="dot"></span>
+          </div>
+          <span>09 / 10</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-label">SLIDE 11 — REASON 10</div>
+    <div class="slide light">
+      <div class="grid-overlay"></div>
+      <div class="reason-inner">
+        <div class="reason-top">
+          <div class="reason-number">10</div>
+          <div class="reason-tag">Convenience</div>
+        </div>
+        <div class="reason-body">
+          <div class="accent-bar"></div>
+          <h2 class="reason-headline">
+            No cards. No sign-in books. Just a tap.
+          </h2>
+          <p class="reason-desc">
+            A digital membership card means staff see instantly if a membership
+            is active, and members never lose a card or wait for someone to
+            check a book.
+          </p>
+        </div>
+        <div class="reason-footer">
+          <span>Black Lotus</span>
+          <div class="progress-dots">
+            <span class="dot"></span><span class="dot"></span
+            ><span class="dot"></span><span class="dot"></span
+            ><span class="dot"></span> <span class="dot"></span
+            ><span class="dot"></span><span class="dot"></span
+            ><span class="dot"></span><span class="dot active"></span>
+          </div>
+          <span>10 / 10</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gap-label">SLIDE 12 — CTA</div>
+    <div class="slide">
+      <div class="grid-overlay"></div>
+      <div class="cta-inner">
+        <div class="cta-tag">Let's Build Yours</div>
+        <h2 class="cta-title">
+          Ready to give your gym an app members actually use?
+        </h2>
+        <p class="cta-line">
+          We design and build custom gym apps, from booking and billing to AI
+          training plans, built around how your gym actually runs.
+        </p>
+        <div class="cta-contact">
+          <div>
+            <div class="label">Email</div>
+            <div>blacklotusenquiry@gmail.com</div>
+          </div>
+          <div>
+            <div class="label">Web</div>
+            <div>blacklotusdev.org</div>
+          </div>
+        </div>
+        <div class="cta-tagline-box">
+          "Engineering ideas into digital reality."
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

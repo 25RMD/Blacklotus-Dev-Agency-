@@ -105,6 +105,12 @@
   transform: scale(0.97);
 }
 
+@layer base {
+  img {
+    overflow-clip-margin: unset;
+  }
+}
+
 @keyframes route-fade-in {
   from {
     opacity: 0;

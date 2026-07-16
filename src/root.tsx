@@ -79,6 +79,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
   )
 }
 
+import { SmoothScroll } from "./components/SmoothScroll"
+import { LazyRenderProvider } from "./lib/useLazyRender"
 export default function Root() {
-  return <Outlet />
+  return (
+    <LazyRenderProvider>
+      <SmoothScroll>
+        <Outlet />
+      </SmoothScroll>
+    </LazyRenderProvider> 
+  )
 }

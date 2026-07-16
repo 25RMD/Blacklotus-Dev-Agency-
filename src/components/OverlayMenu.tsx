@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import { useLocation, useNavigate } from "react-router"
-
+import { useLazyRender } from "@/lib/useLazyRender"
 interface OverlayMenuProps {
   isOpen: boolean
   onClose: () => void
@@ -20,13 +20,14 @@ export const menuItems = [
 export const useHandleNavigation = () => {
   const location = useLocation()
   const navigate = useNavigate()
+  const { isRendered } = useLazyRender();
 
   // Check if target is just a hash on the current page
   return (targetPath: string) => {
     const isHomePage = location.pathname === "/"
     const [, hash] = targetPath.split("#")
 
-    if (isHomePage && hash) {
+    if (isHomePage && hash && isRendered) {
       // We are already home, just scroll
       setTimeout(() => {
         const element = document.querySelector(`#${hash}`)

@@ -102,7 +102,7 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
       <BlogLayout>
         <div className='grid grid-cols-1 relative'>
           <div className='mx-auto'>
-            <article className='px-2 prose prose-lg max-w-screen prose-pre:bg-background lg:max-w-3xl lg:px-6 py-20 prose-headings:font-display prose-headings:font-semibold prose-headings:tracking-[-0.03em] prose-headings:leading-tight prose-p:text-zinc-700 prose-p:leading-relaxed prose-img:rounded-xl prose-a:text-blue-600 dark:prose-invert'>
+            <article className='px-2 prose prose-lg max-w-screen prose-pre:bg-background lg:max-w-3xl lg:px-6 py-20 prose-headings:font-display prose-headings:font-semibold prose-headings:tracking-[-0.03em] prose-headings:leading-tight prose-p:text-zinc-700 prose-p:leading-relaxed  prose-a:text-blue-600 dark:prose-invert'>
               <span className='text-[10px] font-medium uppercase tracking-[0.18em] text-zinc-500'>
                 {metadata.category}
               </span>
@@ -119,6 +119,16 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
                 <span>•</span>
                 <p>5 min read</p>
               </div>
+
+              {metadata.image && (
+                <div className="w-full overflow-hidden">
+                  <img
+                    src={metadata.image}
+                    alt={metadata.title}
+                    className="w-full h-auto object-cover max-h-[500px] m-0"
+                  />
+                </div>
+              )}
               <ReactMarkdown
                 remarkPlugins={[remarkGithubAlerts]}
                 components={{

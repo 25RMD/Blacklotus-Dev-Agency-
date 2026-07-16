@@ -17,14 +17,17 @@ export function AudioPlayer() {
   useEffect(() => {
     const handleToggleAudio = () => {
       if (audioRef.current) {
-        if (isPlaying) {
-          audioRef.current.pause()
-        } else {
-          audioRef.current.play().catch(error => {
-            console.error("Audio playback failed:", error)
-          })
+        // This event is fired by LoadingScreen's "ENTER" button.
+        // We only want to play if the user hasn't explicitly paused it in this session.
+        if (!isPlaying) {
+          const pref = sessionStorage.getItem('audioPref')
+          if (pref !== 'paused') {
+            audioRef.current.play().catch(error => {
+              console.error("Audio playback failed:", error)
+            })
+            setIsPlaying(true)
+          }
         }
-        setIsPlaying(!isPlaying)
       }
     }
 
@@ -48,10 +51,12 @@ export function AudioPlayer() {
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause()
+        sessionStorage.setItem('audioPref', 'paused')
       } else {
         audioRef.current.play().catch(error => {
           console.error("Audio playback failed:", error)
         })
+        sessionStorage.setItem('audioPref', 'playing')
       }
       setIsPlaying(!isPlaying)
     }
