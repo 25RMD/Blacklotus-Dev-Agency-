@@ -39,7 +39,7 @@ export const projects = [
     url: "https://platz-landtokenization.vercel.app",
     imgWebp: "/projects/platz.webp",
     imgFallback: "/projects/platz.jpg",
-    detailImage: "/projects/platz.jpg",
+    detailImage: "/projects/detail/platz.png",
     tags: ["Web3", "Website", "Ethereum"],
     brandColor: "#4285F4", // Ethereum-ish Blue/Tech
     textColor: "#ffffff"
