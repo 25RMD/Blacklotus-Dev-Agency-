@@ -2,7 +2,7 @@ import type { Route } from "./+types/projects.$id"
 import { Link } from "react-router"
 import { motion } from "framer-motion"
 import { ArrowLeft, ExternalLink } from "lucide-react"
-import { projects } from "../lib/projects"
+import { getProjectDetailImage, projects } from "../lib/projects"
 import { buildMeta, seo, toAbsoluteUrl } from "../lib/seo"
 import { Layout } from "./index"
 
@@ -29,7 +29,7 @@ export const meta: Route.MetaFunction = ({ data, params }) => {
     title: `${data.project.title} Case Study | Black Lotus Nigeria`,
     description: data.project.description,
     path: `/projects/${data.project.id}`,
-    image: data.project.imgFallback,
+    image: getProjectDetailImage(data.project),
     keywords: [
       `${data.project.title} case study`,
       `${data.project.client} project`,
@@ -41,6 +41,7 @@ export const meta: Route.MetaFunction = ({ data, params }) => {
 
 export default function ProjectDetail({ loaderData }: Route.ComponentProps) {
   const { project } = loaderData
+  const detailImage = getProjectDetailImage(project)
   const bgColor = project.brandColor || "#4285F4"
   const textColor = project.textColor || "#ffffff"
 
@@ -55,7 +56,7 @@ export default function ProjectDetail({ loaderData }: Route.ComponentProps) {
             name: `${project.title} Case Study`,
             description: project.description,
             url: `${seo.siteUrl}/projects/${project.id}`,
-            image: toAbsoluteUrl(project.imgFallback),
+            image: toAbsoluteUrl(detailImage),
             creator: {
               "@type": "Organization",
               name: seo.siteName,
@@ -70,7 +71,7 @@ export default function ProjectDetail({ loaderData }: Route.ComponentProps) {
             className="w-full pt-16 pb-12 md:pt-24 md:pb-16 px-6 md:px-12 relative flex flex-col"
             style={{ backgroundColor: bgColor, color: textColor }}
           >
-            <div className="flex items-center gap-4 mb-16 md:mb-24 relative z-10 w-full max-w-[100rem] mx-auto">
+            <div className="mt-12 md:mt-8 flex flex-wrap items-center gap-3 md:gap-4 mb-16 md:mb-24 relative z-10 w-full max-w-[100rem] mx-auto">
               <Link
                 to="/projects"
                 className="inline-flex items-center text-[10px] md:text-[11px] font-medium uppercase tracking-[0.16em] opacity-70 hover:opacity-100 transition-opacity gap-2"
@@ -89,7 +90,7 @@ export default function ProjectDetail({ loaderData }: Route.ComponentProps) {
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="font-display font-extrabold uppercase tracking-[-0.04em] leading-[0.85] text-[clamp(3.2rem,11vw,13rem)] max-w-[92%] wrap-anywhere"
+                className="font-display font-extrabold uppercase tracking-normal leading-[0.9] text-[clamp(2.35rem,10vw,13rem)] max-w-[92%] break-normal whitespace-normal"
               >
                 {project.title}
               </motion.h1>
@@ -104,7 +105,7 @@ export default function ProjectDetail({ loaderData }: Route.ComponentProps) {
               className="w-full aspect-[16/10] md:aspect-[21/9] bg-zinc-200 overflow-hidden mb-16 md:mb-24 shadow-2xl"
             >
               <img
-                src={project.imgFallback}
+                src={detailImage}
                 alt={`${project.title} project showcase`}
                 className="w-full h-full object-cover object-center"
               />
@@ -136,25 +137,13 @@ export default function ProjectDetail({ loaderData }: Route.ComponentProps) {
               </div>
 
               <div className="lg:col-span-4 lg:col-start-9 flex flex-col">
-                <div className="flex items-center gap-3 mb-8">
-                  <span className="w-2 h-2 rounded-full" style={{ backgroundColor: bgColor }}></span>
-                  <h2 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-500">Features</h2>
-                </div>
-
                 <div className="flex flex-col border-t border-zinc-200">
                   <div className="flex flex-col py-6 border-b border-zinc-200">
-                    <span className="text-[10px] font-medium uppercase tracking-[0.1em] text-zinc-500 mb-1">Client</span>
-                    <span className="text-base text-[#111] font-medium">{project.client}</span>
-                  </div>
-                  <div className="flex flex-col py-6 border-b border-zinc-200">
-                    <span className="text-[10px] font-medium uppercase tracking-[0.1em] text-zinc-500 mb-1">Services</span>
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      {project.tags.map((tag) => (
-                        <span key={tag} className="px-3 py-1.5 border border-zinc-300 rounded-full text-[10px] uppercase tracking-[0.1em] font-medium text-zinc-600 bg-white shadow-sm">
-                          {tag}
-                        </span>
-                      ))}
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="w-2 h-2 rounded-full" style={{ backgroundColor: bgColor }}></span>
+                      <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-500">Client</span>
                     </div>
+                    <span className="text-base text-[#111] font-medium">{project.client}</span>
                   </div>
                 </div>
               </div>

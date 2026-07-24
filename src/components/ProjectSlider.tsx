@@ -1,6 +1,6 @@
 import { useRef, useEffect, useCallback, useState } from 'react'
 import { Link } from 'react-router'
-import { projects } from '../lib/projects'
+import { getProjectDetailImage, projects } from '../lib/projects'
 
 const CARD_W = 220
 const CARD_H = 300
@@ -143,6 +143,7 @@ export function ProjectSlider() {
             {cardTransforms.map((ct) => {
               if (!ct.visible) return null
               const project = projects[ct.index]
+              const detailImage = getProjectDetailImage(project)
               const isHovered = hoveredIndex === ct.index
               return (
                 <Link
@@ -170,17 +171,14 @@ export function ProjectSlider() {
                       : '0 10px 40px rgba(0,0,0,0.2)',
                   }}
                 >
-                  <picture>
-                    <source srcSet={project.imgWebp} type="image/webp" />
-                    <img
-                      src={project.imgFallback}
-                      alt={project.title}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-contain rounded-sm"
-                      draggable={false}
-                    />
-                  </picture>
+                  <img
+                    src={detailImage}
+                    alt={project.title}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-contain rounded-sm"
+                    draggable={false}
+                  />
                   {/* Overlay info on hover */}
                   <div
                     className="absolute inset-0 flex flex-col justify-end p-4 rounded-sm transition-opacity duration-300"

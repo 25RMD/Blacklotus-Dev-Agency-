@@ -9,6 +9,7 @@ export const projects = [
     url: "https://blacklotusdev.org",
     imgWebp: "/projects/blacklotus.webp",
     imgFallback: "/projects/blacklotus.jpg",
+    detailImage: "/showcase/bl-desktop-hero.png",
     tags: ["Company", "Website", "Dev Agency"],
     brandColor: "#000000",
     textColor: "#ffffff"
@@ -23,6 +24,7 @@ export const projects = [
     url: "https://eewellnesshub.com",
     imgWebp: "/projects/eewellness.webp",
     imgFallback: "/projects/eewellness.jpg",
+    detailImage: "/projects/wellness.jpeg",
     tags: ["Company", "Website", "Mobile App"],
     brandColor: "#1B4332", // Deep green
     textColor: "#ffffff"
@@ -37,6 +39,7 @@ export const projects = [
     url: "https://platz-landtokenization.vercel.app",
     imgWebp: "/projects/platz.webp",
     imgFallback: "/projects/platz.jpg",
+    detailImage: "/projects/platz.jpg",
     tags: ["Web3", "Website", "Ethereum"],
     brandColor: "#4285F4", // Ethereum-ish Blue/Tech
     textColor: "#ffffff"
@@ -51,6 +54,7 @@ export const projects = [
     url: "https://tdf-front.pages.dev/",
     imgWebp: "/projects/tomsu.webp",
     imgFallback: "/projects/tomsu.jpg",
+    detailImage: "/projects/detail/tomsu.png",
     tags: ["Company", "Website", "NGO"],
     brandColor: "#E63946", // NGO-ish Red
     textColor: "#ffffff"
@@ -65,6 +69,7 @@ export const projects = [
     url: "https://tracklearn.org",
     imgWebp: "/projects/tracklearn.webp",
     imgFallback: "/projects/tracklearn.jpg",
+    detailImage: "/projects/detail/tracklearn.png",
     tags: ["EdTech", "Website", "Mobile App"],
     brandColor: "#F4A261", // EdTech Orange
     textColor: "#111111"
@@ -79,6 +84,7 @@ export const projects = [
     url: "https://precog.trade",
     imgWebp: "/projects/precog.webp",
     imgFallback: "/projects/precog.jpg",
+    detailImage: "/projects/detail/precog.png",
     tags: ["Crypto", "Website", "Solana"],
     brandColor: "#14F195", // Solana Green
     textColor: "#000000"
@@ -93,23 +99,10 @@ export const projects = [
     url: "https://makingafricagreatagain.org",
     imgWebp: "/projects/maga.svg",
     imgFallback: "/projects/maga.svg",
+    detailImage: "/projects/ng.jpeg",
     tags: ["NGO", "Website", "Africa"],
     brandColor: "#0D3B66", // Deep Blue
     textColor: "#ffffff"
-  },
-  {
-    id: "08",
-    title: "King Royal Events",
-    client: "King Royal Events",
-    year: "2024",
-    role: "Full-Stack Website",
-    description: "A fullstack website for an event center located in Maiduguri, featuring booking, gallery, and event management.",
-    url: "https://kingroyal-events.com",
-    imgWebp: "/projects/kingroyal.svg",
-    imgFallback: "/kingroyal.png",
-    tags: ["Events", "Website", "Booking"],
-    brandColor: "#D4AF37", // Gold
-    textColor: "#111111"
   },
   {
     id: "09",
@@ -121,6 +114,7 @@ export const projects = [
     url: "https://tabularasa.vercel.app/",
     imgWebp: "/projects/tabularasa.svg", // already lightweight
     imgFallback: "/projects/tabularasa.svg",
+    detailImage: "/projects/tabularasa.svg",
     tags: ["AI", "Data", "Africa"],
     brandColor: "#8338EC", // AI Purple
     textColor: "#ffffff"
@@ -135,10 +129,30 @@ export const projects = [
     url: "https://medicalsimulator.vercel.app/",
     imgWebp: "/projects/medivision.webp",
     imgFallback: "/projects/medivision.png",
+    detailImage: "/projects/medivision.png",
     tags: ["AR", "Medical", "3D"],
     brandColor: "#06D6A0", // Medical Teal
+    textColor: "#111111"
+  },
+  {
+    id: "11",
+    title: "RentMate",
+    client: "RentMate",
+    year: "2026",
+    role: "Full Stack Developer",
+    description: "RentMate is a smart co-living platform for Nigeria, connecting space providers with verified seekers through lifestyle matching, secure supported payments, agreement records, and trust-focused shared housing workflows.",
+    url: "https://www.rentmateapp.org/",
+    imgWebp: "/projects/detail/rentmate.png",
+    imgFallback: "/projects/detail/rentmate.png",
+    detailImage: "/projects/detail/rentmate.png",
+    tags: ["PropTech", "Co-Living", "Payments"],
+    brandColor: "#FFD700",
     textColor: "#111111"
   }
 ]
 
 export type Project = typeof projects[0]
+
+export function getProjectDetailImage(project: Project) {
+  return project.detailImage || project.imgFallback
+}
